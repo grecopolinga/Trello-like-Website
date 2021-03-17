@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .position-auto {
+    position: auto;
+  }
+}
+
+.btn {
+  @apply position-auto bg-c-teal-light font-bold;
+}
