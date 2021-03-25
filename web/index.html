@@ -39,40 +39,71 @@
     <div class="container" id="container">
       <!-- Sign Up Container Form -->
       <div class="form-container signup-container">
-        <form action="#">
+        <form id="signup-form" action="home.html" method="GET">
           <h1>Create Account</h1>
 
           <div class="input-field">
             <i class="fas fa-caret-right"></i>
-            <input type="text" placeholder="First Name" required />
+            <input 
+              type="text" 
+              placeholder="First Name" 
+              id="firstname"
+              for="firstname"
+              required 
+            />
           </div>
 
           <div class="input-field">
             <i class="fas fa-caret-right"></i>
-            <input type="text" placeholder="Last Name" required />
+            <input
+              type="text" 
+              placeholder="Last Name"
+              id="lastname"
+              for="lastname" 
+              required 
+            />
+            
           </div>
 
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" required />
+            <input 
+              type="text" 
+              placeholder="Username"
+              id="reg_username"
+              for="reg_username" 
+              required 
+            />
           </div>
 
           <div class="input-field">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" required />
+            <input 
+              type="email" 
+              placeholder="Email"
+              id="email"
+              for="email" 
+              required 
+            />
           </div>
 
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" required />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              id="reg_password"
+              for="reg_password"
+              required
+            />
           </div>
 
           <!--  Error Message -->
           <div class="error-message-holder">
-            <p id="signup-error-message"><!--Invalid username/password.--></p>
+            <p id="signup-err"><!--Invalid username/password.--></p>
           </div>
 
-          <button id="signup-submit">Sign In</button>
+          <button type="submit">Sign In</button>
         </form>
       </div>
       <!-- Sign In Container Form -->
@@ -144,5 +175,6 @@
     <!-- JavaScript -->
     <script src="./js/SignIn_SignUp_Animation.js"></script>
     <script src="./js/auth_user.js"></script>
+    <script src="./js/register_user.js"></script>
   </body>
 </html>
