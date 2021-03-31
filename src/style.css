@@ -1,3 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .side-1 {
+    height: 10%;
+  }
+
+  .side-2 {
+    height: 74%;
+  }
+
+  .side-3 {
+    height: 16%;
+  }
+
+  .w-transition {
+    transition: width 600ms ease;
+  }
+
+  .speed-600 {
+    transition: 600ms ease;
+  }
+
+  .filter-gray {
+    filter: grayscale(100%) opacity(0.7);
+  }
+
+  .filter-gray-2 {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  .m-22px {
+    margin: 22px;
+  }
+
+  .mt-22px {
+    margin-top: 22px;
+  }
+
+  .mb-22px {
+    margin-bottom: 22px;
+  }
+
+  .ml-80px {
+    margin-left: 80px;
+  }
+
+  .ml-22px {
+    margin-left: 22px;
+  }
+
+  .mr-22px {
+    margin-right: 22px;
+  }
+
+  .w-22\/25 {
+    width: 92%;
+  }
+
+  .font-raleway {
+    font-family: "Raleway", sans-serif;
+  }
+}
+
+.navbar {
+  @apply fixed bg-c-purple-dark w-20 h-screen w-transition font-raleway overflow-hidden;
+}
+
+.navbar-nav-s1 {
+  @apply flex flex-row items-center p-0 m-0 side-1 mb-4;
+}
+
+.navbar-nav-s2 {
+  @apply flex flex-col items-center p-0 m-0 side-2 border-b-2 border-solid mb-4;
+}
+
+.navbar-nav-s3 {
+  @apply flex flex-col items-center p-0 m-0 side-3;
+}
+
+.nav-item {
+  @apply w-full;
+}
+
+.nav-link {
+  @apply flex items-center h-20 speed-600 filter-gray;
+}
+
+.nav-text {
+  @apply hidden ml-4;
+}
+
+.nav-logout {
+  @apply invisible ml-14;
+}
+
+.navbar:hover {
+  @apply w-64;
+}
+
+.navbar:hover .nav-logout {
+  @apply visible;
+}
+
+.navbar:hover .nav-text {
+  @apply block speed-600 text-c-whitesmoke;
+}
+
+.navbar:hover .nav-link i {
+  @apply pr-2;
+}
+
+.nav-link:hover {
+  @apply bg-c-purple-darker ml-2 mr-2 mt-1 mb-1 rounded-md filter-gray-2;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
