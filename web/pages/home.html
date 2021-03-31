@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--  Imports. -->
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--  Style Sheets.  -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Home | Trone</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-nav-s1 bg-c-purple-darker">
+          <div class="flex items-center m-4">
+            <img src="../svg/Trone.svg" class="w-12" />
+            <h1 class="nav-text text-2xl pl-6 font-bold text-c-whitesmoke">
+              TRONE
+            </h1>
+          </div>
+        </div>
+        <ul class="navbar-nav-s2">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">
+              <i
+                class="fas fa-home fa-2x ml-22px mr-22px text-c-whitesmoke"
+              ></i>
+
+              <span class="nav-text text-lg font-bold">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">
+              <i
+                class="fas fa-columns fa-2x ml-6 mr-22px text-c-whitesmoke"
+              ></i>
+              <span class="nav-text text-lg font-bold text-c-whitesmoke"
+                >Boards</span
+              >
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i
+                class="fas fa-star fa-2x ml-22px mr-22px text-c-whitesmoke"
+              ></i>
+              <span class="nav-text text-lg font-bold text-c-whitesmoke"
+                >Favorites</span
+              >
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="settings.html">
+              <i class="fas fa-cog fa-2x ml-6 mr-22px text-c-whitesmoke"></i>
+              <span class="nav-text text-lg font-bold text-c-whitesmoke"
+                >Settings</span
+              >
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav-s3">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <img
+                src="https://randomuser.me/api/portraits/men/10.jpg"
+                class="w-10 rounded-full ml-5 mr-5"
+              />
+
+              <span class="nav-text text-lg mr-3 font-bold">User</span>
+              <i
+                class="fas fa-sign-out-alt fa-lg nav-logout text-c-whitesmoke"
+              ></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!--  Page    -->
+    <div class="h-screen ml-96">
+      <!--    Search Bar  -->
+      <header class="flex justify-end">
+        <div class="p-8">
+          <div
+            class="flex bg-c-whitesmoke items-center rounded-full py-1 px-2 h-10 shadow-xl border-2 border-c-purple-light"
+          >
+            <input
+              class="bg-c-whitesmoke rounded-l-full w-full py-4 px-6 text-c-teal-dark font-medium h-1 leading-tight focus:outline-none"
+              id="search"
+              type="text"
+              placeholder="Search"
+            />
+
+            <div class="p-4">
+              <button
+                class="fas fa-search bg-c-purple-dark text-white rounded-full py-2 px-4 hover:bg-c-purple-light focus:outline-none w-12 h-8 flex items-center justify-center"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!--    Content -->
+      <div>
+        <div>
+          <div
+            class="flex justify-between p-4 font-extrabold text-3xl sm:w-full md:w-full lg:w-4/5 xl:w-4/5"
+          >
+            <!--    Title   -->
+            <div><h1>My Boards</h1></div>
+            <!--  Sort  -->
+            <div class="relative inline-block text-left">
+              <div>
+                <button
+                  type="button"
+                  id="sort-button"
+                  class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-400"
+                  id="options-menu"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  Sort By
+                  <i
+                    class="fas fa-caret-down text-c-teal-dark -mr-1 ml-2 h-5 w-5"
+                  ></i>
+                </button>
+              </div>
+              <div
+                class="hidden origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                id="dropdown-items"
+              >
+                <div
+                  class="py-1"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="sortby-menu"
+                >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="sortbyitem"
+                    >Name</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="sortbyitem"
+                    >Date Modified</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="sortbyitem"
+                    >Date Added</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--    All Boards  -->
+        <div
+          class="flex flex-wrap justify-start sm:w-full md:w-full lg:w-4/5 xl:w-4/5"
+        >
+          <!-- Items    -->
+          <div
+            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+          >
+            <div class="flex justify-start pt-0 px-0 items-center">
+              <div
+                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                style="
+                  background: radial-gradient(black, transparent 60%);
+                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                  opacity: 0.2;
+                "
+              ></div>
+              <img
+                class="object-cover"
+                src="https://picsum.photos/1001/600"
+                alt=""
+              />
+            </div>
+            <div class="relative text-white px-4 pb-4 mt-4">
+              <span class="flex opacity-75 -mb-1">Label</span>
+              <div class="flex justify-between">
+                <span class="block font-semibold text-xl">Title</span>
+                <button
+                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+          >
+            <div class="flex justify-start pt-0 px-0 items-center">
+              <div
+                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                style="
+                  background: radial-gradient(black, transparent 60%);
+                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                  opacity: 0.2;
+                "
+              ></div>
+              <img
+                class="object-cover"
+                src="https://picsum.photos/1002/600"
+                alt=""
+              />
+            </div>
+            <div class="relative text-white px-4 pb-4 mt-4">
+              <span class="flex opacity-75 -mb-1">Label</span>
+              <div class="flex justify-between">
+                <span class="block font-semibold text-xl">Title</span>
+                <button
+                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--  Add new    -->
+          <div
+            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+          >
+            <div class="flex justify-start pt-0 px-0 items-center">
+              <div
+                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                style="
+                  background: radial-gradient(black, transparent 60%);
+                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                  opacity: 0.2;
+                "
+              ></div>
+              <img
+                class="object-cover"
+                src="https://picsum.photos/1000/600"
+                alt=""
+              />
+            </div>
+            <div class="relative text-white px-4 pb-4 mt-4">
+              <span class="flex opacity-75 -mb-1">Board</span>
+              <div class="flex justify-between">
+                <span class="block font-semibold text-xl">Add</span>
+                <button
+                  class="fas fa-plus bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                ></button>
+              </div>
+            </div>
+          </div>
+          <!--  ----------------------- -->
+        </div>
+      </div>
+      <script src="js/home.js"></script>
+    </div>
+  </body>
+</html>
