@@ -4,176 +4,459 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Agulto. Moneda. Polinga." />
-
-    <!--  Imports. -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <!--  Style Sheets.  -->
-    <link rel="stylesheet" href="../css/SignIn_SignUp.css" />
-    <link rel="stylesheet" href="../css/SignIn_SignUp_Animation.css" />
-    <title>[Title]</title>
+    <title>TRONE</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/wave.css" />
+    <link rel="stylesheet" href="../css/custom_styles.css" />
   </head>
   <body>
-    <!--  Background Animation -->
-    <div class="background-main">
-      <ul class="shapes-area">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+    <!-- Nav bar -->
+    <header id="home-page-navbar" class="fixed z-10 w-full">
+      <nav
+        class="flex flex-wrap justify-between items-center bg-c-purple-dark p-6"
+      >
+        <div class="flex flex-wrap items-center">
+          <!-- Logo -->
+          <div class="flex flex-warp items-center pr-4">
+            <svg
+              class="w-44"
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 386.01 97.33"
+              style="enable-background: new 0 0 386.01 97.33"
+              xml:space="preserve"
+            >
+              <style type="text/css">
+                @font-face {
+                  font-family: "LEMONMILK-Bold";
+                  src: url(../fonts/LEMONMILK-Regular.otf);
+                }
+                .st0 {
+                  fill: #ffffff;
+                  stroke: #000000;
+                  stroke-miterlimit: 10;
+                }
+                .st1 {
+                  fill: #ffffff;
+                  stroke: #000000;
+                  stroke-width: 4;
+                  stroke-miterlimit: 10;
+                }
+                .st2 {
+                  fill: none;
+                  stroke: #000000;
+                  stroke-width: 4;
+                  stroke-miterlimit: 10;
+                }
+                .st3 {
+                  fill: none;
+                }
+                .st4 {
+                  font-family: "LEMONMILK-Bold";
+                }
+                .st5 {
+                  font-size: 72px;
+                }
+              </style>
+              <g>
+                <path class="st0" d="M96.9,11.95" />
+                <path class="st0" d="M3.93,11.95" />
+                <rect
+                  x="3.93"
+                  y="4.82"
+                  class="st1"
+                  width="92.96"
+                  height="89.13"
+                />
+                <path class="st0" d="M48.18,5.53" />
+                <path
+                  class="st1"
+                  d="M48.83,92.37V9.22c0-1.22,1.58-1.83,2.51-0.96l42.95,38.57c0.93,0.87,0.28,2.35-1.02,2.35H54.04
+		c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
+                />
+                <line class="st2" x1="3.93" y1="4.28" x2="48.18" y2="93.95" />
+                <rect
+                  x="112.69"
+                  y="21.7"
+                  class="st3"
+                  width="273.31"
+                  height="56.83"
+                />
+                <text
+                  transform="matrix(1 0 0 1 112.6942 78.3712)"
+                  class="st4 st5"
+                >
+                  TRONE
+                </text>
+              </g>
+            </svg>
+            <!-- Nav links -->
+            <div class="pl-10 text-lg font-semibold font-raleway">
+              <a class="hover:text-white pr-4" href="#home">Home</a>
+              <a class="hover:text-white pr-4" href="#about">About</a>
+              <a class="hover:text-white pr-4" href="#team">Team</a>
+            </div>
+          </div>
+        </div>
+        <!-- Login/Signup -->
+        <div>
+          <a
+            class="bg-purple-500 hover:bg-purple-500 font-raleway text-white font-semibold hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+            href="login.html"
+            >Login/Signup</a
+          >
+        </div>
+      </nav>
+    </header>
+    <!-- Welcome -->
+    <div id="home" class="relative bg-c-purple-darker w-full overflow-hidden">
+      <div
+        class="flex flex-col items-center text-center justify-center h-screen"
+      >
+        <div class="w-1/2 m-2 mt-8 font-raleway">
+          <h1 class="p-8 font-bold text-6xl text-white">
+            Welcome to <span class="font-lemon text-black">TRONE</span>
+          </h1>
+          <hr />
+          <p class="p-8 font-light text-white">
+            <span class="font-lemon text-black">Trone</span> is a productivity
+            app that was inspired from Trello and Evernote. The application is
+            made easier, more flexible and simpler to manage and organize notes
+            and reminders.
+          </p>
+          <a
+            class="btn-home px-4 py-2 rounded-md text-white focus:outline-none"
+            href="#about"
+          >
+            Learn More
+          </a>
+        </div>
+        <div class="absolute bottom-0 w-full z-0 mt-20">
+          <div class="absolute wave wave-1"></div>
+          <div class="absolute wave wave-2"></div>
+          <div class="absolute wave wave-3"></div>
+          <div class="absolute wave wave-4"></div>
+        </div>
+      </div>
     </div>
-    <!--  Container -->
-    <div class="container" id="container">
-      <!-- Sign Up Container Form -->
-      <div class="form-container signup-container">
-        <form id="signup-form" action="home.html" method="GET">
-          <h1>Create Account</h1>
-
-          <div class="input-field">
-            <i class="fas fa-caret-right"></i>
-            <input
-              type="text"
-              placeholder="First Name"
-              id="firstname"
-              for="firstname"
-              required
+    <!-- About -->
+    <div class="relative p-10 bg-white pt-32 overflow-hidden" id="about">
+      <h1 class="text-5xl text-center font-bold p-5 uppercase">
+        How <span class="font-lemon">TRONE</span> works
+      </h1>
+      <!--  Details -->
+      <div class="flex content-center items-center flex-col">
+        <!--  Create an Account -->
+        <div class="flex justify-center p-2">
+          <div class="bg-white flex-shrink-0 mr-20">
+            <img
+              src="../svg/Acccount.svg"
+              alt="create-account"
+              class="w-96 h-96"
             />
           </div>
+          <div>
+            <div class="w-80 h-80 text-center px-10">
+              <div
+                class="rounded-full h-10 w-10 flex items-center justify-center bg-purple-200 mt-24 ml-24"
+              >
+                <h1 class="font-semibold text-xl">1</h1>
+              </div>
+              <h2 class="p-4 text-2xl font-semibold pt-5">Create Account</h2>
+              <p class="text-lg">
+                Start you journey to being productive and manage your tasks
+                effectively with <span class="font-lemon">TRONE</span>.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          <div class="input-field">
-            <i class="fas fa-caret-right"></i>
-            <input
-              type="text"
-              placeholder="Last Name"
-              id="lastname"
-              for="lastname"
-              required
+        <!--  Log In  -->
+        <div class="flex justify-center p-4">
+          <div>
+            <div class="w-80 h-80 text-center px-10">
+              <div
+                class="rounded-full h-10 w-10 flex items-center justify-center bg-purple-200 mt-20 ml-24"
+              >
+                <h1 class="font-semibold text-xl">2</h1>
+              </div>
+              <h2 class="p-4 text-2xl font-semibold pt-5">Log In</h2>
+              <p class="text-lg">
+                Make the most out it and start creating specific boards that
+                would keeps your tasks in check.
+              </p>
+            </div>
+          </div>
+          <div class="bg-white flex-shrink-0 ml-20">
+            <img
+              src="../svg/Log in.svg"
+              alt="create-account"
+              class="w-96 h-96"
             />
           </div>
+        </div>
 
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input
-              type="text"
-              placeholder="Username"
-              id="reg_username"
-              for="reg_username"
-              required
+        <!--  Boards -->
+        <div class="flex justify-center p-4">
+          <div class="bg-white flex-shrink-0 mr-20">
+            <img
+              src="../svg/Board.svg"
+              alt="create-account"
+              class="w-96 h-96"
             />
           </div>
+          <div>
+            <div class="w-80 h-80 text-center px-10">
+              <div
+                class="rounded-full h-10 w-10 flex items-center justify-center bg-purple-200 mt-24 ml-24"
+              >
+                <h1 class="font-semibold text-xl">3</h1>
+              </div>
+              <h2 class="p-4 text-2xl font-semibold pt-5">Boards</h2>
+              <p class="text-lg">
+                Make the most out it and start creating specific boards that
+                would keeps your tasks in check.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            <input
-              type="email"
-              placeholder="Email"
-              id="email"
-              for="email"
-              required
+        <!--  List  -->
+        <div class="flex justify-center p-4">
+          <div>
+            <div class="w-80 h-80 text-center px-10">
+              <div
+                class="rounded-full h-10 w-10 flex items-center justify-center bg-purple-200 mt-24 ml-24"
+              >
+                <h1 class="font-semibold text-xl">4</h1>
+              </div>
+              <h2 class="p-4 text-2xl font-semibold pt-5">Lists</h2>
+              <p class="text-lg">
+                Specify certain lists in the board to know which to prioritize
+                first.
+              </p>
+            </div>
+          </div>
+          <div class="bg-white flex-shrink-0 ml-20">
+            <img src="../svg/List.svg" alt="create-account" class="w-96 h-96" />
+          </div>
+        </div>
+
+        <!--  Card -->
+        <div class="flex justify-center p-4">
+          <div class="bg-white flex-shrink-0 mr-20">
+            <img src="../svg/Card.svg" alt="create-account" class="w-96 h-96" />
+          </div>
+          <div>
+            <div class="w-80 h-80 text-center px-10">
+              <div
+                class="rounded-full h-10 w-10 flex items-center justify-center bg-purple-200 mt-24 ml-24"
+              >
+                <h1 class="font-semibold text-xl">5</h1>
+              </div>
+              <h2 class="p-4 text-2xl font-semibold pt-5">Cards</h2>
+              <p class="text-lg">
+                Put your task in a card and add dates and labels to know what's
+                important.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!--  Customize  -->
+        <div class="flex justify-center p-4">
+          <div>
+            <div class="w-80 h-80 text-center px-10">
+              <div
+                class="rounded-full h-10 w-10 flex items-center justify-center bg-purple-200 mt-20 ml-24"
+              >
+                <h1 class="font-semibold text-xl">6</h1>
+              </div>
+              <h2 class="p-4 text-2xl font-semibold pt-5">Design</h2>
+              <p class="text-lg">
+                Customize the cards as you see fit to keep yourself going with
+                its simple and user friendly interface.
+              </p>
+            </div>
+          </div>
+          <div class="bg-white flex-shrink-0 ml-20">
+            <img
+              src="../svg/Customize.svg"
+              alt="create-account"
+              class="w-96 h-96"
             />
-          </div>
-
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input
-              type="password"
-              placeholder="Password"
-              id="reg_password"
-              for="reg_password"
-              required
-            />
-          </div>
-
-          <!--  Error Message -->
-          <div class="error-message-holder">
-            <p id="signup-err"><!--Invalid username/password.--></p>
-          </div>
-
-          <button type="submit">Sign In</button>
-        </form>
-      </div>
-      <!-- Sign In Container Form -->
-      <div class="form-container signin-container">
-        <form id="signin-form" action="home.html" method="GET">
-          <h1>Sign In</h1>
-
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input
-              type="text"
-              placeholder="Username"
-              id="username"
-              for="username"
-              required
-            />
-          </div>
-
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input
-              type="password"
-              placeholder="Password"
-              id="password"
-              for="password"
-              required
-            />
-          </div>
-
-          <label class="checkbox">
-            <input type="checkbox" value="remember-me" id="remember_me" />
-            Keep me signed in
-          </label>
-
-          <!--  Error Message -->
-          <div class="error-message-holder">
-            <p id="signin-err">
-              <!-- Invalid username/password.-->
-              placeholder
-            </p>
-          </div>
-          <div class="signin-button">
-            <button type="submit">Sign In</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Overlay Container -->
-      <div class="overlay-container">
-        <div class="overlay">
-          <!-- Sign In Overlay Container -->
-          <div class="panel-overlay left-overlay">
-            <h1>Welcome Back!</h1>
-            <p>
-              To keep connected with us please log in with your personal info.
-            </p>
-            <button class="ghost" id="signin-slide">Sign In</button>
-          </div>
-
-          <!-- Sign Up Overlay Container -->
-          <div class="panel-overlay right-overlay">
-            <h1>Hello, There!</h1>
-            <p>Enter your personal details and start journey with us.</p>
-            <button class="ghost" id="signup-slide">Sign Up</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- JavaScript -->
-    <script src="../js/SignIn_SignUp_Animation.js"></script>
-    <script src="../js/auth_user.js"></script>
-    <script src="../js/register_user.js"></script>
+    <div id="svg-wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#6E65C4"
+          fill-opacity="1"
+          d="M0,192L60,213.3C120,235,240,277,360,282.7C480,288,600,256,720,224C840,192,960,160,1080,170.7C1200,181,1320,235,1380,261.3L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+        ></path>
+      </svg>
+    </div>
+    <div
+      class="flex flex-col items-ceter justify-center bg-c-purple-darker p-8 2xl:px-64"
+      id="team"
+    >
+      <div
+        class="text-center p-4 pb-8 text-4xl font-raleway font-bold text-white"
+      >
+        <h1>Meet Our Team</h1>
+      </div>
+      <div class="flex flex-row xl:px-32">
+        <div class="float-left mb-4 p-2 w-1/3 flex-auto bg-transparent">
+          <div
+            class="max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden md:max-w-2xl transition ease-in-out duration-700 transform hover:scale-105 motion-reduce:transform-none"
+          >
+            <img
+              class="h-48 w-full object-cover md:w-48"
+              src="../img/heinze.jpg"
+              alt="Heinze"
+              style="width: 100%"
+            />
+            <div class="p-4 m-3 clear-both table">
+              <h2 class="font-bold text-2xl mb-2">Heinze Kristian Moneda</h2>
+              <p class="text-gray-400">
+                BS Computer Science <br />Major in Software Technology
+              </p>
+              <p class="my-1 text-sm">De La Salle University</p>
+              <p>heinze_moneda@dlsu.edu.ph</p>
+            </div>
+            <div
+              class="p-2 text-white bg-purple-600 hover:bg-purple-800 text-center w-full"
+            >
+              <div class="flex justify-evenly p-0.5 text-lg">
+                <a
+                  href="https://www.facebook.com/heinzedotmoneda"
+                  target="_blank"
+                  class="fa fa-facebook"
+                ></a>
+
+                <a
+                  href="https://www.instagram.com/heinzedotmoneda/"
+                  target="_blank"
+                  class="fa fa-instagram"
+                ></a>
+                <a
+                  href="https://www.linkedin.com/in/heinze-moneda/"
+                  target="_blank"
+                  class="fa fa-linkedin"
+                ></a>
+                <a
+                  href="https://github.com/HMoneda"
+                  target="_blank"
+                  class="fa fa-github"
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-left mb-4 p-2 w-1/3 flex-auto bg-transparent">
+          <div
+            class="max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden md:max-w-2xl transition ease-in-out duration-700 transform hover:scale-105 motion-reduce:transform-none"
+          >
+            <img
+              class="h-48 w-full object-cover md:w-48"
+              src="../img/juliana.jpg"
+              alt="Heinze"
+              style="width: 100%"
+            />
+            <div class="p-4 m-3 clear-both table">
+              <h2 class="font-bold text-2xl mb-2">Juliana Marie Agulto</h2>
+              <p class="text-gray-400">
+                BS Computer Science <br />Major in Computer Systems Engineering
+              </p>
+              <p class="my-1 text-sm">De La Salle University</p>
+              <p>juliana_agulto@dlsu.edu.ph</p>
+            </div>
+            <div
+              class="p-2 text-white bg-purple-600 hover:bg-purple-800 text-center w-full"
+            >
+              <div class="flex justify-evenly p-0.5 text-lg">
+                <a
+                  href="https://www.facebook.com/juliana.marieb"
+                  target="_blank"
+                  class="fa fa-facebook"
+                ></a>
+
+                <a
+                  href="https://www.instagram.com/xjulianamarie/"
+                  target="_blank"
+                  class="fa fa-instagram"
+                ></a>
+                <a
+                  href="https://www.linkedin.com/in/jmarie-agulto/"
+                  target="_blank"
+                  class="fa fa-linkedin"
+                ></a>
+                <a
+                  href="https://github.com/jmarie39"
+                  target="_blank"
+                  class="fa fa-github"
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-left mb-4 p-2 w-1/3 flex-auto bg-transparent">
+          <div
+            class="max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden md:max-w-2xl transition ease-in-out duration-700 transform hover:scale-105 motion-reduce:transform-none"
+          >
+            <img
+              class="h-48 w-full object-cover md:w-48"
+              src="../img/greco.jpg"
+              alt="Heinze"
+              style="width: 100%"
+            />
+            <div class="p-4 m-3 clear-both table">
+              <h2 class="font-bold text-2xl mb-2">Alonzo Greco Polinga</h2>
+              <p class="text-gray-400">
+                BS Computer Science <br />Major in Computer Systems Engineering
+              </p>
+              <p class="my-1 text-sm">De La Salle University</p>
+              <p>alonzo_polinga@dlsu.edu.ph</p>
+            </div>
+            <div
+              class="p-2 text-white bg-purple-600 hover:bg-purple-800 text-center w-full"
+            >
+              <div class="flex justify-evenly p-0.5 text-lg">
+                <a
+                  href="https://www.facebook.com/grecoalonzo"
+                  target="_blank"
+                  class="fa fa-facebook"
+                ></a>
+
+                <a
+                  href="https://www.instagram.com/grecopolinga/"
+                  target="_blank"
+                  class="fa fa-instagram"
+                ></a>
+                <a href="#" target="_blank" class="fa fa-linkedin"></a>
+                <a
+                  href="https://github.com/grecopolinga"
+                  target="_blank"
+                  class="fa fa-github"
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="font-raleway bg-c-purple-darker text-center p-4">
+      <p>&copy 2021 <span class="font-lemon">TRONE</span></p>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
