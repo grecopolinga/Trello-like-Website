@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="fixed z-10 inset-0 overflow-y-auto"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+      id="save-modal"
+    >
+      <!-- Background -->
+      <div
+        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <!--  Gray Background -->
+        <div
+          class="fixed inset-0 bg-gray-600 bg-opacity-80 transition-opacity"
+          aria-hidden="true"
+        ></div>
+        <!--  Center the pop-up message-->
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+        ></span>
+
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-4"
+        >
+          <div class="flex flex-row items-center justify-between mb-2">
+            <div class="flex flex-wrap">
+              <svg
+                class="w-8 pr-2"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
+                />
+              </svg>
+              <h1 class="font-bold text-lg">Add Board</h1>
+            </div>
+            <button class="focus:outline-none">
+              <svg
+                class="w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col">
+            <div class="w-full mb-2">
+              <label class="font-bold block">Board Name</label>
+              <input
+                class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-1 px-2 leading-tight focus:outline-none focus:border-gray-500"
+                type="text"
+                name="board_name"
+                id="board_name"
+                placeholder="Board Name"
+              />
+            </div>
+            <div class="w-full mb-2">
+              <label class="font-bold block">Label</label>
+              <input
+                class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-1 px-2 leading-tight focus:outline-none focus:border-gray-500"
+                type="text"
+                name="board_label"
+                id="board_label"
+                placeholder="Add a description"
+              />
+            </div>
+            <div class="w-full mb-2">
+              <label class="font-bold block">Board Color</label>
+              <input
+                class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md leading-tight focus:outline-none focus:border-gray-500"
+                type="color"
+                name="board_color"
+                id="board_color"
+                value="#B19CD9"
+                placeholder="Board Color"
+              />
+            </div>
+            <div class="flex flex-row-reverse mt-2">
+              <button
+                class="bg-transparent hover:bg-c-purple-dark focus:outline-none text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                id="save-board-settings"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
