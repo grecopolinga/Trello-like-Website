@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "LEMONMILK";
+  src: url(../fonts/LEMONMILK-Regular.otf);
+}
+
+.font-lemon {
+  font-family: "LEMONMILK";
+}
+
+.btn-home {
+  background-color: #a89eff;
+  z-index: 9999;
+}

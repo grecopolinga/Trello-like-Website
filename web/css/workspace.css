@@ -25,7 +25,7 @@ button {
 #addTodoListDiv button:hover {
   margin-left: 0.5em;
   margin-top: 3em;
-  background-color: #392b58;
+  background-color: #645e9d;
 }
 
 #root {
@@ -170,7 +170,7 @@ button {
 }
 
 .btn-save {
-  background-color: #645e9d;
+  background-color: rgba(177, 156, 217);
   color: white;
   border: none;
   border-radius: 4px;
@@ -179,7 +179,7 @@ button {
 }
 
 .btn-save:hover {
-  background-color: #392b58;
+  background-color: #645e9d;
 }
 
 .delButton {
