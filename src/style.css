@@ -95,7 +95,7 @@
 }
 
 .nav-logout {
-  @apply invisible ml-14;
+  @apply invisible ml-8;
 }
 
 .navbar:hover {
