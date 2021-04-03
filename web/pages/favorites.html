@@ -107,53 +107,18 @@
             <!--    Title   -->
             <div><h1>Favorites</h1></div>
             <!--  Sort  -->
-            <div class="relative inline-block text-left">
-              <div>
-                <button
-                  type="button"
-                  id="sort-button"
-                  class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-400"
-                  id="options-menu"
-                  aria-haspopup="true"
-                  aria-expanded="true"
-                >
-                  Sort By
-                  <i
-                    class="fas fa-caret-down text-c-teal-dark -mr-1 ml-2 h-5 w-5"
-                  ></i>
-                </button>
-              </div>
-              <div
-                class="hidden origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-                id="dropdown-items"
+            <form class="relative inline-block text-left">
+              <select
+                name="sort"
+                id="sort"
+                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-400"
               >
-                <div
-                  class="py-1"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="sortby-menu"
-                >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    role="sortbyitem"
-                    >Name</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    role="sortbyitem"
-                    >Date Modified</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    role="sortbyitem"
-                    >Date Added</a
-                  >
-                </div>
-              </div>
-            </div>
+                <option value="sortBy">Sort By</option>
+                <option value="sortName">Alphabetical</option>
+                <option value="sortModified">Date Modified</option>
+                <option value="sortAdded">Date Added</option>
+              </select>
+            </form>
           </div>
         </div>
 
@@ -186,10 +151,8 @@
               <div class="flex justify-between">
                 <span class="block font-semibold text-xl">Daily Tasks</span>
                 <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                >
-                  Edit
-                </button>
+                  class="fas fa-star bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                ></button>
               </div>
             </div>
           </a>
@@ -218,10 +181,8 @@
               <div class="flex justify-between">
                 <span class="block font-semibold text-xl">School Projects</span>
                 <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                >
-                  Edit
-                </button>
+                  class="fas fa-star bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                ></button>
               </div>
             </div>
           </a>
