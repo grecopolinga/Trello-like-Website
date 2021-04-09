@@ -95,16 +95,16 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
 <div class="container" id="container">
   <!-- Sign Up Container Form -->
   <div class="form-container signup-container">
-    <form id="signup-form" action="home.html" method="GET">
+    <form id="signup-form" action="/login" method="POST">
       <h1>Create Account</h1>
-
+      <input type="hidden" id="form_type" name="form_type" value="reg">
       <div class="input-field">
         <i class="fas fa-caret-right"></i>
         <input
           type="text"
           placeholder="First Name"
           id="firstname"
-          for="firstname"
+          name="firstname"
           required
         />
       </div>
@@ -115,7 +115,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           type="text"
           placeholder="Last Name"
           id="lastname"
-          for="lastname"
+          name="lastname"
           required
         />
       </div>
@@ -126,7 +126,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           type="text"
           placeholder="Username"
           id="reg_username"
-          for="reg_username"
+          name="reg_username"
           required
         />
       </div>
@@ -137,7 +137,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           type="email"
           placeholder="Email"
           id="email"
-          for="email"
+          name="email"
           required
         />
       </div>
@@ -148,7 +148,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           type="password"
           placeholder="Password"
           id="reg_password"
-          for="reg_password"
+          name="reg_password"
           required
         />
       </div>
@@ -158,13 +158,14 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
         <p id="signup-err"><!--Invalid username/password.--></p>
       </div>
 
-      <button type="submit">Sign In</button>
+      <button type="submit">Sign Up</button>
     </form>
   </div>
   <!-- Sign In Container Form -->
   <div class="form-container signin-container">
-    <form id="signin-form" action="boards.html" method="GET">
+    <form id="signin-form" action="/login" method="POST">
       <h1>Sign In</h1>
+      <input type="hidden" id="form_type" name="form_type" value="log">
 
       <div class="input-field">
         <i class="fas fa-user"></i>
@@ -172,7 +173,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           type="text"
           placeholder="Username"
           id="username"
-          for="username"
+          name="username"
           value="Sonson_Great"
           required
         />
@@ -184,23 +185,25 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           type="password"
           placeholder="Password"
           id="password"
-          for="password"
+          name="password"
           value="Hakdoq12345"
           required
         />
       </div>
 
-      <label class="checkbox">
-        <input type="checkbox" value="remember-me" id="remember_me" />
-        Keep me signed in
-      </label>
-
       <!--  Error Message -->
       <div class="error-message-holder">
+        {{#if error}}
         <p id="signin-err">
+          <!-- Invalid username/password.-->
+          {{msg}}
+        </p>
+        {{else}}
+        <p id="signin-err" class="hidden">
           <!-- Invalid username/password.-->
           placeholder
         </p>
+        {{/if}}
       </div>
       <div class="signin-button">
         <button type="submit">Sign In</button>
