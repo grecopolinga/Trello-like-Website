@@ -12,6 +12,10 @@ const app = express();
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
+//Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -22,6 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Routes
 app.use('/', require('./routes/index'));
+app.use('/login', require('./routes/auth'));
 
 const PORT = process.env.PORT || 3000;
 
