@@ -4,6 +4,12 @@ Project for CCAPDEV
 
 Group Members:
 
-- Juliana Marie Agulto
-- Heinze Kristian Moneda
-- Greco Polinga
+-   Juliana Marie Agulto
+-   Heinze Kristian Moneda
+-   Greco Polinga
+
+How to Run Program:
+
+-   npm run start
+    or
+-   yarn start
