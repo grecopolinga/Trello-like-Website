@@ -9,7 +9,5 @@ Group Members:
 -   Greco Polinga
 
 How to Run Program:
-
 -   npm run start
-    or
--   yarn start
+
