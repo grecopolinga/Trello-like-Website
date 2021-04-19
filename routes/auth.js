@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
             return res.render('login', {
                 layout: 'login',
                 error: true,
-                msg: 'Username not found',
+                msg: 'Incorrect Username/Password',
             });
         }
         try {
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
                 res.render('login', {
                     layout: 'login',
                     error: true,
-                    msg: 'Incorrect Password',
+                    msg: 'Incorrect Username/Password',
                 });
             }
         } catch (err) {
