@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 
 const users = [];
 
@@ -42,7 +43,7 @@ router.post('/', async (req, res) => {
         try {
             const hashedPassword = await bcrypt.hash(req.body.reg_password, 10);
             users.push({
-                id: Date.now().toString(),
+                id: uuid.v4(),
                 name: req.body.firstname + ' ' + req.body.lastname,
                 username: req.body.reg_username,
                 email: req.body.email,
