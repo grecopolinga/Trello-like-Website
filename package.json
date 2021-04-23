@@ -8,7 +8,8 @@
     "scripts": {
         "build:css": "tailwind build src/style.css -o public/css/style.css",
         "start": "cross-env NODE_ENV=production node app",
-        "dev": "cross-env NODE_ENV=development nodemon app"
+        "dev": "cross-env NODE_ENV=development nodemon app",
+        "db_up": "node ./migrations/insert"
     },
     "devDependencies": {
         "autoprefixer": "^10.2.5",
