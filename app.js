@@ -5,8 +5,11 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
-
+const connectDB = require('./models/db');
 const app = express();
+
+// Connect to MongoDB
+connectDB();
 
 //Handlebars
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
