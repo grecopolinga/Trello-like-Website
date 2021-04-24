@@ -1,13 +1,7 @@
 //import mongoose
 const mongoose = require('mongoose');
-const uuid = require('uuid');
 
 const UsersSchema = new mongoose.Schema({
-    uid: {
-        type: String,
-        required: true,
-        default: uuid.v4(),
-    },
     fName: {
         type: String,
         required: true,
@@ -18,6 +12,7 @@ const UsersSchema = new mongoose.Schema({
     },
     username: {
         type: String,
+        required: true,
     },
     email: {
         type: String,
