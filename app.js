@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const connectDB = require('./models/db');
+const methodOverride = require('method-override');
 const app = express();
 
 // Connect to MongoDB
@@ -15,9 +16,12 @@ connectDB();
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
-//Middlewares
+//Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//Method Override
+app.use(methodOverride('_method'));
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,7 +33,6 @@ if (process.env.NODE_ENV === 'development') {
 
 //Routes
 app.use('/', require('./routes/index'));
-app.use('/boards', require('./routes/boards'));
 
 const PORT = process.env.PORT || 3000;
 
