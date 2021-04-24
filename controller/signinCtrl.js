@@ -14,7 +14,7 @@ const signinCtrl = {
         }
         try {
             if (await bcrypt.compare(req.body.password, user.password)) {
-                res.send('Success');
+                res.redirect(`/${user.username}/boards`);
             } else {
                 res.render('login', {
                     layout: 'login',

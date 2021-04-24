@@ -13,7 +13,7 @@ const signupCtrl = {
                 password: hashedPassword,
             });
             const newUser = await user.save();
-            res.send(newUser);
+            res.redirect(`/${newUser.username}/boards`);
         } catch (err) {
             res.redirect('/login');
         }
