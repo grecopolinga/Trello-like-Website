@@ -18,11 +18,10 @@ const boardCtrl = {
 
     //retrieve all boards
     getBoards: async (req, res) => {
-        
         try {
             const boards = await Boards.find();
             console.log(boards);
-            //res.render(`users`, { users: users });
+            //res.render();
         } catch (err) {
             console.log(err);
             res.status(500).send();
