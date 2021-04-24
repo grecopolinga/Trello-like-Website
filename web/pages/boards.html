@@ -1,433 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--  Imports. -->
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
+        <!--  Imports. -->
+        <script
+            src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"
+        ></script>
 
-    <!--  Style Sheets.  -->
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/custom_styles.css" />
+        <!--  Style Sheets.  -->
+        <link rel="stylesheet" href="../../public/css/style.css" />
+        <link rel="stylesheet" href="../../public/css/custom_styles.css" />
 
-    <title>My Boards | Trone</title>
-  </head>
-  <body>
-    <!--Nav bar-->
-    <header>
-      <nav class="navbar">
-        <div class="navbar-nav-s1 bg-c-purple-darker">
-          <div class="flex items-center m-4">
-            <img src="../svg/Trone.svg" class="w-12" />
-            <h1 class="text-2xl font-lemon pl-6 font-bold">TRONE</h1>
-          </div>
-        </div>
-        <ul class="navbar-nav-s2">
-          <li class="nav-item">
-            <a class="nav-link" href="boards.html">
-              <i
-                class="fas fa-columns fa-2x ml-6 mr-22px text-c-whitesmoke"
-              ></i>
-              <span class="nav-text text-lg font-bold text-c-whitesmoke"
-                >Boards</span
-              >
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="favorites.html">
-              <i
-                class="fas fa-star fa-2x ml-22px mr-22px text-c-whitesmoke"
-              ></i>
-              <span class="nav-text text-lg font-bold text-c-whitesmoke"
-                >Favorites</span
-              >
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="settings.html">
-              <i class="fas fa-cog fa-2x ml-6 mr-22px text-c-whitesmoke"></i>
-              <span class="nav-text text-lg font-bold text-c-whitesmoke"
-                >Settings</span
-              >
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav-s3">
-          <li class="nav-item">
-            <a class="nav-link" href="login.html">
-              <img
-                src="https://randomuser.me/api/portraits/men/10.jpg"
-                class="w-10 rounded-full ml-5 mr-5"
-              />
+        <title>My Boards | Trone</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <!--Nav bar-->
+        <header>
+            <nav class="navbar">
+                <div class="navbar-nav-s1 bg-c-purple-darker">
+                    <div class="flex items-center m-4">
+                        <img src="../../public/svg/Trone.svg" class="w-12" />
+                        <h1 class="text-2xl font-lemon pl-6 font-bold">
+                            TRONE
+                        </h1>
+                    </div>
+                </div>
+                <ul class="navbar-nav-s2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="boards.html">
+                            <i
+                                class="fas fa-columns fa-2x ml-6 mr-22px text-c-whitesmoke"
+                            ></i>
+                            <span
+                                class="nav-text text-lg font-bold text-c-whitesmoke"
+                                >Boards</span
+                            >
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorites.html">
+                            <i
+                                class="fas fa-star fa-2x ml-22px mr-22px text-c-whitesmoke"
+                            ></i>
+                            <span
+                                class="nav-text text-lg font-bold text-c-whitesmoke"
+                                >Favorites</span
+                            >
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i
+                                class="fas fa-cog fa-2x ml-6 mr-22px text-c-whitesmoke"
+                            ></i>
+                            <span
+                                class="nav-text text-lg font-bold text-c-whitesmoke"
+                                >Settings</span
+                            >
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav-s3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <img
+                                src="https://randomuser.me/api/portraits/men/10.jpg"
+                                class="w-10 rounded-full ml-5 mr-5"
+                            />
 
-              <span class="nav-text text-lg mr-2 font-bold">Sonson</span>
-              <i
-                class="fas fa-sign-out-alt fa-lg nav-logout text-c-whitesmoke"
-              ></i>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <!--  Page    -->
-    <div class="h-screen ml-96">
-      <!--    Search Bar  -->
-      <header class="flex justify-end">
-        <div class="p-8">
-          <div
-            class="flex bg-c-whitesmoke items-center rounded-full py-1 px-2 h-10 shadow-xl border-2 border-c-purple-light"
-          >
-            <input
-              class="bg-c-whitesmoke rounded-l-full w-full py-4 px-6 text-c-teal-dark font-medium h-1 leading-tight focus:outline-none"
-              id="search"
-              type="text"
-              placeholder="Search"
-            />
+                            <span class="nav-text text-lg mr-2 font-bold"
+                                >Sonson</span
+                            >
+                            <i
+                                class="fas fa-sign-out-alt fa-lg nav-logout text-c-whitesmoke"
+                            ></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!--  Page    -->
+        <div class="h-screen ml-96">
+            <!--    Search Bar  -->
+            <header class="flex justify-end">
+                <div class="p-8">
+                    <div
+                        class="flex bg-c-whitesmoke items-center rounded-full py-1 px-2 h-10 shadow-xl border-2 border-c-purple-light"
+                    >
+                        <input
+                            class="bg-c-whitesmoke rounded-l-full w-full py-4 px-6 text-c-teal-dark font-medium h-1 leading-tight focus:outline-none"
+                            id="search"
+                            type="text"
+                            placeholder="Search"
+                        />
 
-            <div class="p-4">
-              <button
-                class="fas fa-search bg-c-purple-dark text-white rounded-full py-2 px-4 hover:bg-c-purple-light focus:outline-none w-12 h-8 flex items-center justify-center"
-              ></button>
+                        <div class="p-4">
+                            <button
+                                class="fas fa-search bg-c-purple-dark text-white rounded-full py-2 px-4 hover:bg-c-purple-light focus:outline-none w-12 h-8 flex items-center justify-center"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!--    Content -->
+            <div>
+                <div>
+                    <!--  Sort By -->
+                    <div
+                        class="flex justify-between p-4 font-extrabold text-3xl sm:w-full md:w-full lg:w-4/5 xl:w-4/5"
+                    >
+                        <!--    Title   -->
+                        <div><h1>My Boards</h1></div>
+                        <!--  Sort  -->
+                        <form class="relative inline-block text-left">
+                            <select
+                                name="sort"
+                                id="sort"
+                                onchange="sortBy(this.value)"
+                                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-400"
+                            >
+                                <option value="sortBy">Sort By</option>
+                                <option value="sortName">Name</option>
+                                <option value="sortLabel">Label</option>
+                                <option value="sortDate">Date Added</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+
+                <!--    All Boards  -->
+                <div
+                    class="flex flex-wrap justify-start sm:w-full md:w-full lg:w-4/5 xl:w-4/5"
+                    id="root"
+                >
+                    <!--  Add new    -->
+                    <div
+                        class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+                        id="0.0.0.0"
+                    >
+                        <div class="flex justify-start pt-0 px-0 items-center">
+                            <div
+                                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                                style="
+                                    background: radial-gradient(
+                                        black,
+                                        transparent 60%
+                                    );
+                                    transform: rotate3d(0, 0, 1, 20deg)
+                                        scale3d(1, 0.6, 1);
+                                    opacity: 0.2;
+                                "
+                            ></div>
+                            <img
+                                class="object-cover fas fa-plus"
+                                src="https://picsum.photos/1000/600"
+                                alt=""
+                            />
+                        </div>
+                        <div class="relative text-white px-4 pb-4 mt-6">
+                            <div class="flex justify-center">
+                                <button
+                                    class="bg-white rounded-full text-purple-500 text-xl font-extrabold px-6 py-2 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                                    id="board-add-button"
+                                >
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Items    -->
+                    <div
+                        class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+                        id="daily-tasks.favorites.2021-12-1"
+                        href="workspace.html"
+                    >
+                        <div class="flex justify-start pt-0 px-0 items-center">
+                            <div
+                                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                                style="
+                                    background: radial-gradient(
+                                        black,
+                                        transparent 60%
+                                    );
+                                    transform: rotate3d(0, 0, 1, 20deg)
+                                        scale3d(1, 0.6, 1);
+                                    opacity: 0.2;
+                                "
+                            ></div>
+                            <a href="workspace.html">
+                                <img
+                                    class="object-cover fas fa-plus"
+                                    src="https://picsum.photos/1001/600"
+                                    alt=""
+                                />
+                            </a>
+                        </div>
+                        <div class="relative text-white px-4 pb-4 mt-4">
+                            <span class="flex opacity-75 -mb-1">Favorites</span>
+                            <div class="flex justify-between">
+                                <span class="block font-semibold text-xl"
+                                    >Daily Tasks</span
+                                >
+                                <button
+                                    class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                                >
+                                    <i class="fas fa-star-half-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+                        href="workspace.html"
+                        id="school-projects.favorites_school.2021-2-1"
+                    >
+                        <div class="flex justify-start pt-0 px-0 items-center">
+                            <div
+                                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                                style="
+                                    background: radial-gradient(
+                                        black,
+                                        transparent 60%
+                                    );
+                                    transform: rotate3d(0, 0, 1, 20deg)
+                                        scale3d(1, 0.6, 1);
+                                    opacity: 0.2;
+                                "
+                            ></div>
+                            <a href="workspace.html">
+                                <img
+                                    class="object-cover fas fa-plus"
+                                    src="https://picsum.photos/1002/600"
+                                    alt=""
+                                />
+                            </a>
+                        </div>
+                        <div class="relative text-white px-4 pb-4 mt-4">
+                            <span class="flex opacity-75 -mb-1"
+                                >Favorites, School</span
+                            >
+                            <div class="flex justify-between">
+                                <span class="block font-semibold text-xl"
+                                    >School Projects</span
+                                >
+                                <button
+                                    class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                                >
+                                    <i class="fas fa-star-half-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+                        href="workspace.html"
+                        id="ccapdev_checklist.school1.2021-3-1"
+                    >
+                        <div class="flex justify-start pt-0 px-0 items-center">
+                            <div
+                                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                                style="
+                                    background: radial-gradient(
+                                        black,
+                                        transparent 60%
+                                    );
+                                    transform: rotate3d(0, 0, 1, 20deg)
+                                        scale3d(1, 0.6, 1);
+                                    opacity: 0.2;
+                                "
+                            ></div>
+                            <a href="workspace.html">
+                                <img
+                                    class="object-cover fas fa-plus"
+                                    src="https://picsum.photos/1003/600"
+                                    alt=""
+                                />
+                            </a>
+                        </div>
+                        <div class="relative text-white px-4 pb-4 mt-4">
+                            <span class="flex opacity-75 -mb-1">School</span>
+                            <div class="flex justify-between">
+                                <span class="block font-semibold text-xl"
+                                    >CCAPDEV Checklist</span
+                                >
+                                <button
+                                    class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                                >
+                                    <i class="fas fa-star-half-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+                        id="event-tasks.orgs.2021-4-1"
+                    >
+                        <div class="flex justify-start pt-0 px-0 items-center">
+                            <div
+                                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                                style="
+                                    background: radial-gradient(
+                                        black,
+                                        transparent 60%
+                                    );
+                                    transform: rotate3d(0, 0, 1, 20deg)
+                                        scale3d(1, 0.6, 1);
+                                    opacity: 0.2;
+                                "
+                            ></div>
+                            <a href="workspace.html">
+                                <img
+                                    class="object-cover"
+                                    src="https://picsum.photos/1004/600"
+                                    alt=""
+                                />
+                            </a>
+                        </div>
+                        <div class="relative text-white px-4 pb-4 mt-4">
+                            <span class="flex opacity-75 -mb-1">Orgs</span>
+                            <div class="flex justify-between">
+                                <span class="block font-semibold text-xl"
+                                    >Event Tasks</span
+                                >
+                                <button
+                                    class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                                >
+                                    <i class="fas fa-star-half-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+                        href="workspace.html"
+                        id="meetings.orgs.2021-5-1"
+                    >
+                        <div class="flex justify-start pt-0 px-0 items-center">
+                            <div
+                                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                                style="
+                                    background: radial-gradient(
+                                        black,
+                                        transparent 60%
+                                    );
+                                    transform: rotate3d(0, 0, 1, 20deg)
+                                        scale3d(1, 0.6, 1);
+                                    opacity: 0.2;
+                                "
+                            ></div>
+                            <a href="workspace.html">
+                                <img
+                                    class="object-cover"
+                                    src="https://picsum.photos/1005/600"
+                                    alt=""
+                                />
+                            </a>
+                        </div>
+                        <div class="relative text-white px-4 pb-4 mt-4">
+                            <span class="flex opacity-75 -mb-1">Orgs</span>
+                            <div class="flex justify-between">
+                                <span class="block font-semibold text-xl"
+                                    >Meetings</span
+                                >
+                                <button
+                                    class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                                >
+                                    <i class="fas fa-star-half-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </header>
-
-      <!--    Content -->
-      <div>
-        <div>
-          <div
-            class="flex justify-between p-4 font-extrabold text-3xl sm:w-full md:w-full lg:w-4/5 xl:w-4/5"
-          >
-            <!--    Title   -->
-            <div><h1>My Boards</h1></div>
-            <!--  Sort  -->
-            <form class="relative inline-block text-left">
-              <select
-                name="sort"
-                id="sort"
-                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-400"
-              >
-                <option value="sortBy">Sort By</option>
-                <option value="sortName">Alphabetical</option>
-                <option value="sortModified">Date Modified</option>
-                <option value="sortAdded">Date Added</option>
-              </select>
-            </form>
-          </div>
         </div>
 
-        <!--    All Boards  -->
+        <!-- Add Modal -->
         <div
-          class="flex flex-wrap justify-start sm:w-full md:w-full lg:w-4/5 xl:w-4/5"
+            class="hidden fixed z-10 inset-0 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+            id="board-add-modal"
         >
-          <!-- Items    -->
-          <a
-            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-            href="workspace.html"
-          >
-            <div class="flex justify-start pt-0 px-0 items-center">
-              <div
-                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="
-                  background: radial-gradient(black, transparent 60%);
-                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
-                  opacity: 0.2;
-                "
-              ></div>
-              <img
-                class="object-cover"
-                src="https://picsum.photos/1001/600"
-                alt=""
-              />
-            </div>
-            <div class="relative text-white px-4 pb-4 mt-4">
-              <span class="flex opacity-75 -mb-1">Favorites</span>
-              <div class="flex justify-between">
-                <span class="block font-semibold text-xl">Daily Tasks</span>
-                <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                >
-                  <i class="fas fa-star"></i>
-                </button>
-              </div>
-            </div>
-          </a>
+            <!-- Background -->
+            <div
+                class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <!--  Gray Background -->
+                <div
+                    class="fixed inset-0 bg-gray-600 bg-opacity-80 transition-opacity"
+                    aria-hidden="true"
+                ></div>
+                <!--  Center the pop-up message-->
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                ></span>
 
-          <a
-            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-            href="workspace.html"
-          >
-            <div class="flex justify-start pt-0 px-0 items-center">
-              <div
-                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="
-                  background: radial-gradient(black, transparent 60%);
-                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
-                  opacity: 0.2;
-                "
-              ></div>
-              <img
-                class="object-cover"
-                src="https://picsum.photos/1002/600"
-                alt=""
-              />
-            </div>
-            <div class="relative text-white px-4 pb-4 mt-4">
-              <span class="flex opacity-75 -mb-1">Favorites, School</span>
-              <div class="flex justify-between">
-                <span class="block font-semibold text-xl">School Projects</span>
-                <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                 >
-                  <i class="fas fa-star"></i>
-                </button>
-              </div>
+                    <div class="flex flex-row items-center justify-between p-4">
+                        <!--  Top  -->
+                        <div class="flex flex-wrap">
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <i
+                                    class="fas fa-columns text-purple-400 text-lg"
+                                ></i>
+                            </div>
+                            <h1
+                                class="text-xl leading-6 font-bold text-gray-900 my-2 ml-4 uppercase"
+                            >
+                                Add Board
+                            </h1>
+                        </div>
+                        <button class="close-modal focus:outline-none">
+                            <svg
+                                class="w-6"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                    <!--  Content -->
+                    <div class="flex flex-col my-2 mx-10">
+                        <!--  Board Name  -->
+                        <div class="w-full mb-4">
+                            <label class="font-semibold block mb-1"
+                                >Board Name</label
+                            >
+                            <input
+                                class="appearance-none block w-full bg-white text-gray-500 border border-gray-400 shadow-inner rounded-md py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                                type="text"
+                                name="board_name"
+                                id="board_name"
+                                placeholder="Board Name"
+                                value="Term 3 Tasks"
+                            />
+                        </div>
+                        <!--  Label -->
+                        <div class="w-full mb-4">
+                            <label class="font-semibold block mb-1"
+                                >Label</label
+                            >
+                            <input
+                                class="appearance-none block w-full bg-white text-gray-500 border border-gray-400 shadow-inner rounded-md py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                                type="text"
+                                name="board_label"
+                                id="board_label"
+                                placeholder="Add a description"
+                                value="Important"
+                            />
+                        </div>
+                        <!--  Board Color -->
+                        <div class="w-full mb-4">
+                            <label class="font-semibold block mb-1"
+                                >Board Color</label
+                            >
+                            <input
+                                class="appearance-none block w-full bg-white text-gray-500 border border-gray-400 shadow-inner rounded-md leading-tight focus:outline-none focus:border-gray-500"
+                                type="color"
+                                name="board_color"
+                                id="board_color"
+                                value="#B19CD9"
+                                placeholder="Board Color"
+                            />
+                        </div>
+                    </div>
+                    <!--  Bottom  -->
+                    <div
+                        class="bg-gray-50 flex flex-row-reverse justify-between px-2 py-2 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            type="button"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            id="board-add-confirm"
+                        >
+                            Confirm
+                        </button>
+                        <!--  Error Message -->
+                        <div class="error-message-holder">
+                            <p
+                                id="add-err"
+                                class="text-red-500 my-2 font-medium"
+                            >
+                                Error message goes here!
+                                <!--Remove -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </a>
-
-          <a
-            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-            href="workspace.html"
-          >
-            <div class="flex justify-start pt-0 px-0 items-center">
-              <div
-                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="
-                  background: radial-gradient(black, transparent 60%);
-                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
-                  opacity: 0.2;
-                "
-              ></div>
-              <img
-                class="object-cover"
-                src="https://picsum.photos/1003/600"
-                alt=""
-              />
-            </div>
-            <div class="relative text-white px-4 pb-4 mt-4">
-              <span class="flex opacity-75 -mb-1">School</span>
-              <div class="flex justify-between">
-                <span class="block font-semibold text-xl"
-                  >CCAPDEV Checklist</span
-                >
-                <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                >
-                  <i class="fas fa-star"></i>
-                </button>
-              </div>
-            </div>
-          </a>
-
-          <a
-            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-            href="workspace.html"
-          >
-            <div class="flex justify-start pt-0 px-0 items-center">
-              <div
-                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="
-                  background: radial-gradient(black, transparent 60%);
-                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
-                  opacity: 0.2;
-                "
-              ></div>
-              <img
-                class="object-cover"
-                src="https://picsum.photos/1004/600"
-                alt=""
-              />
-            </div>
-            <div class="relative text-white px-4 pb-4 mt-4">
-              <span class="flex opacity-75 -mb-1">Orgs</span>
-              <div class="flex justify-between">
-                <span class="block font-semibold text-xl">Event Tasks</span>
-                <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                >
-                  <i class="fas fa-star"></i>
-                </button>
-              </div>
-            </div>
-          </a>
-
-          <a
-            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-            href="workspace.html"
-          >
-            <div class="flex justify-start pt-0 px-0 items-center">
-              <div
-                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="
-                  background: radial-gradient(black, transparent 60%);
-                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
-                  opacity: 0.2;
-                "
-              ></div>
-              <img
-                class="object-cover"
-                src="https://picsum.photos/1005/600"
-                alt=""
-              />
-            </div>
-            <div class="relative text-white px-4 pb-4 mt-4">
-              <span class="flex opacity-75 -mb-1">Orgs</span>
-              <div class="flex justify-between">
-                <span class="block font-semibold text-xl">Meetings</span>
-                <button
-                  class="bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                >
-                  <i class="fas fa-star"></i>
-                </button>
-              </div>
-            </div>
-          </a>
-
-          <!--  Add new    -->
-          <div
-            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-          >
-            <div class="flex justify-start pt-0 px-0 items-center">
-              <div
-                class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="
-                  background: radial-gradient(black, transparent 60%);
-                  transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
-                  opacity: 0.2;
-                "
-              ></div>
-              <img
-                class="object-cover"
-                src="https://picsum.photos/1000/600"
-                alt=""
-              />
-            </div>
-            <div class="relative text-white px-4 pb-4 mt-4">
-              <span class="flex opacity-75 -mb-1">Board</span>
-              <div class="flex justify-between">
-                <span class="block font-semibold text-xl">Add</span>
-                <button
-                  id="board-add-button"
-                  class="fas fa-plus bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
-                ></button>
-              </div>
-            </div>
-          </div>
-          <!--  ----------------------- -->
         </div>
-      </div>
-    </div>
-    <!-- Modal -->
-    <div
-      class="hidden fixed z-10 inset-0 overflow-y-auto"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
-      id="board-add-modal"
-    >
-      <!-- Background -->
-      <div
-        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-      >
-        <!--  Gray Background -->
-        <div
-          class="fixed inset-0 bg-gray-600 bg-opacity-80 transition-opacity"
-          aria-hidden="true"
-        ></div>
-        <!--  Center the pop-up message-->
-        <span
-          class="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        ></span>
-
-        <div
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-4"
-        >
-          <div class="flex flex-row items-center justify-between mb-2">
-            <div class="flex flex-wrap">
-              <svg
-                class="w-8 pr-2"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"
-                />
-              </svg>
-              <h1 class="font-bold text-lg">Add Board</h1>
-            </div>
-            <button class="close-modal focus:outline-none">
-              <svg
-                class="w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
-          <div class="flex flex-col">
-            <div class="w-full mb-2">
-              <label class="font-bold block">Board Name</label>
-              <input
-                class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-1 px-2 leading-tight focus:outline-none focus:border-gray-500"
-                type="text"
-                name="board_name"
-                id="board_name"
-                placeholder="Board Name"
-                value="Term 3 Tasks"
-              />
-            </div>
-            <div class="w-full mb-2">
-              <label class="font-bold block">Label</label>
-              <input
-                class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-1 px-2 leading-tight focus:outline-none focus:border-gray-500"
-                type="text"
-                name="board_label"
-                id="board_label"
-                placeholder="Add a description"
-                value="Important"
-              />
-            </div>
-            <div class="w-full mb-2">
-              <label class="font-bold block">Board Color</label>
-              <input
-                class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md leading-tight focus:outline-none focus:border-gray-500"
-                type="color"
-                name="board_color"
-                id="board_color"
-                value="#B19CD9"
-                placeholder="Board Color"
-              />
-            </div>
-            <div class="flex flex-row-reverse mt-2">
-              <button
-                class="bg-transparent hover:bg-c-purple-dark focus:outline-none text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
-                id="board-add-confirm"
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="../js/home.js"></script>
-  </body>
+        <!--  ----------------------- -->
+        <script src="../../public/js/home.js"></script>
+        <script src="../../public/js/boards.js" defer></script>
+    </body>
 </html>
