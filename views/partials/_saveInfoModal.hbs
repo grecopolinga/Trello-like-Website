@@ -1,0 +1,92 @@
+<div
+  class="hidden fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+  id="save-modal"
+>
+  <!-- Background -->
+  <div
+    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+  >
+    <!--  Gray Background -->
+    <div
+      class="fixed inset-0 bg-gray-600 bg-opacity-80 transition-opacity"
+      aria-hidden="true"
+    ></div>
+    <!--  Center the pop-up message-->
+    <span
+      class="hidden sm:inline-block sm:align-middle sm:h-screen"
+      aria-hidden="true"
+    ></span>
+
+    <div
+        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+      >
+        <div class="flex flex-row items-center justify-between p-4">
+          <!--  Top  -->
+          <div class="flex flex-wrap">
+            <div
+              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+            >
+              <i
+                class="fas fa-exclamation-triangle text-green-400 text-lg"
+              ></i>
+            </div>
+            <h1
+              class="text-xl leading-6 font-bold text-gray-900 my-2 ml-4 uppercase"
+            >
+              Confirm Changes
+            </h1>
+          </div>
+          <button class="close-modal focus:outline-none">
+            <svg
+              class="w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+        <!--  Content -->
+        <div class="flex flex-col my-2 mx-10">
+          <p class="font-raleway text-sm text-gray-500 mb-2">
+            Kindly confirm the changes by inputting your (old) password.
+          </p>
+          <input
+            class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
+            type="password"
+            placeholder="Password"
+            id="confirm-password"
+            required
+          />
+        </div>
+        <!--  Bottom -->
+        <div
+          class="bg-gray-50 flex flex-row-reverse justify-between px-2 py-2 sm:px-6 sm:flex sm:flex-row-reverse mt-6"
+        >
+          <button
+            type="button"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+            id="save-confirm"
+            onclick="location.href = 'index.html';"
+          >
+            Confirm
+          </button>
+        <!--  Error Message -->
+        <div class="error-message-holder">
+          <p id="confirm-err" class="text-red-500 my-2 font-medium">
+            <!--Remove -->
+            Invalid password!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
