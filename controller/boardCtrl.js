@@ -20,7 +20,7 @@ const boardCtrl = {
     getBoards: async (req, res) => {
         try {
             const boards = await Boards.find();
-            console.log(boards);
+            // console.log(boards);
             res.json(boards);
         } catch (err) {
             console.log(err);
@@ -60,6 +60,7 @@ const boardCtrl = {
             const modBoard = await board.save(); // Save modified board
             res.send(modBoard);
         } catch (err) {
+            console.log(err);
             res.status(400).send();
         }
     },
@@ -85,10 +86,14 @@ const boardCtrl = {
         try {
             const board = new Boards({
                 boardName: req.body.boardName,
+                boardLabel: req.body.boardLabel,
+                boardFavorite: req.body.boardFavorite,
             });
-            await board.save();
-            res.json(board);
+            const newBoard = await board.save();
+            // await board.save();
+            res.send(newBoard);
         } catch (err) {
+            // console.log(err);
             res.redirect('/boards');
         }
     },
