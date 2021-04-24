@@ -87,7 +87,6 @@ const boardCtrl = {
             const board = new Boards({
                 boardName: req.body.boardName,
                 boardLabel: req.body.boardLabel,
-                boardFavorite: req.body.boardFavorite,
             });
             const newBoard = await board.save();
             // await board.save();
