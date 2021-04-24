@@ -1,13 +1,13 @@
 //import mongoose
 const mongoose = require('mongoose');
-const uuid = require('uuid');
+//const uuid = require('uuid');
 
 const BoardsSchema = new mongoose.Schema({
-    uid: {
-        type: String,
-        required: true,
-        default: uuid.v4(),
-    },
+    // uid: {
+    //     type: String,
+    //     required: true,
+    //     default: uuid.v4(),
+    // },
     boardName: {
         type: String,
         required: true,
@@ -20,7 +20,7 @@ const BoardsSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    list: [
+    boardLists: [
         {
             listName: { type: String, required: true },
             cards: {

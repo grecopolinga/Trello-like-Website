@@ -21,7 +21,7 @@ const boardCtrl = {
         try {
             const boards = await Boards.find();
             console.log(boards);
-            //res.render();
+            res.json(boards);
         } catch (err) {
             console.log(err);
             res.status(500).send();
@@ -35,9 +35,27 @@ const boardCtrl = {
             if (board == null) {
                 return res.status(404).json({ msg: 'Board does not exist' });
             }
-
             if (req.body.boardName != null) {
-                board.password = req.body.boardName;
+                board.boardName = req.body.boardName;
+            }
+            if (req.body.boardLabel != null) {
+                board.boardLabel = req.body.boardName;
+            }
+            if (req.body.boardFavorite != null) {
+                board.boardFavorite = req.body.boardName;
+            }
+            if (req.body.boardLists != null) {
+                if (req.body.boardLists.listname != null) {
+                    board.boardLists.listname = req.body.boardLists.listname;
+                }
+                if (req.body.boardLists.cards != null) {
+                    board.boardLists.cards.cardName =
+                        req.body.boardLists.cards.cardName;
+                    board.boardLists.cards.cardDesc =
+                        req.body.boardLists.cards.cardDesc;
+                    board.boardLists.cards.comments =
+                        req.body.boardLists.cards.comments;
+                }
             }
             const modBoard = await board.save(); // Save modified board
             res.send(modBoard);
@@ -55,8 +73,8 @@ const boardCtrl = {
             if (board == null) {
                 return res.status(404).json({ msg: 'Board does not exist' });
             }
-            const delBoard = await Boards.remove(board);
-            res.send(delBoard);
+            await Boards.remove(board);
+            res.send({ msg: 'Board deleted' });
         } catch (err) {
             res.status(500).send();
         }
@@ -69,7 +87,7 @@ const boardCtrl = {
                 boardName: req.body.boardName,
             });
             await board.save();
-            // res.redirect();
+            res.json(board);
         } catch (err) {
             res.redirect('/boards');
         }
