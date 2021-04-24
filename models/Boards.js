@@ -12,6 +12,14 @@ const BoardsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    boardLabel: {
+        type: String,
+        required: false,
+    },
+    boardFavorite: {
+        type: Boolean,
+        required: true,
+    }
 });
 
 module.exports = mongoose.model('Board', BoardsSchema);
