@@ -19,7 +19,17 @@ const BoardsSchema = new mongoose.Schema({
     boardFavorite: {
         type: Boolean,
         required: true,
-    }
+    },
+    list: [
+        {
+            listName: { type: String, required: true },
+            cards: {
+                cardName: { type: String, required: true },
+                cardDesc: { type: String, required: true },
+                cardComments: [String],
+            },
+        },
+    ],
 });
 
 module.exports = mongoose.model('Board', BoardsSchema);
