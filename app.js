@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Routes
 app.use('/', require('./routes/index'));
-app.use('/boards', require('./routes/boards'));
+app.use('/', require('./routes/boards'));
 
 const PORT = process.env.PORT || 3000;
 

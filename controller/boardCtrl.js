@@ -39,23 +39,13 @@ const boardCtrl = {
                 board.boardName = req.body.boardName;
             }
             if (req.body.boardLabel != null) {
-                board.boardLabel = req.body.boardName;
+                board.boardLabel = req.body.boardLabel;
             }
             if (req.body.boardFavorite != null) {
-                board.boardFavorite = req.body.boardName;
+                board.boardFavorite = req.body.boardFavorite;
             }
             if (req.body.boardLists != null) {
-                if (req.body.boardLists.listname != null) {
-                    board.boardLists.listname = req.body.boardLists.listname;
-                }
-                if (req.body.boardLists.cards != null) {
-                    board.boardLists.cards.cardName =
-                        req.body.boardLists.cards.cardName;
-                    board.boardLists.cards.cardDesc =
-                        req.body.boardLists.cards.cardDesc;
-                    board.boardLists.cards.comments =
-                        req.body.boardLists.cards.comments;
-                }
+                board.boardLists = req.body.boardLists;
             }
             const modBoard = await board.save(); // Save modified board
             res.send(modBoard);
@@ -87,7 +77,7 @@ const boardCtrl = {
             const board = new Boards({
                 boardName: req.body.boardName,
                 boardLabel: req.body.boardLabel,
-                boardFavorite: req.body.boardFavorite,
+                boardLists: req.body.boardLists,
             });
             const newBoard = await board.save();
             // await board.save();

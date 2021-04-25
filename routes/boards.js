@@ -18,4 +18,8 @@ router.post('/createnewboard', boardCtrl.createBoard);
 // @route PATCH /updateboard
 router.patch('/:boardName', boardCtrl.updateBoard);
 
+// @desc Delete specific board
+// @route DELETE /:boardName
+router.delete('/:boardName', boardCtrl.deleteBoard);
+
 module.exports = router;

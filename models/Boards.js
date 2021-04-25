@@ -18,16 +18,19 @@ const BoardsSchema = new mongoose.Schema({
     },
     boardFavorite: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     boardLists: [
         {
             listName: { type: String, required: true },
-            cards: {
-                cardName: { type: String, required: true },
-                cardDesc: { type: String, required: true },
-                cardComments: [String],
-            },
+            cards: [
+                {
+                    cardName: { type: String, required: true },
+                    cardDesc: { type: String, required: true },
+                    cardComments: [String],
+                },
+            ],
+            required: false,
         },
     ],
 });
