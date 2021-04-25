@@ -6,6 +6,7 @@ const signinCtrl = require('../controller/signinCtrl');
 const userCtrl = require('../controller/userCtrl');
 const ctrl = require('../controller/controller');
 const findUserBoard = require('../middleware/findUserBoard');
+
 // @desc  Landing page
 // @route GET /
 router.get('/', ctrl.getIndex);
@@ -37,5 +38,7 @@ router.get('/:username/settings', findUserBoard, ctrl.userSettings);
 router.post('/:username/settings', userCtrl.updateUser);
 
 router.delete('/:username/settings', userCtrl.deleteUser);
+
+router.get('/:username/settings/confirm', userCtrl.confirmPassword);
 
 module.exports = router;
