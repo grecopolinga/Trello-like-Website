@@ -12,8 +12,18 @@ $('#save-button').click(() => {
     $('#save-modal').removeClass('hidden');
 });
 
-$('#save-confirm').click(() => {
-    $('#save-modal').addClass('hidden');
+$('#save-confirm').click((e) => {
+    let cPassword = $('#confirm-password').val();
+    $.get(`${window.location.pathname}/confirm`, { cPassword }, (data) => {
+        if (data) {
+            $('#confirm-password').val('');
+            $('#save-modal').addClass('hidden');
+            $('#confirm-err').addClass('hidden');
+            $('#settings_form').submit();
+        } else {
+            $('#confirm-err').removeClass('hidden');
+        }
+    });
 });
 
 closeModal.forEach((close) => {
