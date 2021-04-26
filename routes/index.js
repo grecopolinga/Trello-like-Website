@@ -6,6 +6,18 @@ const signinCtrl = require('../controller/signinCtrl');
 const userCtrl = require('../controller/userCtrl');
 const ctrl = require('../controller/controller');
 const findUserBoard = require('../middleware/findUserBoard');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/img/uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.body.username + 'profile.png');
+    },
+});
+
+const upload = multer({ storage: storage });
 
 // @desc  Landing page
 // @route GET /
@@ -35,7 +47,7 @@ router.get('/:username/favorites', findUserBoard, ctrl.userFavorites);
 // @route GET /:username/settings
 router.get('/:username/settings', findUserBoard, ctrl.userSettings);
 
-router.post('/:username/settings', userCtrl.updateUser);
+router.post('/:username/settings', upload.single('image'), userCtrl.updateUser);
 
 router.delete('/:username/settings', userCtrl.deleteUser);
 
