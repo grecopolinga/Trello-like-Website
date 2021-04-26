@@ -97,8 +97,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
   <div class="form-container signup-container">
     <form id="signup-form" action="/register" method="POST">
       <h1>Create Account</h1>
-      <input type="hidden" id="form_type" name="form_type" value="reg">
-      <div class="input-field">
+      <div class="input-field register">
         <i class="fas fa-caret-right"></i>
         <input
           type="text"
@@ -108,8 +107,8 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           required
         />
       </div>
-
-      <div class="input-field">
+      <p id="firstnameError" class="error">{{firstnameError}}</p>
+      <div class="input-field register">
         <i class="fas fa-caret-right"></i>
         <input
           type="text"
@@ -119,8 +118,8 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           required
         />
       </div>
-
-      <div class="input-field">
+      <p id="lastnameError" class="error">{{lastnameError}}</p>
+      <div class="input-field register">
         <i class="fas fa-user"></i>
         <input
           type="text"
@@ -130,8 +129,8 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           required
         />
       </div>
-
-      <div class="input-field">
+      <p id="reg_usernameError" class="error">{{reg_usernameError}}</p>
+      <div class="input-field register">
         <i class="fas fa-envelope"></i>
         <input
           type="email"
@@ -141,8 +140,8 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           required
         />
       </div>
-
-      <div class="input-field">
+      <p id="emailError" class="error">{{emailError}}</p>
+      <div class="input-field register">
         <i class="fas fa-lock"></i>
         <input
           type="password"
@@ -152,13 +151,8 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           required
         />
       </div>
-
-      <!--  Error Message -->
-      <div class="error-message-holder">
-        <p id="signup-err"><!--Invalid username/password.--></p>
-      </div>
-
-      <button type="submit">Sign Up</button>
+      <p id="reg_passwordError" class="error">{{reg_passwordError}}</p>
+      <button type="submit" id="submit" disabled>Sign Up</button>
     </form>
   </div>
   <!-- Sign In Container Form -->
@@ -174,7 +168,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           placeholder="Username"
           id="username"
           name="username"
-          value="Sonson_Great"
+          
           required
         />
       </div>
@@ -186,7 +180,7 @@ c-1.3,0-1.95,1.48-1.02,2.35l43.23,40.83"
           placeholder="Password"
           id="password"
           name="password"
-          value="Hakdoq12345"
+          
           required
         />
       </div>
