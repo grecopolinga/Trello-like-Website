@@ -11,6 +11,7 @@ const signupCtrl = {
                 username: req.body.reg_username,
                 email: req.body.email,
                 password: hashedPassword,
+                img: 'default.png',
             });
             const newUser = await user.save();
             res.redirect(`/${newUser.username}/boards`);
