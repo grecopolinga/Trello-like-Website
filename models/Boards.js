@@ -26,7 +26,7 @@ const BoardsSchema = new mongoose.Schema({
             cards: [
                 {
                     cardName: { type: String, required: true },
-                    cardDesc: { type: String, required: true },
+                    cardDesc: { type: String, required: false },
                     cardComments: [String],
                 },
             ],

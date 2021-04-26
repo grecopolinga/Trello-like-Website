@@ -46,41 +46,65 @@ const boardCtrl = {
                 board.boardLabel = req.body.boardLabel;
             }
             if (req.body.boardLists != null) {
-                const boardList = req.body.listName
+                const boardList = req.body.boardLists
                     .map((item, index) => {
-                        if (item != '') {
-                            boardList.card = req.body.cards
-                                .map((item2, index2) => {
-                                    if (item2 != '') {
-                                        let object2 = {
-                                            cardName: req.body.cardName[index2],
-                                            cardDesc: req.body.cards[index2],
-                                            cardComments:
-                                                req.body.cardComments[index2],
-                                        };
-                                        return object2;
-                                    }
-                                })
-                                .filter(function (el) {
-                                    return el != null;
-                                });
+                        if (item != null) {
+                            //Mapping Cards array
+                            if (req.body.boardLists[index].cards != null) {
+                                //Modifies cards
+                                const card = req.body.boardLists[index].cards
+                                    .map((item2, index2) => {
+                                        if (item2 != null) {
+                                            let object2 = {
+                                                //Temporary card object
+                                                cardName:
+                                                    req.body.boardLists[index]
+                                                        .cards[index2].cardName,
+                                                cardDesc:
+                                                    req.body.boardLists[index]
+                                                        .cards[index2].cardDesc,
+                                                cardComments:
+                                                    req.body.boardLists[index]
+                                                        .cards[index2]
+                                                        .cardComments,
+                                            };
+                                            return object2;
+                                        }
+                                    })
+                                    .filter(function (el) {
+                                        return el != null;
+                                    });
 
-                            let object = {
-                                listName: req.body.listName[index],
-                                cards: boardList.card,
-                            };
-                            return object;
+                                let object = {
+                                    //Temporary list object if both cards and list name are edited
+                                    listName:
+                                        req.body.boardLists[index].listName,
+                                    cards: card,
+                                };
+                                return object;
+                            } else if (
+                                //Modifies the list's name only
+                                req.body.boardLists[index].cards == null
+                            ) {
+                                let object = {
+                                    //Temporary list object if list name is only edited
+                                    listName:
+                                        req.body.boardLists[index].listName,
+                                };
+                                return object;
+                            }
                         }
                     })
                     .filter(function (el) {
                         return el != null;
                     });
 
-                board.boardLists = boardList;
+                board.boardLists = boardList; //Save new boardList object
             }
-            const modBoard = await board.save(); // Save modified board
+            const modBoard = await board.save(); //Save modified board
             res.send(modBoard);
         } catch (err) {
+            console.log(err);
             res.status(500).send();
         }
     },
