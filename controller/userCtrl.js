@@ -19,6 +19,9 @@ const userCtrl = {
             if (req.body.email !== '') {
                 user.email = req.body.email;
             }
+            if (req.file != null) {
+                user.img = req.file.filename;
+            }
             await user.save();
             res.redirect(`/${user.username}/settings`);
         } catch (err) {
