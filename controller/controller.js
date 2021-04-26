@@ -9,14 +9,30 @@ const ctrl = {
         res.render('login', { layout: 'login', error: false });
     },
 
-    userBoards: (req, res) => {
-        const user = req.params.username;
-        res.render('myboards', { layout: 'home', user: user });
+    userBoards: async (req, res) => {
+        try {
+            const user = await Users.findOne({
+                username: req.params.username,
+            });
+            const username = user.username;
+            const img = user.img;
+            res.render('myboards', { layout: 'home', user: username, img });
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
     },
 
-    userFavorites: (req, res) => {
-        const user = req.params.username;
-        res.render('favorites', { layout: 'home', user: user });
+    userFavorites: async (req, res) => {
+        try {
+            const user = await Users.findOne({
+                username: req.params.username,
+            });
+            const username = user.username;
+            const img = user.img;
+            res.render('favorites', { layout: 'home', user: username, img });
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
     },
 
     userSettings: async (req, res) => {
@@ -26,7 +42,9 @@ const ctrl = {
                 fName: user.fName,
                 lName: user.lName,
                 email: user.email,
+                img: user.img,
             };
+            console.log(user.img);
             const options = { layout: 'home', user: user.username };
             res.render('settings', {
                 ...options,
