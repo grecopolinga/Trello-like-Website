@@ -11,6 +11,7 @@ var users = [
         email: 'sample@sample.com',
         password:
             '$2b$10$cv0xOlHgV.z0oa1epd6lbubfBYUKiAePR5IzBf54K6iQx4Xadyr/O', // Hakdoq1234
+        img: 'default.png',
     },
     {
         fName: 'Leona',
@@ -19,6 +20,7 @@ var users = [
         email: 'leona.graves@example.com',
         password:
             '$2b$10$.pCXuXeK71uKVYpByLDNEeO7SXCuoQ9zIk0GTcQP84pYOtap3HLxm', //Leona_1234
+        img: 'default.png',
     },
     {
         fName: 'Friedhelm',
@@ -27,6 +29,7 @@ var users = [
         email: 'friedhelm.rudiger@example.com',
         password:
             '$2b$10$t4FhmawFk/ct7hbyFhJWRu3nCA.0Ex2.x7y.59v7nRHhVYw3y8pHm', //Chizudoggu11_
+        img: 'default.png',
     },
     {
         fName: 'Stella',
@@ -35,6 +38,7 @@ var users = [
         email: 'stella.davies@example.com',
         password:
             '$2b$10$KOMWBy8nYd89S/zLkzjJDOlV3QGQUBrlJ1HHVl8NIKfHrst36LiZi', //Bestoftherest143
+        img: 'default.png',
     },
     {
         fName: 'Angelo',
@@ -43,6 +47,7 @@ var users = [
         email: 'angelo.laurent@example.com',
         password:
             '$2b$10$dXpuzFA0UwpYh46PqppafeDsYZhn7liQ9Pxe/LvH1T6Q4BjD3Wbje', //Daraifurawa12
+        img: 'default.png',
     },
 ];
 
