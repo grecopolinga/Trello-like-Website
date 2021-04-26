@@ -30,28 +30,58 @@ const boardCtrl = {
 
     // update specific board
     updateBoard: async (req, res) => {
-        const board = await Boards.findOne({ boardName: req.params.boardName });
         try {
+            const board = await Boards.findOne({
+                boardName: req.params.boardName,
+            });
+
             if (board == null) {
                 return res.status(404).json({ msg: 'Board does not exist' });
             }
+
             if (req.body.boardName != null) {
                 board.boardName = req.body.boardName;
             }
             if (req.body.boardLabel != null) {
                 board.boardLabel = req.body.boardLabel;
             }
-            if (req.body.boardFavorite != null) {
-                board.boardFavorite = req.body.boardFavorite;
-            }
             if (req.body.boardLists != null) {
-                board.boardLists = req.body.boardLists;
+                const boardList = req.body.listName
+                    .map((item, index) => {
+                        if (item != '') {
+                            boardList.card = req.body.cards
+                                .map((item2, index2) => {
+                                    if (item2 != '') {
+                                        let object2 = {
+                                            cardName: req.body.cardName[index2],
+                                            cardDesc: req.body.cards[index2],
+                                            cardComments:
+                                                req.body.cardComments[index2],
+                                        };
+                                        return object2;
+                                    }
+                                })
+                                .filter(function (el) {
+                                    return el != null;
+                                });
+
+                            let object = {
+                                listName: req.body.listName[index],
+                                cards: boardList.card,
+                            };
+                            return object;
+                        }
+                    })
+                    .filter(function (el) {
+                        return el != null;
+                    });
+
+                board.boardLists = boardList;
             }
             const modBoard = await board.save(); // Save modified board
             res.send(modBoard);
         } catch (err) {
-            console.log(err);
-            res.status(400).send();
+            res.status(500).send();
         }
     },
 
