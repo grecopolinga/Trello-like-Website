@@ -135,13 +135,13 @@ const boardCtrl = {
     deleteBoard: async (req, res) => {
         try {
             const board = await Boards.findById(req.params.id);
+            const user = await Users.findById(board.user);
 
             if (board == null) {
                 return res.status(404).json({ msg: 'Board does not exist' });
             }
             await Boards.remove(board);
-            res.send({ msg: 'Board deleted' });
-            res.redirect('/${username}/boards');
+            res.redirect(`/${user.username}/boards`);
         } catch (err) {
             res.status(500).send();
         }

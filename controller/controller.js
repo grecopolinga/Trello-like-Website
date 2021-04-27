@@ -17,7 +17,6 @@ const ctrl = {
             });
             const username = user.username;
             const boards = await Boards.find({ user: user._id });
-            console.log(boards);
             const img = user.img;
             res.render('myboards', {
                 layout: 'home',
@@ -67,11 +66,10 @@ const ctrl = {
         try {
             const board = await Boards.findById(req.params.id);
             const user = await Users.findById(board.user);
-
             res.render('workspace', {
                 layout: 'workspace',
                 user: user.username,
-                board,
+                board: board.toObject(),
             });
         } catch (err) {
             res.status(500).send(err.message);
