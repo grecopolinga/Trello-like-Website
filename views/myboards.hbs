@@ -39,6 +39,53 @@
             </div>
         </div>
     </div>
+    {{#if boards}}
+      {{#each boards}}
+        {{#each this}}
+          {{#if boardName}}
+        <div
+            class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
+            id="daily-tasks.favorites.2021-12-1"
+        >
+            <div class="flex justify-start pt-0 px-0 items-center">
+                <div
+                    class="flex absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                    style="
+                        background: radial-gradient(
+                            black,
+                            transparent 60%
+                        );
+                        transform: rotate3d(0, 0, 1, 20deg)
+                            scale3d(1, 0.6, 1);
+                        opacity: 0.2;
+                    "
+                ></div>
+                <a href="/workspace/{{_id}}">
+                    <img
+                        class="object-cover fas fa-plus"
+                        src="https://picsum.photos/1001/600"
+                        alt=""
+                    />
+                </a>
+            </div>
+            <div class="relative text-white px-4 pb-4 mt-4">
+                <span class="flex opacity-75 -mb-1">{{boardLabel}}</span>
+                <div class="flex justify-between">
+                    <span class="block font-semibold text-xl"
+                        >{{boardName}}</span
+                    >
+                    <button
+                        class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                    >
+                        <i class="fas fa-star-half-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+          {{/if}}
+        {{/each}}
+      {{/each}}
+    {{/if}}
   </div>
-  {{>_addBoardModal}}
+  {{>_addBoardModal parameter=user}}
 </div>

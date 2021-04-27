@@ -56,11 +56,11 @@
                 </button>
             </div>
             <!--  Content -->
-            <div class="flex flex-col my-2 mx-10">
+            <form class="flex flex-col my-2 mx-10" id="add-board" action="/{{user}}/createBoard" method="POST">
                 <!--  Board Name  -->
                 <div class="w-full mb-4">
                     <label class="font-semibold block mb-1"
-                        >Board Name</label
+                        >Board Name {{user}}</label
                     >
                     <input
                         class="appearance-none block w-full bg-white text-gray-500 border border-gray-400 shadow-inner rounded-md py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
@@ -99,15 +99,16 @@
                         placeholder="Board Color"
                     />
                 </div>
-            </div>
+            </form>
             <!--  Bottom  -->
             <div
                 class="bg-gray-50 flex flex-row-reverse justify-between px-2 py-2 sm:px-6 sm:flex sm:flex-row-reverse"
             >
                 <button
-                    type="button"
+                    type="submit"
                     class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                     id="board-add-confirm"
+                    form="add-board"
                 >
                     Confirm
                 </button>

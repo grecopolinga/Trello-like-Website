@@ -1,4 +1,5 @@
 const Users = require('../models/Users');
+const Boards = require('../models/Boards');
 
 const ctrl = {
     getIndex: (req, res) => {
@@ -15,8 +16,15 @@ const ctrl = {
                 username: req.params.username,
             });
             const username = user.username;
+            const boards = await Boards.find({ user: user._id });
+            console.log(boards);
             const img = user.img;
-            res.render('myboards', { layout: 'home', user: username, img });
+            res.render('myboards', {
+                layout: 'home',
+                user: username,
+                img,
+                boards,
+            });
         } catch (err) {
             res.status(500).send(err.message);
         }

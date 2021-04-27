@@ -90,4 +90,6 @@ router.get('/:username/boards', findUserBoard, (req, res) => {
     res.json(res.board);
 });
 
+router.post('/:username/createBoard', boardCtrl.createBoard);
+
 module.exports = router;

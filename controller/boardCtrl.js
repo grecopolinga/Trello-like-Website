@@ -1,4 +1,5 @@
 const Boards = require('../models/Boards');
+const Users = require('../models/Users');
 
 const boardCtrl = {
     //retrieve one board
@@ -129,14 +130,15 @@ const boardCtrl = {
     // create board
     createBoard: async (req, res) => {
         try {
+            const user = await Users.findOne({ username: req.params.username });
             const board = new Boards({
-                boardName: req.body.boardName,
-                boardLabel: req.body.boardLabel,
-                boardLists: req.body.boardLists,
+                boardName: req.body.board_name,
+                user: user._id,
+                boardLabel: req.body.board_label,
+                boardLists: [],
             });
             const newBoard = await board.save();
-            // await board.save();
-            res.send(newBoard);
+            res.redirect(`/workspace/${newBoard._id}`);
         } catch (err) {
             // console.log(err);
             res.redirect('/boards');
