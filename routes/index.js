@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const signupCtrl = require('../controller/signupCtrl');
 const signinCtrl = require('../controller/signinCtrl');
-// const boardCtrl = require('../controller/boardCtrl');
-const userCtrl = require('../controller/userCtrl');
+const boardCtrl = require('../controller/boardCtrl');
+const findUserBoard = require('../middleware/findUserBoards');
 const ctrl = require('../controller/controller');
-const findUserBoard = require('../middleware/findUserBoard');
 const validator = require('../helpers/validator');
 const multer = require('multer');
 
@@ -63,5 +62,31 @@ router.get('/:username/settings/confirm', userCtrl.confirmPassword);
 // @desc  Check username if it exists
 // @route GET /:username/settings/confirm
 router.get('/getCheckUser', signupCtrl.getCheckUser);
+
+// @desc Retrieve all boards
+// @route GET /myboards
+router.get('/myboards', boardCtrl.getBoards);
+
+// @desc Get specific board
+// @route GET /:boardName
+router.get('/:boardName', boardCtrl.getBoard);
+
+// @desc Create new board
+// @route POST /create
+router.post('/createnewboard', boardCtrl.createBoard);
+
+// @desc Update specific board
+// @route PATCH /updateboard
+router.patch('/:boardName', boardCtrl.updateBoard);
+
+// @desc Delete specific board
+// @route Delete /delete
+router.delete('/:boardName', boardCtrl.deleteBoard);
+
+// @desc Get userboards
+// @route GET /:username/boards
+router.get('/:username/boards', findUserBoard, (req, res) => {
+    res.json(res.board);
+});
 
 module.exports = router;

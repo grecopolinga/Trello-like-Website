@@ -30,38 +30,83 @@ const boardCtrl = {
 
     // update specific board
     updateBoard: async (req, res) => {
-        const board = await Boards.findOne({ boardName: req.params.boardName });
         try {
+            const board = await Boards.findOne({
+                boardName: req.params.boardName,
+            });
+
             if (board == null) {
                 return res.status(404).json({ msg: 'Board does not exist' });
             }
+
             if (req.body.boardName != null) {
                 board.boardName = req.body.boardName;
             }
             if (req.body.boardLabel != null) {
-                board.boardLabel = req.body.boardName;
-            }
-            if (req.body.boardFavorite != null) {
-                board.boardFavorite = req.body.boardName;
+                board.boardLabel = req.body.boardLabel;
             }
             if (req.body.boardLists != null) {
-                if (req.body.boardLists.listname != null) {
-                    board.boardLists.listname = req.body.boardLists.listname;
-                }
-                if (req.body.boardLists.cards != null) {
-                    board.boardLists.cards.cardName =
-                        req.body.boardLists.cards.cardName;
-                    board.boardLists.cards.cardDesc =
-                        req.body.boardLists.cards.cardDesc;
-                    board.boardLists.cards.comments =
-                        req.body.boardLists.cards.comments;
-                }
+                const boardList = req.body.boardLists
+                    .map((item, index) => {
+                        if (item != null) {
+                            //Mapping Cards array
+                            if (req.body.boardLists[index].cards != null) {
+                                //Modifies cards
+                                const card = req.body.boardLists[index].cards
+                                    .map((item2, index2) => {
+                                        if (item2 != null) {
+                                            let object2 = {
+                                                //Temporary card object
+                                                cardName:
+                                                    req.body.boardLists[index]
+                                                        .cards[index2].cardName,
+                                                cardDesc:
+                                                    req.body.boardLists[index]
+                                                        .cards[index2].cardDesc,
+                                                cardComments:
+                                                    req.body.boardLists[index]
+                                                        .cards[index2]
+                                                        .cardComments,
+                                            };
+                                            return object2;
+                                        }
+                                    })
+                                    .filter(function (el) {
+                                        return el != null;
+                                    });
+
+                                let object = {
+                                    //Temporary list object if both cards and list name are edited
+                                    listName:
+                                        req.body.boardLists[index].listName,
+                                    cards: card,
+                                };
+                                return object;
+                            } else if (
+                                //Modifies the list's name only
+                                req.body.boardLists[index].cards == null
+                            ) {
+                                let object = {
+                                    //Temporary list object if list name is only edited
+                                    listName:
+                                        req.body.boardLists[index].listName,
+                                    cards: board.boardLists[index].cards,
+                                };
+                                return object;
+                            }
+                        }
+                    })
+                    .filter(function (el) {
+                        return el != null;
+                    });
+
+                board.boardLists = boardList; //Save new boardList object
             }
-            const modBoard = await board.save(); // Save modified board
+            const modBoard = await board.save(); //Save modified board
             res.send(modBoard);
         } catch (err) {
             console.log(err);
-            res.status(400).send();
+            res.status(500).send();
         }
     },
 
@@ -87,6 +132,7 @@ const boardCtrl = {
             const board = new Boards({
                 boardName: req.body.boardName,
                 boardLabel: req.body.boardLabel,
+                boardLists: req.body.boardLists,
             });
             const newBoard = await board.save();
             // await board.save();

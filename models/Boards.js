@@ -21,11 +21,14 @@ const BoardsSchema = new mongoose.Schema({
     boardLists: [
         {
             listName: { type: String, required: true },
-            cards: {
-                cardName: { type: String, required: true },
-                cardDesc: { type: String, required: true },
-                cardComments: [String],
-            },
+            cards: [
+                {
+                    cardName: { type: String, required: true },
+                    cardDesc: { type: String, required: false },
+                    cardComments: [String],
+                },
+            ],
+            required: false,
         },
     ],
 });
