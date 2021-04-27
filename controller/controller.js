@@ -62,6 +62,21 @@ const ctrl = {
             res.status(500).send(err.message);
         }
     },
+
+    getWorkspace: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const user = await Users.findById(board.user);
+
+            res.render('workspace', {
+                layout: 'workspace',
+                user: user.username,
+                board,
+            });
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
+    },
 };
 
 module.exports = ctrl;

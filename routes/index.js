@@ -92,4 +92,6 @@ router.get('/:username/boards', findUserBoard, (req, res) => {
 
 router.post('/:username/createBoard', boardCtrl.createBoard);
 
+router.get('/workspace/:id', ctrl.getWorkspace);
+
 module.exports = router;
