@@ -26,6 +26,10 @@ router.post('/register', signupCtrl.registerUser);
 // @route GET /myboards
 router.get('/myboards', boardCtrl.getBoards);
 
+// @desc Retrieve all favorites
+// @route GET /myfavorites
+router.get('/myfavorites', boardCtrl.getBoards);
+
 // @desc Get specific board
 // @route GET /:boardName
 router.get('/:boardName', boardCtrl.getBoard);
