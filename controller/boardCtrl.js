@@ -90,6 +90,7 @@ const boardCtrl = {
                                     //Temporary list object if list name is only edited
                                     listName:
                                         req.body.boardLists[index].listName,
+                                    cards: board.boardLists[index].cards,
                                 };
                                 return object;
                             }
