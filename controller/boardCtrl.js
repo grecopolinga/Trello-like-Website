@@ -111,17 +111,37 @@ const boardCtrl = {
         }
     },
 
+    // update
+    updateBoardDetails: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            console.log(req.body);
+            if (req.body.board_name != null) {
+                board.boardName = req.body.board_name;
+            }
+            if (req.body.board_label != null) {
+                board.boardLabel = req.body.board_label;
+            }
+
+            await board.save();
+            res.redirect(`/workspace/${req.params.id}`);
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
     // delete specific board
     deleteBoard: async (req, res) => {
         try {
-            const board = await Boards.findOne({
-                boardName: req.params.boardName,
-            });
+            const board = await Boards.findById(req.params.id);
+
             if (board == null) {
                 return res.status(404).json({ msg: 'Board does not exist' });
             }
             await Boards.remove(board);
             res.send({ msg: 'Board deleted' });
+            res.redirect('/${username}/boards');
         } catch (err) {
             res.status(500).send();
         }

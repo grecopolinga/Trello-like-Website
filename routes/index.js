@@ -78,11 +78,13 @@ router.post('/createnewboard', boardCtrl.createBoard);
 
 // @desc Update specific board
 // @route PATCH /updateboard
-router.patch('/:boardName', boardCtrl.updateBoard);
+// router.patch('/:boardName', boardCtrl.updateBoard);
+router.patch('/workspace/:id', boardCtrl.updateBoardDetails);
 
 // @desc Delete specific board
 // @route Delete /delete
-router.delete('/:boardName', boardCtrl.deleteBoard);
+// router.delete('/:boardName', boardCtrl.deleteBoard);
+router.delete('/workspace/:id', boardCtrl.deleteBoard);
 
 // @desc Get userboards
 // @route GET /:username/boards
