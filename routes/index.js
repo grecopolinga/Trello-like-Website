@@ -42,7 +42,10 @@ router.patch('/:boardName', boardCtrl.updateBoard);
 // @route Delete /delete
 router.delete('/:boardName', boardCtrl.deleteBoard);
 
+// @desc Get userboards
+// @route GET /:username/boards
 router.get('/:username/boards', findUserBoard, (req, res) => {
     res.json(res.board);
 });
+
 module.exports = router;
