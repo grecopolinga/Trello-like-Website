@@ -100,6 +100,6 @@ router.post('/:username/createBoard', boardCtrl.createBoard);
 // @route GET /:username/:id
 router.get('/workspace/:id', ctrl.getWorkspace);
 
-router.post('/myboards/clicked', boardCtrl.updateBoardFavorite);
+router.get('/confirmFavorites', boardCtrl.confirmFavorites);
 
 module.exports = router;

@@ -129,16 +129,6 @@ const boardCtrl = {
         }
     },
 
-    // update board favorite
-    updateBoardFavorite: async (req, res) => {
-        try {
-            console.log(req.params);
-        } catch (err) {
-            console.log(err);
-            res.status(500).send();
-        }
-    },
-
     // delete specific board
     deleteBoard: async (req, res) => {
         try {
@@ -170,6 +160,15 @@ const boardCtrl = {
         } catch (err) {
             // console.log(err);
             res.redirect('/boards');
+        }
+    },
+
+    confirmFavorites: (req, res) => {
+        try {
+            console.log(req.query);
+            res.send(req.query);
+        } catch (err) {
+            res.status(500).send();
         }
     },
 };
