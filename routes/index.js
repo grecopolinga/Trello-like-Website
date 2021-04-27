@@ -6,6 +6,7 @@ const boardCtrl = require('../controller/boardCtrl');
 const findUserBoard = require('../middleware/findUserBoards');
 const ctrl = require('../controller/controller');
 const validator = require('../helpers/validator');
+const userCtrl = require('../controller/userCtrl');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
