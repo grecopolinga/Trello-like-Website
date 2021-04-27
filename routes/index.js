@@ -74,7 +74,7 @@ router.get('/:boardName', boardCtrl.getBoard);
 
 // @desc Create new board
 // @route POST /create
-router.post('/createnewboard', boardCtrl.createBoard);
+// router.post('/createnewboard', boardCtrl.createBoard);
 
 // @desc Update specific board
 // @route PATCH /updateboard
@@ -92,8 +92,14 @@ router.get('/:username/boards', findUserBoard, (req, res) => {
     res.json(res.board);
 });
 
+// @desc Create new board
+// @route POST /:username/createBoard
 router.post('/:username/createBoard', boardCtrl.createBoard);
 
+// @desc Get workspace
+// @route GET /:username/:id
 router.get('/workspace/:id', ctrl.getWorkspace);
+
+router.post('/myboards/clicked', boardCtrl.updateBoardFavorite);
 
 module.exports = router;

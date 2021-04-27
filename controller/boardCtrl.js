@@ -111,20 +111,28 @@ const boardCtrl = {
         }
     },
 
-    // update
+    // update board details
     updateBoardDetails: async (req, res) => {
         try {
             const board = await Boards.findById(req.params.id);
-            console.log(req.body);
             if (req.body.board_name != null) {
                 board.boardName = req.body.board_name;
             }
             if (req.body.board_label != null) {
                 board.boardLabel = req.body.board_label;
             }
-
             await board.save();
             res.redirect(`/workspace/${req.params.id}`);
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    // update board favorite
+    updateBoardFavorite: async (req, res) => {
+        try {
+            console.log(req.params);
         } catch (err) {
             console.log(err);
             res.status(500).send();

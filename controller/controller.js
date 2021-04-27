@@ -37,7 +37,14 @@ const ctrl = {
             });
             const username = user.username;
             const img = user.img;
-            res.render('favorites', { layout: 'home', user: username, img });
+            const boards = await Boards.find({ boardFavorite: true });
+            // console.log(boards);
+            res.render('favorites', {
+                layout: 'home',
+                user: username,
+                img,
+                boards,
+            });
         } catch (err) {
             res.status(500).send(err.message);
         }
