@@ -104,4 +104,8 @@ router.get('/workspace/:id', ctrl.getWorkspace);
 // @route GET /clicked
 router.get('/clicked', boardCtrl.confirmFavorite);
 
+// @desc Get search board
+// @route GET /search
+router.get('/:username/search', ctrl.boardSearch);
+
 module.exports = router;

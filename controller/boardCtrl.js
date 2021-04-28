@@ -163,13 +163,8 @@ const boardCtrl = {
         }
     },
 
-    confirmFavorites: (req, res) => {
-        try {
-            console.log(req.query);
-            res.send(req.query);
-        } catch (err) {
-            res.status(500).send();
-        }
+    confirmFavorite: async (req, res) => {
+        console.log('Check');
     },
 };
 
