@@ -111,18 +111,16 @@ const boardCtrl = {
         }
     },
 
-    // update
+    // update board details
     updateBoardDetails: async (req, res) => {
         try {
             const board = await Boards.findById(req.params.id);
-            console.log(req.body);
             if (req.body.board_name != null) {
                 board.boardName = req.body.board_name;
             }
             if (req.body.board_label != null) {
                 board.boardLabel = req.body.board_label;
             }
-
             await board.save();
             res.redirect(`/workspace/${req.params.id}`);
         } catch (err) {
@@ -221,6 +219,23 @@ const boardCtrl = {
             }
         } catch (err) {
             res.status(500).send();
+        }
+    },
+    // updates the board if favorite or not
+    confirmFavorite: async (req, res) => {
+        try {
+            const board = await Boards.findOne({ _id: req.params.id });
+            if (board.boardFavorite != true) {
+                board.boardFavorite = 'true';
+                res.send(true);
+            } else {
+                board.boardFavorite = 'false';
+                res.send(false);
+            }
+            console.log(board);
+            await board.save();
+        } catch (err) {
+            console.log(err);
         }
     },
 };

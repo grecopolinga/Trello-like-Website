@@ -66,7 +66,7 @@ router.get('/getCheckUser', signupCtrl.getCheckUser);
 
 // @desc Create new board
 // @route POST /create
-router.post('/createnewboard', boardCtrl.createBoard);
+// router.post('/createnewboard', boardCtrl.createBoard);
 
 router.get('/workspace/:id', ctrl.getWorkspace);
 
@@ -87,5 +87,13 @@ router.post('/workspace/:id/createList', boardCtrl.postCreateList);
 router.delete('/workspace/:id/deleteList', boardCtrl.deleteList);
 
 router.patch('/workspace/:id/updateList', boardCtrl.patchUpdateList);
+
+// @desc Update clicked board
+// @route Patch /clicked
+router.patch('/:id/clicked', boardCtrl.confirmFavorite);
+
+// @desc Get search board
+// @route GET /search
+router.get('/:username/search', ctrl.boardSearch);
 
 module.exports = router;

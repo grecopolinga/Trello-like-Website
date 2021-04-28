@@ -7,7 +7,6 @@
     <!--  Add new    -->
     <div
         class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
-        id="0.0.0.0"
     >
         <div class="flex justify-start pt-0 px-0 items-center">
             <div
@@ -79,6 +78,26 @@
                         <i class="fas fa-star-half-alt"></i>
                     </button>
                 </div>
+                <form class="relative text-white px-4 pb-4 mt-4"
+                action="/{{_id}}/clicked?_method=PATCH"
+                method="POST"
+                >
+                    <span class="flex opacity-75 -mb-1">{{boardLabel}}</span>
+                    <div class="flex justify-between">
+                        <span class="block font-semibold text-xl"
+                            >{{boardName}}</span
+                        >
+                        <button
+                            class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                        >
+                            {{#if boardFavorite}}
+                            <i class="fas fa-star"></i>
+                            {{else}}
+                            <i class="fas fa-star-half-alt"></i>
+                            {{/if}}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>    
         {{/each}}

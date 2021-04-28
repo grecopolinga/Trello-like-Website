@@ -37,7 +37,17 @@ const ctrl = {
             });
             const username = user.username;
             const img = user.img;
-            res.render('favorites', { layout: 'home', user: username, img });
+            const boards = await Boards.find({
+                user: user._id,
+                boardFavorite: true,
+            });
+            // console.log(boards);
+            res.render('favorites', {
+                layout: 'home',
+                user: username,
+                img,
+                boards,
+            });
         } catch (err) {
             res.status(500).send(err.message);
         }
@@ -72,6 +82,28 @@ const ctrl = {
                 layout: 'workspace',
                 user: user.username,
                 board: board.toObject(),
+            });
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
+    },
+
+    boardSearch: async (req, res) => {
+        try {
+            const user = await Users.findOne({
+                username: req.params.username,
+            });
+            const username = user.username;
+            const img = user.img;
+            const boards = await Boards.find({
+                user: user._id,
+                boardName: new RegExp(req.query.boardname, 'i'),
+            });
+            res.render('searchboards', {
+                layout: 'home',
+                user: username,
+                img,
+                boards,
             });
         } catch (err) {
             res.status(500).send(err.message);
