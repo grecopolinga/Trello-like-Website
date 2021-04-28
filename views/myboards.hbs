@@ -40,9 +40,7 @@
         </div>
     </div>
     {{#if boards}}
-      {{#each boards}}
-        {{#each this}}
-          {{#if boardName}}
+        {{#each boards}}    
         <div
             class="flex-shrink-0 m-4 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg"
             id="daily-tasks.favorites.2021-12-1"
@@ -76,15 +74,14 @@
                     >
                     <button
                         class="fave-button bg-white rounded-full text-purple-500 text-xs font-bold px-4 py-1 leading-none flex items-center hover:bg-c-purple-light hover:text-c-whitesmoke focus:outline-none"
+                        value={{_id}}
                     >
                         <i class="fas fa-star-half-alt"></i>
                     </button>
                 </div>
             </div>
-        </div>
-          {{/if}}
+        </div>    
         {{/each}}
-      {{/each}}
     {{/if}}
   </div>
   {{>_addBoardModal parameter=user}}
