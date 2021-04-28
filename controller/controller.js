@@ -17,7 +17,7 @@ const ctrl = {
             });
             const username = user.username;
             const boards = await Boards.find({ user: user._id });
-            console.log(boards);
+            // console.log(boards);
             const img = user.img;
             res.render('myboards', {
                 layout: 'home',
@@ -80,6 +80,22 @@ const ctrl = {
                 user: user.username,
                 board,
             });
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
+    },
+
+    userSearch: async (req, res) => {
+        try {
+            const user = await Users.findOne({
+                username: req.params.username,
+            });
+            const username = user.username;
+            const img = user.img;
+            const boards = await Boards.find({
+                boardName: new RegExp(`^${req.params.boardName}$`, 'i'),
+            });
+            console.log(boards); // check if board name matched
         } catch (err) {
             res.status(500).send(err.message);
         }
