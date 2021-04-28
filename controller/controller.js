@@ -93,6 +93,7 @@ const ctrl = {
             const username = user.username;
             const img = user.img;
             const boards = await Boards.find({
+                user: user._id,
                 boardName: new RegExp(req.query.boardname, 'i'),
             });
             res.render('searchboards', {
