@@ -64,17 +64,11 @@ router.get('/:username/settings/confirm', userCtrl.confirmPassword);
 // @route GET /:username/settings/confirm
 router.get('/getCheckUser', signupCtrl.getCheckUser);
 
-// @desc Retrieve all boards
-// @route GET /myboards
-router.get('/myboards', boardCtrl.getBoards);
-
-// @desc Get specific board
-// @route GET /:boardName
-router.get('/:boardName', boardCtrl.getBoard);
-
 // @desc Create new board
 // @route POST /create
 router.post('/createnewboard', boardCtrl.createBoard);
+
+router.get('/workspace/:id', ctrl.getWorkspace);
 
 // @desc Update specific board
 // @route PATCH /updateboard
@@ -86,14 +80,12 @@ router.patch('/workspace/:id', boardCtrl.updateBoardDetails);
 // router.delete('/:boardName', boardCtrl.deleteBoard);
 router.delete('/workspace/:id', boardCtrl.deleteBoard);
 
-// @desc Get userboards
-// @route GET /:username/boards
-router.get('/:username/boards', findUserBoard, (req, res) => {
-    res.json(res.board);
-});
-
 router.post('/:username/createBoard', boardCtrl.createBoard);
 
-router.get('/workspace/:id', ctrl.getWorkspace);
+router.post('/workspace/:id/createList', boardCtrl.postCreateList);
+
+router.delete('/workspace/:id/deleteList', boardCtrl.deleteList);
+
+router.patch('/workspace/:id/updateList', boardCtrl.patchUpdateList);
 
 module.exports = router;

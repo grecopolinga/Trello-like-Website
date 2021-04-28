@@ -164,6 +164,65 @@ const boardCtrl = {
             res.redirect('/boards');
         }
     },
+
+    postCreateList: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            if (req.body.listName !== '') {
+                board.boardLists.push({
+                    listName: req.body.listName,
+                    cards: [],
+                });
+                await board.save();
+                const boardLists = board.boardLists;
+                const data = {
+                    listName: req.body.listName,
+                    id: board.boardLists[boardLists.length - 1]._id,
+                };
+                res.send(data);
+            } else {
+                res.send(false);
+            }
+        } catch (error) {
+            res.status(500).send();
+        }
+    },
+
+    deleteList: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            if (board != null) {
+                board.boardLists = board.boardLists.filter(
+                    (v) => v._id.toString() !== req.body.id
+                );
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            res.status(500).send();
+        }
+    },
+
+    patchUpdateList: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            if (board != null) {
+                board.boardLists.forEach((v) => {
+                    if (v._id.toString() === req.body.id) {
+                        v.listName = req.body.listName;
+                    }
+                });
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            res.status(500).send();
+        }
+    },
 };
 
 module.exports = boardCtrl;

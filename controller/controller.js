@@ -16,8 +16,9 @@ const ctrl = {
                 username: req.params.username,
             });
             const username = user.username;
-            const boards = await Boards.find({ user: user._id });
+            var boards = await Boards.find({ user: user._id });
             const img = user.img;
+            boards = boards.map((board) => board.toObject());
             res.render('myboards', {
                 layout: 'home',
                 user: username,
@@ -66,6 +67,7 @@ const ctrl = {
         try {
             const board = await Boards.findById(req.params.id);
             const user = await Users.findById(board.user);
+
             res.render('workspace', {
                 layout: 'workspace',
                 user: user.username,
