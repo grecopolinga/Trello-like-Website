@@ -163,8 +163,20 @@ const boardCtrl = {
         }
     },
 
+    // updates the board if favorite or not
     confirmFavorite: async (req, res) => {
-        console.log('Check');
+        try {
+            const board = await Boards.findOne({ _id: req.params.id });
+            if (board.boardFavorite != true) {
+                board.boardFavorite = 'true';
+            } else {
+                board.boardFavorite = 'false';
+            }
+            console.log(board);
+            await board.save();
+        } catch (err) {
+            console.log(err);
+        }
     },
 };
 

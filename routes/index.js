@@ -100,9 +100,9 @@ router.post('/:username/createBoard', boardCtrl.createBoard);
 // @route GET /:username/:id
 router.get('/workspace/:id', ctrl.getWorkspace);
 
-// @desc Get clicked board
-// @route GET /clicked
-router.get('/clicked', boardCtrl.confirmFavorite);
+// @desc Update clicked board
+// @route Patch /clicked
+router.patch('/:id/clicked', boardCtrl.confirmFavorite);
 
 // @desc Get search board
 // @route GET /search

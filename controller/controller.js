@@ -37,7 +37,10 @@ const ctrl = {
             });
             const username = user.username;
             const img = user.img;
-            const boards = await Boards.find({ boardFavorite: true });
+            const boards = await Boards.find({
+                user: user._id,
+                boardFavorite: true,
+            });
             // console.log(boards);
             res.render('favorites', {
                 layout: 'home',
