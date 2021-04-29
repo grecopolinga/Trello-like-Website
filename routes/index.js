@@ -88,4 +88,12 @@ router.delete('/workspace/:id/deleteList', boardCtrl.deleteList);
 
 router.patch('/workspace/:id/updateList', boardCtrl.patchUpdateList);
 
+// @desc Create card
+// @route Create /Create;
+router.post('/workspace/:id/:listId/createCard', boardCtrl.postCreateCard);
+
+// @desc Delete card
+// @route Delete /delete;
+router.delete('/workspace/:id/:listId/deleteCard', boardCtrl.deleteCard);
+
 module.exports = router;

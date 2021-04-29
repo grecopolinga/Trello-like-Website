@@ -223,6 +223,100 @@ const boardCtrl = {
             res.status(500).send();
         }
     },
+
+    postCreateCard: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+
+            if (req.body.cardName != '') {
+                board.boardLists[listIndex].cards.push({
+                    cardName: req.body.cardName,
+                });
+
+                await board.save();
+                const listCards = board.boardLists[listIndex].cards;
+                const data = {
+                    cardName:
+                        board.boardLists[listIndex].cards[listCards.length - 1]
+                            .cardName,
+                    id:
+                        board.boardLists[listIndex].cards[listCards.length - 1]
+                            ._id,
+                };
+                res.send(data);
+            } else {
+                res.send(false);
+            }
+            //console.log(board.boardLists[listIndex].cards);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send();
+        }
+    },
+
+    deleteCard: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex] != null) {
+                board.boardLists[listIndex].cards = board.boardLists[
+                    listIndex
+                ].cards.filter((v) => v._id.toString() !== req.body.id);
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    patchUpdateCard: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex] != null) {
+                board.boardLists[listIndex].cards.forEach((v) => {
+                    if (v._id.toString() === req.body.id) {
+                        v.cardName = req.body.cardName;
+                    }
+                });
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            res.status(500).send();
+        }
+    },
 };
 
 module.exports = boardCtrl;

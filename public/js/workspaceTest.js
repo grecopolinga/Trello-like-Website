@@ -1,58 +1,48 @@
 $(document).ready(function () {
     class List {
-        constructor(title) {
-            this.title = title;
-            this.cardArray = [];
-
+        constructor(listName, id, place, Card) {
+            this.id = id;
+            this.state = {
+                listName: listName,
+                listDesc: '',
+                listComments: [],
+            };
+            (this.cardPlace = place), (this.card = Card);
             this.render();
         }
 
         render() {
-            this.createListElement();
-            this.place.append(this.ListElement);
-        }
-
-        createListElement() {
-            //Create elements
-            this.h2 = document.createElement('h2');
-            this.h2.innerText = this.title;
-            this.input = document.createElement('input');
-            this.input.classList.add('input_field');
-            this.button = document.createElement('button');
-            this.button.innerText = 'Add';
-            this.button.classList.add('btn-save');
-            this.button.id = 'to-do-list-button';
-            this.div = document.createElement('div');
-            this.ListElement = document.createElement('div');
-
-            //Event listener
-            this.button.addEventListener('click', () => {
-                if (this.input.value != '') {
-                    this.addCard.call(this);
-                    this.input.value = '';
-                }
-            });
-
+            this.value = $('<input>')
+                .addClass('id')
+                .attr('type', 'hidden')
+                .val(this.id);
+            this.list = $('<div>').addClass('card');
+            this.p = $('<p>').text(this.state.listName).addClass('listTitle');
             this.deleteButton = document.createElement('button');
-            this.deleteButton.className = 'deleteButton delButton';
             this.deleteButton.innerText = 'X';
+
+            //Deleting List
             this.deleteButton.addEventListener('click', () => {
-                this.deleteList.call(this);
+                var id = this.id;
+                $.post(
+                    `${window.location.pathname}/${this.card.id}/deleteCard?_method=DELETE`,
+                    { id },
+                    (data) => {
+                        if (data) {
+                            console.log(this.card.cardName);
+                            this.list.remove();
+                        }
+                    }
+                );
+                console.log(this.card.id);
             });
 
-            //Append elements to List
-            this.ListElement.append(this.deleteButton);
-            this.ListElement.append(this.h2);
-            this.ListElement.append(this.input);
-            this.ListElement.append(this.button);
-            this.ListElement.append(this.div);
-            this.ListElement.classList.add('List');
-        }
+            this.list.append([this.value, this.p, this.deleteButton]);
 
-        deleteList() {
-            this.ListElement.remove();
+            this.cardPlace.append(this.list);
         }
     }
+
     // inline edit plugin
     $.fn.inlineEdit = function (replaceWith) {
         $(this).click(function () {
@@ -95,6 +85,7 @@ $(document).ready(function () {
         constructor(cardName, id) {
             this.cardName = cardName;
             this.id = id;
+            this.listArray = [];
             this.createListElement();
         }
 
@@ -105,15 +96,41 @@ $(document).ready(function () {
                 .val(this.id);
             this.card = $('<div>').addClass('List');
             this.title = $('<h2>').text(this.cardName).addClass('cardTitle');
-            this.input = $('<input>').addClass('input_field');
-            this.button = $('<button>')
-                .text('Add')
-                .addClass('btn-save')
-                .attr('id', 'to-do-list-button');
+            this.input = document.createElement('input');
+            this.input.classList.add('input_field');
+            this.button = document.createElement('button');
+            this.button.innerText = 'Add';
+            this.button.classList.add('btn-save');
+            this.button.id = 'to-do-list-button';
             this.delButton = $('<button>')
                 .text('X')
                 .addClass('deleteButton delButton');
 
+            // Creating List
+            this.button.addEventListener('click', () => {
+                if (this.input.value != '') {
+                    var cardName = this.input.value;
+                    $.post(
+                        `${window.location.pathname}/${this.id}/createCard?_method=POST`,
+                        { cardName },
+                        (data) => {
+                            console.log(data);
+                            if (data) {
+                                this.listArray.push(
+                                    new List(
+                                        data.cardName,
+                                        data.id,
+                                        this.card,
+                                        this
+                                    )
+                                );
+                            }
+                        }
+                    );
+                }
+            });
+
+            //Deleting Card
             this.delButton.click(() => {
                 var id = this.id;
                 $.post(

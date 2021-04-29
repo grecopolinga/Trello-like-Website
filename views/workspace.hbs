@@ -54,12 +54,23 @@
         <input type="hidden" class="id" value="{{_id}}">
         <button class="deleteButton delButton" name="id" value="{{_id}}">X</button>
         <h2 class="cardTitle"  title="Click to edit">{{listName}}</h2>
-        <input class="input_field" /><button
+        <input class="input_field"/><button
           class="btn-save"
           id="to-do-list-button"
         >
           Add
         </button>
+        {{#if cards}}
+        {{#each cards}}
+        <div>
+          <div class="card">
+            <p>{{cardName}}</p>
+            <button class="delButton">X</button>
+          </div>
+        </div>
+        {{/each}}
+        {{/if}}
+        
       </div>
       {{/each}}
       {{/with}}
