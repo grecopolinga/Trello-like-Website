@@ -227,10 +227,8 @@ const boardCtrl = {
             const board = await Boards.findOne({ _id: req.params.id });
             if (board.boardFavorite != true) {
                 board.boardFavorite = 'true';
-                res.send(true);
             } else {
                 board.boardFavorite = 'false';
-                res.send(false);
             }
             console.log(board);
             await board.save();
