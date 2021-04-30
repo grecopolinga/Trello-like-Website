@@ -307,9 +307,11 @@ const boardCtrl = {
                     if (v._id.toString() === req.body.id) {
                         if (req.body.listName != null) {
                             v.cardName = req.body.listName;
+                            console.log(v.cardName); //testing after update
                         }
                         if (req.body.listDesc != null) {
                             v.cardDesc = req.body.listDesc;
+                            console.log(v.cardDesc); //testing after update
                         }
                         if (req.body.listComment != null) {
                             v.cardComments.push(req.body.listComment);
@@ -377,6 +379,46 @@ const boardCtrl = {
                 res.send(false);
             }
         } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    createComment: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            const cardIndex = board.boardLists[listIndex].cards
+                .map((item, index) => {
+                    if (item._id == req.body.id) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex].cards[cardIndex] != null) {
+                board.boardLists[listIndex].cards[cardIndex].cardComments.push(
+                    req.body.listComment
+                );
+                console.log(
+                    board.boardLists[listIndex].cards[cardIndex].cardComments
+                ); //testing after adding comment
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            console.log(req.params.listId);
             console.log(err);
             res.status(500).send();
         }

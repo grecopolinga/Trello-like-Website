@@ -100,4 +100,6 @@ router.patch('/workspace/:id/:listId/updateCard', boardCtrl.patchUpdateCard);
 
 router.delete('/workspace/:id/:listId/deleteComment', boardCtrl.deleteComment);
 
+router.post('/workspace/:id/:listId/createComment', boardCtrl.createComment);
+
 module.exports = router;
