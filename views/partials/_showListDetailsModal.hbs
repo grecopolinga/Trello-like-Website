@@ -1,34 +1,33 @@
-<!-- Add Modal -->
+<!-- List Details Modal -->
 <div
-    class="hidden fixed z-10 inset-0 overflow-y-auto"
+    class="modal hidden fixed z-10 inset-0 overflow-y-auto"
     aria-labelledby="modal-title"
     aria-modal="true"
     id="show-listDetails-modal"
 >
-    {{#with board}}
     <div class="menuContainer">
         <div class="menu">
+            <button class="closeButton-list">X</button>
             <div class="menuTitle">
                 <div>
-                <p>{{cardName}}</p>
+                <p class="listTitle">{{cardName}}</p>    
             </div>
         </div>
         <div class="menuDescription">
             <div>
-                <p>{{cardDesc}}</p>
+                <p class="listDesc">{{cardDesc}}</p>
             </div>
         </div>
-        <input class="commentsInput input_field" placeholder="Write a comment..."><button class="commentsButton btn-save-comment">Comment</button>
+        <input class="commentsInput input_field" placeholder="Write a comment...">
+        <button class="commentsButton btn-save-comment">Comment</button>
         <div class="menuComments">
             {{#if cardComments}}
             {{#each cardComments}}
-            <div class="comment">{{cardComments}}<button class="delButton-comment">X</button></div>
+            <div class="comment">{{this}}<button class="delButton-comment">X</button></div>
             {{/each}}
             {{/if}}
-            
         </div>
     </div>
-    {{/with}}
 </div>    
     
 </div>

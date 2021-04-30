@@ -63,19 +63,18 @@
         </button>
         {{#if cards}}
         {{#each cards}}
-        <div>
+        <div id="{{_id}}">
           <div class="card">
             <p>{{cardName}}</p>
             <button class="delButton-list" name="id" value="{{_id}}">X</button>
           </div>
+          {{>_showListDetailsModal}}
         </div>
         {{/each}}
         {{/if}}
-        
       </div>
       {{/each}}
       {{/with}}
-      {{_showListDetailsModal}}
     </div>
 </div>
 {{>_boardSettingsModal}}
