@@ -256,6 +256,7 @@ const boardCtrl = {
             } else {
                 res.send(false);
             }
+            console.log(board.boardLists[listIndex].cards); //Testing display
         } catch (error) {
             console.log(error);
             res.status(500).send();
@@ -310,8 +311,9 @@ const boardCtrl = {
                         if (req.body.listDesc != null) {
                             v.cardDesc = req.body.listDesc;
                         }
-                        if (req.body.listComments != null) {
-                            v.cardComments = req.body.listComments;
+                        if (req.body.listComment != null) {
+                            v.cardComments.push(req.body.listComment);
+                            console.log(v.cardComments); //testing after update
                         }
                     }
                 });
@@ -320,7 +322,60 @@ const boardCtrl = {
             } else {
                 res.send(false);
             }
-            console.log(req.body.id);
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    deleteComment: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            const cardIndex = board.boardLists[listIndex].cards
+                .map((item, index) => {
+                    if (item._id == req.body.id) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex].cards[cardIndex] != null) {
+                const delComment = board.boardLists[listIndex].cards[
+                    cardIndex
+                ].cardComments
+                    .map((item, index) => {
+                        if (item == req.body.listComment) {
+                            return index;
+                        }
+                    })
+                    .filter(function (el) {
+                        return el != null;
+                    });
+
+                board.boardLists[listIndex].cards[
+                    cardIndex
+                ].cardComments.splice(delComment, 1);
+
+                //Testing
+                console.log(
+                    board.boardLists[listIndex].cards[cardIndex].cardComments
+                );
+
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
         } catch (err) {
             console.log(err);
             res.status(500).send();

@@ -98,4 +98,6 @@ router.delete('/workspace/:id/:listId/deleteCard', boardCtrl.deleteCard);
 
 router.patch('/workspace/:id/:listId/updateCard', boardCtrl.patchUpdateCard);
 
+router.delete('/workspace/:id/:listId/deleteComment', boardCtrl.deleteComment);
+
 module.exports = router;
