@@ -458,4 +458,10 @@ $(document).ready(function () {
             }
         );
     });
+
+    $('.card').click(function (event) {
+        if (event.target.nodeName != 'BUTTON') {
+            alert('CARD clicked...');
+        }
+    });
 });
