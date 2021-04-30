@@ -81,7 +81,37 @@ $(document).ready(function () {
 
             this.commentsButton.addEventListener('click', () => {
                 if (this.commentsInput.value != '') {
-                    this.state.listComments.push(this.commentsInput.value);
+                    var listComment = this.commentsInput.value;
+                    var id = this.id;
+
+                    $.post(
+                        `${window.location.pathname}/${this.card.id}/updateCard?_method=PATCH`,
+                        { listComment, id },
+                        (data) => {
+                            console.log(data);
+                            if (data) {
+                                this.state.listComments.push(listComment);
+
+                                let currentCommentsDOM = Array.from(
+                                    this.menuComments.childNodes
+                                );
+
+                                currentCommentsDOM.forEach((commentDOM) => {
+                                    commentDOM.remove();
+                                });
+
+                                this.state.listComments.forEach((comment) => {
+                                    new Comment(
+                                        comment,
+                                        this.menuComments,
+                                        this,
+                                        this.card
+                                    );
+                                });
+                            }
+                        }
+                    );
+
                     this.renderComments();
                     this.commentsInput.value = '';
                 }
@@ -124,7 +154,7 @@ $(document).ready(function () {
             });
 
             this.state.listComments.forEach((comment) => {
-                new Comment(comment, this.menuComments, this);
+                new Comment(comment, this.menuComments, this, this.card);
             });
         }
     }
@@ -228,10 +258,11 @@ $(document).ready(function () {
     }
 
     class Comment {
-        constructor(text, place, list) {
+        constructor(text, place, list, card) {
             this.text = text;
             this.place = place;
             this.list = list;
+            this.card = card;
             this.render();
         }
 
@@ -239,22 +270,32 @@ $(document).ready(function () {
             this.div = document.createElement('div');
             this.div.className = 'comment';
             this.div.innerText = this.text;
-
             this.deleteButton = document.createElement('button');
             this.deleteButton.innerText = 'X';
-            // this.deleteButton.addEventListener('click', () => {
-            //     this.deleteComment.call(this);
-            // });
+
+            var listComment = this.text;
+            var id = this.list.id;
+
+            this.deleteButton.addEventListener('click', () => {
+                $.post(
+                    `${window.location.pathname}/${this.card.id}/deleteComment?_method=DELETE`,
+                    { listComment, id },
+                    (data) => {
+                        if (data) {
+                            let i = this.list.state.listComments.indexOf(
+                                this.div
+                            );
+                            this.list.state.listComments.splice(i, 1);
+                            this.div.remove();
+                            console.log(data);
+                        }
+                    }
+                );
+            });
 
             this.div.append(this.deleteButton);
             this.place.append(this.div);
         }
-
-        // deleteComment() {
-        //     this.div.remove();
-        //     let i = this.card.state.comments.indexOf(this.div);
-        //     this.card.state.comments.splice(i, 1);
-        // }
     }
 
     // inline edit plugin
