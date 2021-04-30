@@ -9,7 +9,7 @@
             {{/with}}
         </div>
         <div class="flex flex-row-reverse items-center">
-            <button id="addTodoListButton" class="btn-save h-10">
+            <button id="addTodoListButton" class="btn-save-card h-10">
                 Create List
             </button>
             <input id="addTodoListInput" class="input_field h-10" />
@@ -17,10 +17,10 @@
     </div>
     <div id="root">
       <div class="List">
-        <button class="deleteButton delButton">X</button>
+        <button class="deleteButton delButton-card">X</button>
         <h2>House Chores</h2>
         <input class="input_field" /><button
-          class="btn-save"
+          class="btn-save-list"
           id="to-do-list-button"
         >
           Add
@@ -50,13 +50,14 @@
       </div>
       {{#with board}}
       {{#each boardLists}}
-      <div class="List">
+      <div class="List" id = "{{_id}}">
         <input type="hidden" class="id" value="{{_id}}">
-        <button class="deleteButton delButton" name="id" value="{{_id}}">X</button>
+        <button class="deleteButton delButton-card" name="id" value="{{_id}}">X</button>
         <h2 class="cardTitle"  title="Click to edit">{{listName}}</h2>
-        <input class="input_field"/><button
-          class="btn-save"
+        <input class="input_field" id="cInput{{_id}}"/><button
+          class="btn-save-list"
           id="to-do-list-button"
+          value="{{_id}}"
         >
           Add
         </button>
@@ -65,7 +66,7 @@
         <div>
           <div class="card">
             <p>{{cardName}}</p>
-            <button class="delButton">X</button>
+            <button class="delButton-list" name="id" value="{{_id}}">X</button>
           </div>
         </div>
         {{/each}}

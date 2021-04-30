@@ -65,7 +65,7 @@ $(document).ready(function () {
             this.menuDescription.className = 'menuDescription';
             this.menuComments.className = 'menuComments';
             this.commentsInput.className = 'commentsInput input_field';
-            this.commentsButton.className = 'commentsButton btn-save';
+            this.commentsButton.className = 'commentsButton btn-save-comment';
 
             //Inner Text
             this.commentsButton.innerText = 'Comment';
@@ -177,7 +177,7 @@ $(document).ready(function () {
             this.p.remove();
             this.input.value = oldText;
             this.saveButton.innerText = 'Save';
-            this.saveButton.className = 'btn-save';
+            this.saveButton.className = 'btn-save-edit';
             this.input.classList.add('input_field');
 
             this.saveButton.addEventListener('click', () => {
@@ -310,7 +310,6 @@ $(document).ready(function () {
                     );
                     elem.html($(this).val());
                 }
-
                 $(this).remove();
                 elem.show();
                 elem.parent().find('br').remove();
@@ -340,11 +339,11 @@ $(document).ready(function () {
             this.input.classList.add('input_field');
             this.button = document.createElement('button');
             this.button.innerText = 'Add';
-            this.button.classList.add('btn-save');
+            this.button.classList.add('btn-save-list');
             this.button.id = 'to-do-list-button';
             this.delButton = $('<button>')
                 .text('X')
-                .addClass('deleteButton delButton');
+                .addClass('deleteButton delButton-card');
 
             // Creating List
             this.button.addEventListener('click', () => {
@@ -411,7 +410,7 @@ $(document).ready(function () {
         );
     });
 
-    $('.deleteButton').click(function () {
+    $('.delButton-card').click(function () {
         var id = $(this).val();
         $.post(
             `${window.location.pathname}/deleteList?_method=DELETE`,
@@ -419,6 +418,42 @@ $(document).ready(function () {
             (data) => {
                 if (data) {
                     $(this).parent().remove();
+                }
+            }
+        );
+    });
+
+    $('.delButton-list').click(function () {
+        var id = $(this).val();
+        var list = $(this).parent().parent().parent().attr('id');
+        $.post(
+            `${window.location.pathname}/${list}/deleteCard?_method=DELETE`,
+            { id },
+            (data) => {
+                if (data) {
+                    $(this).parent().remove();
+                }
+            }
+        );
+    });
+
+    $('.btn-save-list').click(function () {
+        var cardId = $(this).val();
+        var cardInputFieldId = '#cInput' + cardId;
+        var cardName = $(cardInputFieldId).val();
+
+        var list = $(this).parent().attr('id');
+        $.post(
+            `${window.location.pathname}/${list}/createCard?_method=POST`,
+            { cardId, cardName },
+            (data) => {
+                if (data) {
+                    new List(
+                        data.cardName,
+                        data.cardId,
+                        $(this).parent(),
+                        $(this).parent()
+                    );
                 }
             }
         );
