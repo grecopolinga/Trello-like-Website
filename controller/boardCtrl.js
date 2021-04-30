@@ -256,7 +256,6 @@ const boardCtrl = {
             } else {
                 res.send(false);
             }
-            //console.log(board.boardLists[listIndex].cards);
         } catch (error) {
             console.log(error);
             res.status(500).send();
@@ -305,7 +304,15 @@ const boardCtrl = {
             if (board.boardLists[listIndex] != null) {
                 board.boardLists[listIndex].cards.forEach((v) => {
                     if (v._id.toString() === req.body.id) {
-                        v.cardName = req.body.cardName;
+                        if (req.body.listName != null) {
+                            v.cardName = req.body.listName;
+                        }
+                        if (req.body.listDesc != null) {
+                            v.cardDesc = req.body.listDesc;
+                        }
+                        if (req.body.listComments != null) {
+                            v.cardComments = req.body.listComments;
+                        }
                     }
                 });
                 await board.save();
@@ -313,7 +320,9 @@ const boardCtrl = {
             } else {
                 res.send(false);
             }
+            console.log(req.body.id);
         } catch (err) {
+            console.log(err);
             res.status(500).send();
         }
     },

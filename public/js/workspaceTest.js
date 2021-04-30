@@ -4,7 +4,7 @@ $(document).ready(function () {
             this.id = id;
             this.state = {
                 listName: listName,
-                listDesc: '',
+                listDesc: 'Write description here...',
                 listComments: [],
             };
             (this.cardPlace = place), (this.card = Card);
@@ -18,8 +18,16 @@ $(document).ready(function () {
                 .val(this.id);
             this.list = $('<div>').addClass('card');
             this.p = $('<p>').text(this.state.listName).addClass('listTitle');
+
             this.deleteButton = document.createElement('button');
             this.deleteButton.innerText = 'X';
+
+            //Clicking list to see list details
+            this.list.click((e) => {
+                if (e.target != this.deleteButton) {
+                    this.showMenu.call(this);
+                }
+            });
 
             //Deleting List
             this.deleteButton.addEventListener('click', () => {
@@ -29,18 +37,224 @@ $(document).ready(function () {
                     { id },
                     (data) => {
                         if (data) {
-                            console.log(this.card.cardName);
                             this.list.remove();
                         }
                     }
                 );
-                console.log(this.card.id);
             });
 
             this.list.append([this.value, this.p, this.deleteButton]);
 
             this.cardPlace.append(this.list);
         }
+
+        showMenu() {
+            //Elements of Menu
+            this.menu = document.createElement('div');
+            this.menuContainer = document.createElement('div');
+            this.menuTitle = document.createElement('div');
+            this.menuDescription = document.createElement('div');
+            this.commentsInput = document.createElement('input');
+            this.commentsButton = document.createElement('button');
+            this.menuComments = document.createElement('div');
+
+            //Class names
+            this.menu.className = 'menu';
+            this.menuContainer.className = 'menuContainer';
+            this.menuTitle.className = 'menuTitle';
+            this.menuDescription.className = 'menuDescription';
+            this.menuComments.className = 'menuComments';
+            this.commentsInput.className = 'commentsInput input_field';
+            this.commentsButton.className = 'commentsButton btn-save';
+
+            //Inner Text
+            this.commentsButton.innerText = 'Comment';
+            this.commentsInput.placeholder = 'Write a comment...';
+
+            //Event listeners
+            this.menuContainer.addEventListener('click', (e) => {
+                console.log(e.target);
+                if (e.target.classList.contains('menuContainer')) {
+                    this.menuContainer.remove();
+                }
+            });
+
+            this.commentsButton.addEventListener('click', () => {
+                if (this.commentsInput.value != '') {
+                    this.state.listComments.push(this.commentsInput.value);
+                    this.renderComments();
+                    this.commentsInput.value = '';
+                }
+            });
+
+            //Append
+            this.menu.append(this.menuTitle);
+            this.menu.append(this.menuDescription);
+            this.menu.append(this.commentsInput);
+            this.menu.append(this.commentsButton);
+            this.menu.append(this.menuComments);
+            this.menuContainer.append(this.menu);
+            $('#root').append(this.menuContainer);
+
+            this.editableDescription = new EditCardTexts(
+                this.state.listDesc,
+                this.menuDescription,
+                this,
+                this.card,
+                'listDesc',
+                'textarea'
+            );
+            this.editableTitle = new EditCardTexts(
+                this.state.listName,
+                this.menuTitle,
+                this,
+                this.card,
+                'listName',
+                'input'
+            );
+
+            this.renderComments();
+        }
+
+        renderComments() {
+            let currentCommentsDOM = Array.from(this.menuComments.childNodes);
+
+            currentCommentsDOM.forEach((commentDOM) => {
+                commentDOM.remove();
+            });
+
+            this.state.listComments.forEach((comment) => {
+                new Comment(comment, this.menuComments, this);
+            });
+        }
+    }
+
+    class EditCardTexts {
+        constructor(text, place, List, Card, property, typeOfInput) {
+            this.text = text;
+            this.place = place;
+            this.list = List; //"List" to be edited
+            this.card = Card; //"Card" it belongs to
+            this.property = property;
+            this.typeOfInput = typeOfInput;
+            this.render();
+        }
+
+        render() {
+            this.div = document.createElement('div');
+            this.p = document.createElement('p');
+
+            this.p.innerText = this.text;
+
+            this.p.addEventListener('click', () => {
+                this.showEditableTextArea.call(this);
+            });
+
+            this.div.append(this.p);
+            this.place.append(this.div);
+        }
+
+        showEditableTextArea() {
+            let oldText = this.text;
+
+            this.input = document.createElement(this.typeOfInput);
+            this.saveButton = document.createElement('button');
+
+            this.p.remove();
+            this.input.value = oldText;
+            this.saveButton.innerText = 'Save';
+            this.saveButton.className = 'btn-save';
+            this.input.classList.add('input_field');
+
+            this.saveButton.addEventListener('click', () => {
+                this.text = this.input.value;
+                this.list.state[this.property] = this.input.value;
+
+                if (this.property == 'listName') {
+                    this.list.p.innerText = this.input.value; //Bugged: Cannot change in real-time, need to refresh to see changes
+
+                    var listName = this.list.state[this.property];
+                    var id = this.list.id;
+                    $.post(
+                        `${window.location.pathname}/${this.card.id}/updateCard?_method=PATCH`,
+                        { listName, id },
+                        (data) => {
+                            if (data) {
+                                console.log(data);
+                            }
+                        }
+                    );
+                }
+                if (this.property == 'listDesc') {
+                    var listDesc = this.list.state[this.property];
+                    var id = this.list.id;
+                    $.post(
+                        `${window.location.pathname}/${this.card.id}/updateCard?_method=PATCH`,
+                        { listDesc, id },
+                        (data) => {
+                            if (data) {
+                                console.log(data);
+                            }
+                        }
+                    );
+                }
+
+                this.div.remove();
+                this.render();
+            });
+
+            function clickSaveButton(event, object) {
+                // "Enter" key's keycode equivalent is 13
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    object.saveButton.click();
+                }
+            }
+
+            this.input.addEventListener('keyup', (e) => {
+                if (this.typeOfInput == 'input') {
+                    clickSaveButton(e, this);
+                }
+            });
+
+            this.div.append(this.input);
+
+            if (this.typeOfInput == 'textarea') {
+                this.div.append(this.saveButton);
+            }
+
+            this.input.select();
+        }
+    }
+
+    class Comment {
+        constructor(text, place, list) {
+            this.text = text;
+            this.place = place;
+            this.list = list;
+            this.render();
+        }
+
+        render() {
+            this.div = document.createElement('div');
+            this.div.className = 'comment';
+            this.div.innerText = this.text;
+
+            this.deleteButton = document.createElement('button');
+            this.deleteButton.innerText = 'X';
+            // this.deleteButton.addEventListener('click', () => {
+            //     this.deleteComment.call(this);
+            // });
+
+            this.div.append(this.deleteButton);
+            this.place.append(this.div);
+        }
+
+        // deleteComment() {
+        //     this.div.remove();
+        //     let i = this.card.state.comments.indexOf(this.div);
+        //     this.card.state.comments.splice(i, 1);
+        // }
     }
 
     // inline edit plugin

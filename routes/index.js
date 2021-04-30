@@ -96,4 +96,6 @@ router.post('/workspace/:id/:listId/createCard', boardCtrl.postCreateCard);
 // @route Delete /delete;
 router.delete('/workspace/:id/:listId/deleteCard', boardCtrl.deleteCard);
 
+router.patch('/workspace/:id/:listId/updateCard', boardCtrl.patchUpdateCard);
+
 module.exports = router;
