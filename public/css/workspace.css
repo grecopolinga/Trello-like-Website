@@ -243,7 +243,22 @@ button {
     padding: 0.1em;
 }
 
-.delButton-card:hover {
+.delButton-list:hover {
+    color: #615d5d;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delButton-comment {
+    height: max-content;
+    color: #aca2a2;
+    float: right;
+    background: none;
+    border: none;
+    padding: 0.1em;
+}
+
+.delButton-comment:hover {
     color: #615d5d;
     border-radius: 4px;
     cursor: pointer;
