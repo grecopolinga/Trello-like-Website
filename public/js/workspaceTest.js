@@ -91,23 +91,7 @@ $(document).ready(function () {
                             console.log(data);
                             if (data) {
                                 this.state.listComments.push(listComment);
-
-                                let currentCommentsDOM = Array.from(
-                                    this.menuComments.childNodes
-                                );
-
-                                currentCommentsDOM.forEach((commentDOM) => {
-                                    commentDOM.remove();
-                                });
-
-                                this.state.listComments.forEach((comment) => {
-                                    new Comment(
-                                        comment,
-                                        this.menuComments,
-                                        this,
-                                        this.card
-                                    );
-                                });
+                                this.renderComments();
                             }
                         }
                     );
@@ -283,11 +267,12 @@ $(document).ready(function () {
                     (data) => {
                         if (data) {
                             let i = this.list.state.listComments.indexOf(
-                                this.div
+                                this.text
                             );
                             this.list.state.listComments.splice(i, 1);
                             this.div.remove();
                             console.log(data);
+                            console.log(i);
                         }
                     }
                 );
