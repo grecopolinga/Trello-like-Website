@@ -21,6 +21,7 @@ $(document).ready(function () {
 
             this.deleteButton = document.createElement('button');
             this.deleteButton.innerText = 'X';
+            this.deleteButton.classList.add('delButton-list');
 
             //Clicking list to see list details
             this.list.click((e) => {
@@ -53,6 +54,9 @@ $(document).ready(function () {
             this.menu = document.createElement('div');
             this.menuContainer = document.createElement('div');
             this.menuTitle = document.createElement('div');
+            this.deleteButton = document.createElement('button');
+            this.deleteButton.innerText = 'X';
+            this.deleteButton.classList.add('closeButton-list');
             this.menuDescription = document.createElement('div');
             this.commentsInput = document.createElement('input');
             this.commentsButton = document.createElement('button');
@@ -72,6 +76,10 @@ $(document).ready(function () {
             this.commentsInput.placeholder = 'Write a comment...';
 
             //Event listeners
+            this.deleteButton.addEventListener('click', () => {
+                this.menuContainer.remove();
+            });
+
             this.menuContainer.addEventListener('click', (e) => {
                 console.log(e.target);
                 if (e.target.classList.contains('menuContainer')) {
@@ -85,7 +93,7 @@ $(document).ready(function () {
                     var id = this.id;
 
                     $.post(
-                        `${window.location.pathname}/${this.card.id}/updateCard?_method=PATCH`,
+                        `${window.location.pathname}/${this.card.id}/createComment?_method=POST`,
                         { listComment, id },
                         (data) => {
                             console.log(data);
@@ -102,6 +110,7 @@ $(document).ready(function () {
             });
 
             //Append
+            this.menu.append(this.deleteButton);
             this.menu.append(this.menuTitle);
             this.menu.append(this.menuDescription);
             this.menu.append(this.commentsInput);
@@ -288,7 +297,51 @@ $(document).ready(function () {
         $(this).click(function () {
             var elem = $(this);
             var text = elem.text();
-            var id = elem.parent().find('.id').val();
+            var id;
+            var listId;
+
+            if (elem.attr('class') == 'cardTitle') {
+                id = elem.parent().find('.id').val();
+            }
+            if (elem.attr('class') == 'listTitle') {
+                id = elem
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .attr('id');
+                listId = elem
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .attr('id');
+            }
+            if (elem.attr('class') == 'listDesc') {
+                id = elem
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .attr('id');
+
+                listId = elem
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .parent()
+                    .attr('id');
+            }
 
             replaceWith.val(text);
             elem.hide();
@@ -297,17 +350,44 @@ $(document).ready(function () {
             replaceWith.focus();
 
             replaceWith.blur(function () {
-                if ($(this).val() !== text) {
-                    var listName = $(this).val();
-                    $.post(
-                        `${window.location.pathname}/updateList?_method=PATCH`,
-                        { listName, id },
-                        (data) => {
-                            if (data) {
-                                console.log(data);
+                if ($(this).val() !== text && $(this).val() !== '') {
+                    if (elem.parent().attr('class') == 'List') {
+                        var listName = $(this).val();
+                        $.post(
+                            `${window.location.pathname}/updateList?_method=PATCH`,
+                            { listName, id },
+                            (data) => {
+                                if (data) {
+                                    console.log(data);
+                                }
                             }
-                        }
-                    );
+                        );
+                    } else if (elem.attr('class') == 'listTitle') {
+                        listName = $(this).val();
+                        $.post(
+                            `${window.location.pathname}/${listId}/updateCard?_method=PATCH`,
+                            { listName, id },
+                            (data) => {
+                                if (data) {
+                                    console.log(listName);
+                                }
+                            }
+                        );
+                        console.log(id);
+                    } else if (elem.attr('class') == 'listDesc') {
+                        var listDesc = $(this).val();
+                        $.post(
+                            `${window.location.pathname}/${listId}/updateCard?_method=PATCH`,
+                            { listDesc, id },
+                            (data) => {
+                                if (data) {
+                                    console.log(data);
+                                }
+                            }
+                        );
+                        console.log(listDesc);
+                        console.log(listId);
+                    }
                     elem.html($(this).val());
                 }
                 $(this).remove();
@@ -318,7 +398,10 @@ $(document).ready(function () {
     };
 
     var replaceWith = $('<input type="text" class="input_field" />');
+
     $('.cardTitle').inlineEdit(replaceWith);
+    $('.listTitle').inlineEdit(replaceWith); //list title
+    $('.listDesc').inlineEdit(replaceWith); //list description
 
     class Card {
         constructor(cardName, id) {
@@ -437,6 +520,36 @@ $(document).ready(function () {
         );
     });
 
+    $('.delButton-comment').click(function () {
+        var id = $(this)
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+        var listId = $(this)
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+        var listComment = $(this).parent().text();
+        $.post(
+            `${window.location.pathname}/${listId}/deleteComment?_method=DELETE`,
+            { listComment, id },
+            (data) => {
+                if (data) {
+                    $(this).parent().remove();
+                }
+            }
+        );
+    });
+
     $('.btn-save-list').click(function () {
         var cardId = $(this).val();
         var cardInputFieldId = '#cInput' + cardId;
@@ -459,9 +572,44 @@ $(document).ready(function () {
         );
     });
 
+    $('.btn-save-comment').click(function () {
+        var id = $(this).parent().parent().parent().parent().attr('id');
+        var listId = $(this)
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+        var listComment = $('.commentsInput').val();
+        $.post(
+            `${window.location.pathname}/${listId}/createComment?_method=POST`,
+            { listComment, id },
+            (data) => {
+                if (data) {
+                    console.log(data);
+                }
+            }
+        );
+
+        console.log(id);
+        console.log(listId);
+    });
+
+    // Displaying/Closing list details modal
+    const listDetails = document.getElementById('show-listDetails-modal');
+    const closeModal = document.querySelectorAll('.closeButton-list');
+
     $('.card').click(function (event) {
         if (event.target.nodeName != 'BUTTON') {
-            alert('CARD clicked...');
+            // alert('CARD clicked...');
+            listDetails.classList.remove('hidden');
         }
+    });
+
+    closeModal.forEach((close) => {
+        close.addEventListener('click', () => {
+            listDetails.classList.add('hidden');
+        });
     });
 });
