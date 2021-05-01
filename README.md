@@ -20,7 +20,7 @@ The workspace in TRONE is a Kanban-style, list-making application that is simila
 -   [routes](routes) - This folder contains files which describes the response of the server for each HTTP method request to a specific path in the server.
 -   [src](src) - This folder contains the css file for [tailwindcss](https://tailwindcss.com).
 -   [views](views) - This folder contains all the hbs files to be rendered to the server.
--   [app.js](app.js) - Main entry point of the app
+-   [index.js](index.js) - Main entry point of the app
 
 # How to Run Program:
 
@@ -69,7 +69,7 @@ The table below shows the details of the sample users.
 | Sonson_Great | Hakdoq1234 |
 | L_Graves | Leona_1234 |
 | Fried_12 | Chizudoggu11\_ |
-| StellaD | Bestoftherest143 |
+| StellaD8 | Bestoftherest143 |
 | Angelo_Laurent | Daraifurawa12 |
 
 # Authors:
