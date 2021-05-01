@@ -236,6 +236,187 @@ const boardCtrl = {
             console.log(err);
         }
     },
+
+    postCreateCard: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+
+            if (req.body.cardName != '') {
+                board.boardLists[listIndex].cards.push({
+                    cardName: req.body.cardName,
+                });
+
+                await board.save();
+                const listCards = board.boardLists[listIndex].cards;
+                const data = {
+                    cardName:
+                        board.boardLists[listIndex].cards[listCards.length - 1]
+                            .cardName,
+                    id:
+                        board.boardLists[listIndex].cards[listCards.length - 1]
+                            ._id,
+                };
+                res.send(data);
+            } else {
+                res.send(false);
+            }
+            console.log(board.boardLists[listIndex].cards); //Testing display
+        } catch (error) {
+            console.log(error);
+            res.status(500).send();
+        }
+    },
+
+    deleteCard: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex] != null) {
+                board.boardLists[listIndex].cards = board.boardLists[
+                    listIndex
+                ].cards.filter((v) => v._id.toString() !== req.body.id);
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    patchUpdateCard: async (req, res) => {
+        try {
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex] != null) {
+                board.boardLists[listIndex].cards.forEach((v) => {
+                    if (v._id.toString() === req.body.id) {
+                        if (req.body.listName != null) {
+                            v.cardName = req.body.listName;
+                            console.log(v.cardName); //testing after update
+                        }
+                        if (req.body.listDesc != null) {
+                            v.cardDesc = req.body.listDesc;
+                            console.log(v.cardDesc); //testing after update
+                        }
+                        if (req.body.listComment != null) {
+                            v.cardComments.push(req.body.listComment);
+                            console.log(v.cardComments); //testing after update
+                        }
+                    }
+                });
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    deleteComment: async (req, res) => {
+        try {
+            var listComment = req.body.listComment.slice(0, -1);
+            const board = await Boards.findById(req.params.id);
+            if (board != null) {
+                const list = board.boardLists.find((card) => {
+                    if (card._id.toString() === req.body.cardId) {
+                        return true;
+                    }
+                });
+
+                const card = list.cards.find((e) => {
+                    if (e._id.toString() === req.body.listId) {
+                        return true;
+                    }
+                });
+
+                //TODO: Better Delation of Multiple Instance of a Comment
+                card.cardComments = card.cardComments.filter(
+                    (c) => c !== listComment
+                );
+
+                await board.save();
+
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send();
+        }
+    },
+
+    createComment: async (req, res) => {
+        try {
+            console.log(req.body);
+            const board = await Boards.findById(req.params.id);
+            const listIndex = board.boardLists
+                .map((item, index) => {
+                    if (item._id == req.params.listId) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            const cardIndex = board.boardLists[listIndex].cards
+                .map((item, index) => {
+                    if (item._id == req.body.id) {
+                        return index;
+                    }
+                })
+                .filter(function (el) {
+                    return el != null;
+                });
+            if (board.boardLists[listIndex].cards[cardIndex] != null) {
+                board.boardLists[listIndex].cards[cardIndex].cardComments.push(
+                    req.body.listComment
+                );
+                console.log(
+                    board.boardLists[listIndex].cards[cardIndex].cardComments
+                ); //testing after adding comment
+                await board.save();
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        } catch (err) {
+            console.log(req.params.listId);
+            console.log(err);
+            res.status(500).send();
+        }
+    },
 };
 
 module.exports = boardCtrl;

@@ -95,5 +95,18 @@ router.patch('/:id/clicked', boardCtrl.confirmFavorite);
 // @desc Get search board
 // @route GET /search
 router.get('/:username/search', ctrl.boardSearch);
+// @desc Create card
+// @route Create /Create;
+router.post('/workspace/:id/:listId/createCard', boardCtrl.postCreateCard);
+
+// @desc Delete card
+// @route Delete /delete;
+router.delete('/workspace/:id/:listId/deleteCard', boardCtrl.deleteCard);
+
+router.patch('/workspace/:id/:listId/updateCard', boardCtrl.patchUpdateCard);
+
+router.delete('/workspace/:id/:listId/deleteComment', boardCtrl.deleteComment);
+
+router.post('/workspace/:id/:listId/createComment', boardCtrl.createComment);
 
 module.exports = router;
