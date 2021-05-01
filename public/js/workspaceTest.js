@@ -16,6 +16,7 @@ $(document).ready(function () {
                 .addClass('id')
                 .attr('type', 'hidden')
                 .val(this.id);
+            this.div = $('<div>').attr('id', this.id);
             this.list = $('<div>').addClass('card');
             this.p = $('<p>').text(this.state.listName).addClass('listTitle');
 
@@ -46,7 +47,8 @@ $(document).ready(function () {
 
             this.list.append([this.value, this.p, this.deleteButton]);
 
-            this.cardPlace.append(this.list);
+            this.cardPlace.append(this.div);
+            this.div.append(this.list);
         }
 
         showMenu() {
