@@ -1,19 +1,15 @@
-const boardSettingsModal = document.getElementById('board-settings-modal');
-const boardSettingsShow = document.getElementById('board-settings-button');
-const boardSettingsConfirm = document.getElementById('board-settings-confirm');
-
 const closeModal = document.querySelectorAll('.close-modal');
 
-boardSettingsShow.addEventListener('click', () => {
-    boardSettingsModal.classList.remove('hidden');
+$('#board-settings-button').click(() => {
+    $('#board-settings-modal').removeClass('hidden');
 });
 
-boardSettingsConfirm.addEventListener('click', () => {
-    boardSettingsModal.classList.add('hidden');
+$('#board-settings-confirm').click(() => {
+    $('#board-settings-modal').addClass('hidden');
 });
 
 closeModal.forEach((close) => {
     close.addEventListener('click', () => {
-        boardSettingsModal.classList.add('hidden');
+        $('#board-settings-modal').addClass('hidden');
     });
 });
