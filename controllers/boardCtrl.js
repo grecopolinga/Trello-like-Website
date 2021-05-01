@@ -232,6 +232,7 @@ const boardCtrl = {
             }
             console.log(board);
             await board.save();
+            res.send(true);
         } catch (err) {
             console.log(err);
         }
