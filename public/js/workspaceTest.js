@@ -1,13 +1,13 @@
 $(document).ready(function () {
     class List {
-        constructor(listName, id, place, Card) {
+        constructor(listName, id, place, cardId) {
             this.id = id;
             this.state = {
                 listName: listName,
                 listDesc: 'Write description here...',
                 listComments: [],
             };
-            (this.cardPlace = place), (this.card = Card);
+            (this.cardPlace = place), (this.card = cardId);
             this.render();
         }
 
@@ -34,7 +34,7 @@ $(document).ready(function () {
             this.deleteButton.addEventListener('click', () => {
                 var id = this.id;
                 $.post(
-                    `${window.location.pathname}/${this.card.id}/deleteCard?_method=DELETE`,
+                    `${window.location.pathname}/${this.card}/deleteCard?_method=DELETE`,
                     { id },
                     (data) => {
                         if (data) {
@@ -93,7 +93,7 @@ $(document).ready(function () {
                     var id = this.id;
 
                     $.post(
-                        `${window.location.pathname}/${this.card.id}/createComment?_method=POST`,
+                        `${window.location.pathname}/${this.card}/createComment?_method=POST`,
                         { listComment, id },
                         (data) => {
                             console.log(data);
@@ -153,11 +153,11 @@ $(document).ready(function () {
     }
 
     class EditCardTexts {
-        constructor(text, place, List, Card, property, typeOfInput) {
+        constructor(text, place, List, CardId, property, typeOfInput) {
             this.text = text;
             this.place = place;
             this.list = List; //"List" to be edited
-            this.card = Card; //"Card" it belongs to
+            this.card = CardId; //"Card" it belongs to
             this.property = property;
             this.typeOfInput = typeOfInput;
             this.render();
@@ -199,11 +199,12 @@ $(document).ready(function () {
                     var listName = this.list.state[this.property];
                     var id = this.list.id;
                     $.post(
-                        `${window.location.pathname}/${this.card.id}/updateCard?_method=PATCH`,
+                        `${window.location.pathname}/${this.card}/updateCard?_method=PATCH`,
                         { listName, id },
                         (data) => {
                             if (data) {
-                                console.log(data);
+                                console.log(this.list.id);
+                                console.log(this.list);
                             }
                         }
                     );
@@ -212,7 +213,7 @@ $(document).ready(function () {
                     var listDesc = this.list.state[this.property];
                     var id = this.list.id;
                     $.post(
-                        `${window.location.pathname}/${this.card.id}/updateCard?_method=PATCH`,
+                        `${window.location.pathname}/${this.card}/updateCard?_method=PATCH`,
                         { listDesc, id },
                         (data) => {
                             if (data) {
@@ -251,11 +252,11 @@ $(document).ready(function () {
     }
 
     class Comment {
-        constructor(text, place, list, card) {
+        constructor(text, place, list, cardId) {
             this.text = text;
             this.place = place;
             this.list = list;
-            this.card = card;
+            this.card = cardId;
             this.render();
         }
 
@@ -271,7 +272,7 @@ $(document).ready(function () {
 
             this.deleteButton.addEventListener('click', () => {
                 $.post(
-                    `${window.location.pathname}/${this.card.id}/deleteComment?_method=DELETE`,
+                    `${window.location.pathname}/${this.card}/deleteComment?_method=DELETE`,
                     { listComment, id },
                     (data) => {
                         if (data) {
@@ -443,7 +444,7 @@ $(document).ready(function () {
                                         data.cardName,
                                         data.id,
                                         this.card,
-                                        this
+                                        this.id
                                     )
                                 );
                             }
@@ -561,13 +562,15 @@ $(document).ready(function () {
             { cardId, cardName },
             (data) => {
                 if (data) {
+                    console.log(data);
                     new List(
                         data.cardName,
-                        data.cardId,
+                        data.id,
                         $(this).parent(),
-                        $(this).parent()
+                        $(this).parent().attr('id')
                     );
                 }
+                console.log(cardId);
             }
         );
     });
