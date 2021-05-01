@@ -30,6 +30,7 @@ closeModal.forEach((close) => {
     close.addEventListener('click', () => {
         $('#deactivate-modal').addClass('hidden');
         $('#save-modal').addClass('hidden');
-        $('#confirm-err').text('');
+        $('#confirm-err').addClass('hidden');
+        $('#confirm-password').val('');
     });
 });
