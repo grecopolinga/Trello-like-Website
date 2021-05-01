@@ -14,9 +14,15 @@
             </div>
         </div>
         <div class="menuDescription">
+            {{#if cardDesc}}
             <div>
                 <p class="listDesc">{{cardDesc}}</p>
             </div>
+            {{else}}
+            <div>
+                <p class="listDesc">Write description here...</p>
+            </div>
+            {{/if}}
         </div>
         <input class="commentsInput input_field" placeholder="Write a comment...">
         <button class="commentsButton btn-save-comment">Comment</button>

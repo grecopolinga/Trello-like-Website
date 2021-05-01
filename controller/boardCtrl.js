@@ -332,48 +332,28 @@ const boardCtrl = {
 
     deleteComment: async (req, res) => {
         try {
+            var listComment = req.body.listComment.slice(0, -1);
             const board = await Boards.findById(req.params.id);
-            const listIndex = board.boardLists
-                .map((item, index) => {
-                    if (item._id == req.params.listId) {
-                        return index;
+            if (board != null) {
+                const list = board.boardLists.find((card) => {
+                    if (card._id.toString() === req.body.cardId) {
+                        return true;
                     }
-                })
-                .filter(function (el) {
-                    return el != null;
                 });
-            const cardIndex = board.boardLists[listIndex].cards
-                .map((item, index) => {
-                    if (item._id == req.body.id) {
-                        return index;
+
+                const card = list.cards.find((e) => {
+                    if (e._id.toString() === req.body.listId) {
+                        return true;
                     }
-                })
-                .filter(function (el) {
-                    return el != null;
                 });
-            if (board.boardLists[listIndex].cards[cardIndex] != null) {
-                const delComment = board.boardLists[listIndex].cards[
-                    cardIndex
-                ].cardComments
-                    .map((item, index) => {
-                        if (item == req.body.listComment) {
-                            return index;
-                        }
-                    })
-                    .filter(function (el) {
-                        return el != null;
-                    });
 
-                board.boardLists[listIndex].cards[
-                    cardIndex
-                ].cardComments.splice(delComment, 1);
-
-                //Testing
-                console.log(
-                    board.boardLists[listIndex].cards[cardIndex].cardComments
+                //TODO: Better Delation of Multiple Instance of a Comment
+                card.cardComments = card.cardComments.filter(
+                    (c) => c !== listComment
                 );
 
                 await board.save();
+
                 res.send(true);
             } else {
                 res.send(false);
@@ -386,6 +366,7 @@ const boardCtrl = {
 
     createComment: async (req, res) => {
         try {
+            console.log(req.body);
             const board = await Boards.findById(req.params.id);
             const listIndex = board.boardLists
                 .map((item, index) => {

@@ -138,20 +138,20 @@ $(document).ready(function () {
                 'input'
             );
 
-            this.renderComments();
+            // this.renderComments();
         }
 
-        renderComments() {
-            let currentCommentsDOM = Array.from(this.menuComments.childNodes);
+        // renderComments() {
+        //     let currentCommentsDOM = Array.from(this.menuComments.childNodes);
 
-            currentCommentsDOM.forEach((commentDOM) => {
-                commentDOM.remove();
-            });
+        //     currentCommentsDOM.forEach((commentDOM) => {
+        //         commentDOM.remove();
+        //     });
 
-            this.state.listComments.forEach((comment) => {
-                new Comment(comment, this.menuComments, this, this.card);
-            });
-        }
+        //     this.state.listComments.forEach((comment) => {
+        //         new Comment(comment, this.menuComments, this, this.card);
+        //     });
+        // }
     }
 
     class EditCardTexts {
@@ -253,47 +253,25 @@ $(document).ready(function () {
         }
     }
 
-    class Comment {
-        constructor(text, place, list, cardId) {
-            this.text = text;
-            this.place = place;
-            this.list = list;
-            this.card = cardId;
-            this.render();
-        }
+    // class Comment {
+    //     constructor(text, place, list, cardId) {
+    //         this.text = text;
+    //         this.place = place;
+    //         this.list = list;
+    //         this.card = cardId;
+    //         this.render();
+    //     }
 
-        render() {
-            this.div = document.createElement('div');
-            this.div.className = 'comment';
-            this.div.innerText = this.text;
-            this.deleteButton = document.createElement('button');
-            this.deleteButton.innerText = 'X';
-
-            var listComment = this.text;
-            var id = this.list.id;
-
-            this.deleteButton.addEventListener('click', () => {
-                $.post(
-                    `${window.location.pathname}/${this.card}/deleteComment?_method=DELETE`,
-                    { listComment, id },
-                    (data) => {
-                        if (data) {
-                            let i = this.list.state.listComments.indexOf(
-                                this.text
-                            );
-                            this.list.state.listComments.splice(i, 1);
-                            this.div.remove();
-                            console.log(data);
-                            console.log(i);
-                        }
-                    }
-                );
-            });
-
-            this.div.append(this.deleteButton);
-            this.place.append(this.div);
-        }
-    }
+    //     render() {
+    //         this.div = document.createElement('div');
+    //         this.div.className = 'comment';
+    //         this.div.innerText = this.text;
+    //         this.deleteButton = document.createElement('button');
+    //         this.deleteButton.innerText = 'X';
+    //         this.div.append(this.deleteButton);
+    //         this.place.append(this.div);
+    //     }
+    // }
 
     // inline edit plugin
     $.fn.inlineEdit = function (replaceWith) {
@@ -404,7 +382,57 @@ $(document).ready(function () {
 
     $('.cardTitle').inlineEdit(replaceWith);
     $('.listTitle').inlineEdit(replaceWith); //list title
-    $('.listDesc').inlineEdit(replaceWith); //list description
+
+    $('.listDesc').click(function () {
+        var elem = $(this);
+        var desc = elem.text();
+        var textField = $(
+            '<textarea class="input_field" spellcheck="false"></textarea>'
+        );
+        var saveBtn = $('<button class="btn-save-edit">Save</button>');
+
+        var id = elem
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
+        var listId = elem
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
+        elem.hide();
+        elem.after(textField);
+        textField.val(desc);
+        textField.after(saveBtn);
+
+        saveBtn.click(function () {
+            var listDesc = textField.val();
+
+            $.post(
+                `${window.location.pathname}/${listId}/updateCard?_method=PATCH`,
+                { listDesc, id },
+                (data) => {
+                    if (data) {
+                        console.log(data);
+                    }
+                }
+            );
+            textField.remove();
+            $(this).remove();
+            elem.text(listDesc);
+            elem.show();
+        });
+    }); //list description
 
     class Card {
         constructor(cardName, id) {
@@ -524,14 +552,6 @@ $(document).ready(function () {
     });
 
     $('.delButton-comment').click(function () {
-        var id = $(this)
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .parent()
-            .attr('id');
         var listId = $(this)
             .parent()
             .parent()
@@ -539,12 +559,21 @@ $(document).ready(function () {
             .parent()
             .parent()
             .parent()
+            .attr('id');
+        var cardId = $(this)
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent()
             .parent()
             .attr('id');
+
         var listComment = $(this).parent().text();
         $.post(
-            `${window.location.pathname}/${listId}/deleteComment?_method=DELETE`,
-            { listComment, id },
+            `${window.location.pathname}/${cardId}/deleteComment?_method=DELETE`,
+            { cardId, listId, listComment },
             (data) => {
                 if (data) {
                     $(this).parent().remove();
@@ -586,13 +615,51 @@ $(document).ready(function () {
             .parent()
             .parent()
             .attr('id');
-        var listComment = $('.commentsInput').val();
+        var listComment = $(this).parent().find('.commentsInput').val();
         $.post(
             `${window.location.pathname}/${listId}/createComment?_method=POST`,
             { listComment, id },
             (data) => {
                 if (data) {
-                    console.log(data);
+                    var deleteBtn = $('<button>')
+                        .addClass('delButton-comment')
+                        .text('X');
+                    var commentCard = $('<div>')
+                        .addClass('comment')
+                        .text(listComment)
+                        .append(deleteBtn);
+                    $(this).parent().find('.menuComments').append(commentCard);
+
+                    deleteBtn.click(function () {
+                        var listId = $(this)
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .attr('id');
+                        var cardId = $(this)
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .parent()
+                            .attr('id');
+
+                        var listComment = $(this).parent().text();
+                        $.post(
+                            `${window.location.pathname}/${cardId}/deleteComment?_method=DELETE`,
+                            { cardId, listId, listComment },
+                            (data) => {
+                                if (data) {
+                                    $(this).parent().remove();
+                                }
+                            }
+                        );
+                    });
                 }
             }
         );
@@ -602,19 +669,21 @@ $(document).ready(function () {
     });
 
     // Displaying/Closing list details modal
-    const listDetails = document.getElementById('show-listDetails-modal');
-    const closeModal = document.querySelectorAll('.closeButton-list');
+    //const listDetails = document.getElementById('show-listDetails-modal');
 
     $('.card').click(function (event) {
         if (event.target.nodeName != 'BUTTON') {
-            // alert('CARD clicked...');
-            listDetails.classList.remove('hidden');
+            $(this).parent().find('.modal').removeClass('hidden');
         }
     });
 
-    closeModal.forEach((close) => {
-        close.addEventListener('click', () => {
-            listDetails.classList.add('hidden');
-        });
+    $('.closeButton-list').click(function () {
+        $(this).parent().parent().parent().addClass('hidden');
+    });
+
+    $('.menuContainer').click(function () {
+        if (!$('.menu:hover').length != 0) {
+            $(this).parent().addClass('hidden');
+        }
     });
 });
