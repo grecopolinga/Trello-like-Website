@@ -33,7 +33,7 @@
         {{#each cards}}
         <div id="{{_id}}">
           <div class="card">
-            <p>{{cardName}}</p>
+            <p id="cName{{_id}}">{{cardName}}</p>
             <button class="delButton-list" name="id" value="{{_id}}">X</button>
           </div>
           {{>_showListDetailsModal}}

@@ -18,7 +18,10 @@ $(document).ready(function () {
                 .val(this.id);
             this.div = $('<div>').attr('id', this.id);
             this.list = $('<div>').addClass('card');
-            this.p = $('<p>').text(this.state.listName).addClass('listTitle');
+            this.p = $('<p>')
+                .text(this.state.listName)
+                .addClass('listTitle')
+                .attr('id', 'cName' + this.id);
 
             this.deleteButton = document.createElement('button');
             this.deleteButton.innerText = 'X';
@@ -210,7 +213,7 @@ $(document).ready(function () {
                 this.list.state[this.property] = this.input.value;
 
                 if (this.property == 'listName') {
-                    this.list.p.innerText = this.input.value; //Bugged: Cannot change in real-time, need to refresh to see changes
+                    this.list.p.innerText = this.input.value;
 
                     var listName = this.list.state[this.property];
                     var id = this.list.id;
@@ -224,6 +227,7 @@ $(document).ready(function () {
                             }
                         }
                     );
+                    $('#cName' + id).html(listName);
                 }
                 if (this.property == 'listDesc') {
                     var listDesc = this.list.state[this.property];
@@ -369,6 +373,7 @@ $(document).ready(function () {
                                 }
                             }
                         );
+                        $('#cName' + id).html(listName);
                         console.log(id);
                     } else if (elem.attr('class') == 'listDesc') {
                         var listDesc = $(this).val();
@@ -495,6 +500,7 @@ $(document).ready(function () {
                             }
                         }
                     );
+                    this.input.value = '';
                 }
             });
 
@@ -537,6 +543,7 @@ $(document).ready(function () {
                 }
             }
         );
+        $('#addTodoListInput').val('');
     });
 
     $('.delButton-card').click(function () {
@@ -619,6 +626,7 @@ $(document).ready(function () {
                 console.log(cardId);
             }
         );
+        $(cardInputFieldId).val('');
     });
 
     $('.btn-save-comment').click(function () {
@@ -678,6 +686,7 @@ $(document).ready(function () {
                 }
             }
         );
+        $(this).parent().find('.commentsInput').val('');
 
         console.log(id);
         console.log(listId);
