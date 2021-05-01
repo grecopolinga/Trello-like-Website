@@ -578,7 +578,7 @@ $(document).ready(function () {
     });
 
     $('.btn-save-comment').click(function () {
-        var id = $(this).parent().parent().parent().parent().attr('id');
+        var id = $(this).val();
         var listId = $(this)
             .parent()
             .parent()
@@ -596,25 +596,27 @@ $(document).ready(function () {
                 }
             }
         );
-
         console.log(id);
         console.log(listId);
+        console.log(listComment);
     });
 
     // Displaying/Closing list details modal
-    const listDetails = document.getElementById('show-listDetails-modal');
-    const closeModal = document.querySelectorAll('.closeButton-list');
 
     $('.card').click(function (event) {
+        const listDetails = document.getElementById(
+            'menu' + $(this).parent().attr('id')
+        );
+        const closeModal = document.querySelectorAll('.closeButton-list');
+
         if (event.target.nodeName != 'BUTTON') {
-            // alert('CARD clicked...');
             listDetails.classList.remove('hidden');
         }
-    });
 
-    closeModal.forEach((close) => {
-        close.addEventListener('click', () => {
-            listDetails.classList.add('hidden');
+        closeModal.forEach((close) => {
+            close.addEventListener('click', () => {
+                listDetails.classList.add('hidden');
+            });
         });
     });
 });

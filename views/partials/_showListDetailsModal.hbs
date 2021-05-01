@@ -1,9 +1,9 @@
 <!-- List Details Modal -->
 <div
-    class="modal hidden fixed z-10 inset-0 overflow-y-auto"
+    class="modal {{_id}} hidden fixed z-10 inset-0 overflow-y-auto"
     aria-labelledby="modal-title"
     aria-modal="true"
-    id="show-listDetails-modal"
+    id="menu{{_id}}"
 >
     <div class="menuContainer">
         <div class="menu">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <input class="commentsInput input_field" placeholder="Write a comment...">
-        <button class="commentsButton btn-save-comment">Comment</button>
+        <button class="commentsButton btn-save-comment" value="{{_id}}">Comment</button>
         <div class="menuComments">
             {{#if cardComments}}
             {{#each cardComments}}
