@@ -7,8 +7,8 @@
     "license": "MIT",
     "scripts": {
         "build:css": "tailwind build src/style.css -o public/css/style.css",
-        "start": "cross-env NODE_ENV=production node app",
-        "dev": "cross-env NODE_ENV=development nodemon app",
+        "start": "cross-env NODE_ENV=production node index",
+        "dev": "cross-env NODE_ENV=development nodemon index",
         "db_up": "node ./migrations/add_data",
         "db_down": "node ./migrations/delete_data",
         "db_reset": "yarn db_down && yarn db_up"
