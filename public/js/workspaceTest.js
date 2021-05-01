@@ -87,6 +87,20 @@ $(document).ready(function () {
                 if (e.target.classList.contains('menuContainer')) {
                     this.menuContainer.remove();
                 }
+                if (e.target.classList.contains('delButton-comment')) {
+                    var listId = this.id;
+                    var cardId = this.card;
+                    var listComment = e.target.parentElement.textContent;
+                    $.post(
+                        `${window.location.pathname}/${cardId}/deleteComment?_method=DELETE`,
+                        { cardId, listId, listComment },
+                        (data) => {
+                            if (data) {
+                                e.target.parentElement.remove();
+                            }
+                        }
+                    );
+                }
             });
 
             this.commentsButton.addEventListener('click', () => {
@@ -138,20 +152,20 @@ $(document).ready(function () {
                 'input'
             );
 
-            // this.renderComments();
+            this.renderComments();
         }
 
-        // renderComments() {
-        //     let currentCommentsDOM = Array.from(this.menuComments.childNodes);
+        renderComments() {
+            let currentCommentsDOM = Array.from(this.menuComments.childNodes);
 
-        //     currentCommentsDOM.forEach((commentDOM) => {
-        //         commentDOM.remove();
-        //     });
+            currentCommentsDOM.forEach((commentDOM) => {
+                commentDOM.remove();
+            });
 
-        //     this.state.listComments.forEach((comment) => {
-        //         new Comment(comment, this.menuComments, this, this.card);
-        //     });
-        // }
+            this.state.listComments.forEach((comment) => {
+                new Comment(comment, this.menuComments, this, this.card);
+            });
+        }
     }
 
     class EditCardTexts {
@@ -253,25 +267,26 @@ $(document).ready(function () {
         }
     }
 
-    // class Comment {
-    //     constructor(text, place, list, cardId) {
-    //         this.text = text;
-    //         this.place = place;
-    //         this.list = list;
-    //         this.card = cardId;
-    //         this.render();
-    //     }
+    class Comment {
+        constructor(text, place, list, cardId) {
+            this.text = text;
+            this.place = place;
+            this.list = list;
+            this.card = cardId;
+            this.render();
+        }
 
-    //     render() {
-    //         this.div = document.createElement('div');
-    //         this.div.className = 'comment';
-    //         this.div.innerText = this.text;
-    //         this.deleteButton = document.createElement('button');
-    //         this.deleteButton.innerText = 'X';
-    //         this.div.append(this.deleteButton);
-    //         this.place.append(this.div);
-    //     }
-    // }
+        render() {
+            this.div = document.createElement('div');
+            this.div.className = 'comment';
+            this.div.innerText = this.text;
+            this.deleteButton = document.createElement('button');
+            this.deleteButton.className = 'delButton-comment';
+            this.deleteButton.innerText = 'X';
+            this.div.append(this.deleteButton);
+            this.place.append(this.div);
+        }
+    }
 
     // inline edit plugin
     $.fn.inlineEdit = function (replaceWith) {
