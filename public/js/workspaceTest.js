@@ -500,6 +500,7 @@ $(document).ready(function () {
                             }
                         }
                     );
+                    this.input.value = '';
                 }
             });
 
@@ -542,6 +543,7 @@ $(document).ready(function () {
                 }
             }
         );
+        $('#addTodoListInput').val('');
     });
 
     $('.delButton-card').click(function () {
@@ -624,6 +626,7 @@ $(document).ready(function () {
                 console.log(cardId);
             }
         );
+        $(cardInputFieldId).val('');
     });
 
     $('.btn-save-comment').click(function () {
@@ -683,6 +686,7 @@ $(document).ready(function () {
                 }
             }
         );
+        $(this).parent().find('.commentsInput').val('');
 
         console.log(id);
         console.log(listId);
