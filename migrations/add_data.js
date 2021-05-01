@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Users = require('../models/Users');
+const Boards = require('../models/Boards');
 
 const URI = 'mongodb://localhost:27017/TRONE';
 
@@ -34,7 +35,7 @@ var users = [
     {
         fName: 'Stella',
         lName: 'Davies',
-        username: 'StellaD',
+        username: 'StellaD2',
         email: 'stella.davies@example.com',
         password:
             '$2b$10$KOMWBy8nYd89S/zLkzjJDOlV3QGQUBrlJ1HHVl8NIKfHrst36LiZi', //Bestoftherest143
@@ -51,10 +52,184 @@ var users = [
     },
 ];
 
+var boards = [
+    {
+        boardFavorite: false,
+        boardName: 'Term 3 Tasks',
+        boardLabel: 'Important',
+        boardLists: [
+            {
+                listName: 'CCAPDEV',
+                cards: [
+                    {
+                        cardName: 'Phase 1',
+                        cardDesc: 'Phase 1 Tasks',
+                        cardComments: ['HTML', 'CSS', 'Javascript'],
+                    },
+                    {
+                        cardName: 'Phase 2',
+                        cardDesc: 'Phase 2 Tasks',
+                        cardComments: [
+                            'Databases',
+                            'Users Module',
+                            'Boards Module',
+                        ],
+                    },
+                    {
+                        cardName: 'Phase 3',
+                        cardDesc: 'Phase 3 Tasks',
+                        cardComments: [
+                            'Form Validation',
+                            'Sessions',
+                            'Deployment',
+                        ],
+                    },
+                ],
+            },
+            {
+                listName: 'STALGCM',
+                cards: [
+                    {
+                        cardName: 'Towering Arcana',
+                        cardDesc: 'Problem Set',
+                        cardComments: [
+                            'Regular Languages',
+                            'Pumping Lemma',
+                            'Push Down Automata',
+                        ],
+                    },
+                    {
+                        cardName: 'Push Down Automata Problem',
+                        cardDesc: 'Bonus Problem',
+                        cardComments: [
+                            'Regular Languages',
+                            'Pumping Lemma',
+                            'Push Down Automata',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        boardFavorites: false,
+        boardName: 'CEMATH',
+        boardLabel: 'Acads',
+        boardLists: [
+            {
+                listName: 'Project Proposal',
+                cards: [
+                    {
+                        cardName: 'Discussion',
+                        cardDesc: 'MATLAB',
+                        cardComments: ['MATLAB', '1D', 'Signals'],
+                    },
+                    {
+                        cardName: 'Project Proposal',
+                        cardDesc: 'Powerpoint',
+                        cardComments: [],
+                    },
+                    {
+                        cardName: 'Project Proposal',
+                        cardDesc: 'PDF',
+                        cardComments: [
+                            'Target Topic',
+                            'Implementation',
+                            'Test Plan',
+                            'Project Specification',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        boardFavorites: true,
+        boardName: 'LBYTRN1',
+        boardLabel: 'Acads',
+        boardLists: [
+            {
+                listName: 'Individual',
+                cards: [
+                    {
+                        cardName: 'HW1',
+                        cardDesc: 'Mesh Analysis',
+                        cardComments: [],
+                    },
+                    {
+                        cardName: 'HW2',
+                        cardDesc: 'LTSPice',
+                        cardComments: [],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        boardFavorites: false,
+        boardName: 'Home activities',
+        boardLabel: 'Home',
+        boardLists: [
+            {
+                listName: 'Morning',
+                cards: [
+                    {
+                        cardName: 'Laundry',
+                        cardDesc: 'Clean clothes',
+                        cardComments: ['buy', 'detergent', 'wash'],
+                    },
+                    {
+                        cardName: 'Prepare food',
+                        cardDesc: 'Cook',
+                        cardComments: ['But groceries'],
+                    },
+                ],
+            },
+            {
+                listName: 'Afternoon',
+                cards: [
+                    {
+                        cardName: 'Exercise',
+                        cardDesc: 'Get fit',
+                        cardComments: ['30 mins', '3 sets'],
+                    },
+                    {
+                        cardName: 'Wash dishes',
+                        cardDesc: 'Clean after meals',
+                        cardComments: ['7 pm', 'every Friday'],
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        boardFavorites: false,
+        boardName: 'Org Tasks',
+        boardLabel: 'Extra',
+        boardLists: [
+            {
+                listName: 'PTS',
+                cards: [
+                    {
+                        cardName: 'Morning Session',
+                        cardDesc: 'Morning Tutorial Session',
+                        cardComments: ['CCDSTRU', 'CCPROG2'],
+                    },
+                ],
+            },
+        ],
+    },
+];
+
 async function insertUser(model, data) {
     try {
         const d = new model(data);
         await d.save();
+        for (const board of boards) {
+            const b = new Boards({ user: d._id, ...board });
+            await b.save();
+        }
+
         console.log('Inserted 1 Document');
     } catch (err) {
         console.log(err);

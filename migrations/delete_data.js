@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Boards = require('../models/Boards');
 const Users = require('../models/Users');
 
 const URI = 'mongodb://localhost:27017/TRONE';
@@ -13,6 +14,7 @@ async function deleteData() {
         console.log('Connected to DB!');
 
         await Users.deleteMany({});
+        await Boards.deleteMany({});
         console.log('Documents deleted');
         mongoose.disconnect();
     } catch (err) {
