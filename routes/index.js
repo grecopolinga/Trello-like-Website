@@ -77,6 +77,7 @@ router.post(
     '/:username/settings',
     isUserNotAuth,
     upload.single('image'),
+    validator.updateUserValidation(),
     userCtrl.updateUser
 );
 

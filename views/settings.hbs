@@ -21,24 +21,19 @@
       </div>
       <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full md:w-1/2 px-3 mb-4 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >First Name</label
-          >
-          <input
-            type="text"
-            class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
-            placeholder="First Name"
-            value="{{fName}}"
-            id = "fName"
-            name="fName"
-          />
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">First Name</label>
+            <input
+              type="text"
+              class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
+              placeholder="First Name"
+              value="{{fName}}"
+              id = "fName"
+              name="fName"
+            />
+            <p id="fNameError" class="error text-sm font-semibold text-red-500">{{fNameError}}</p>
         </div>
         <div class="w-full md:w-1/2 px-3 mb-4 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >Last Name</label
-          >
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Last Name</label>
           <input
             type="text"
             class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
@@ -47,6 +42,7 @@
             id = "lName"
             name="lName"
           />
+          <p id="lNameError" class="error text-sm font-semibold text-red-500">{{lNameError}}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-2">
@@ -54,10 +50,12 @@
       </div>
       <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full px-3 mb-4 md:mb-2">
-          <label
+          <div class="flex justify-between">
+            <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >Password</label
-          >
+            >Password</label>
+            <p id="passwordError" class="error text-sm font-semibold text-red-500">{{passwordError}}</p>
+          </div>
           <input
             type="password"
             class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
@@ -69,10 +67,12 @@
       </div>
       <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full px-3 mb-4 md:mb-2">
-          <label
+          <div class="flex justify-between">
+            <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >Email</label
-          >
+            >Email</label>
+          <p id="emailError" class="error text-sm font-semibold text-red-500">{{emailError}}</p>
+          </div>
           <input
             type="email"
             class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
@@ -80,6 +80,7 @@
             value="{{email}}"
             id="email"
             name="email"
+            required
           />
         </div>
       </div>
@@ -110,13 +111,10 @@
           Deactivate
         </button>
       </div>
-
       <div>
         <button
           class="bg-gray-300 hover:bg-green-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
           id="save-button"
-          {{!-- type="submit"
-          form="settings_form" --}}
         >
           Save Changes
         </button>
@@ -126,4 +124,3 @@
 </div>
 {{>_saveInfoModal}}
 {{>_deactivateModal parameter=user}}
-
