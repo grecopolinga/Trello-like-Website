@@ -33,7 +33,10 @@ const userCtrl = {
             await Users.findOneAndRemove({
                 username: req.params.username,
             });
-            res.redirect('/login');
+            req.session.destroy((err) => {
+                if (err) throw err;
+                res.redirect('/login');
+            });
         } catch (err) {
             res.status(500).send();
         }

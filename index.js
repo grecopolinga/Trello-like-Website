@@ -5,8 +5,11 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const session = require('express-session');
 const connectDB = require('./models/db');
 const methodOverride = require('method-override');
+const MongoStore = require('connect-mongo');
+
 const app = express();
 
 // Connect to MongoDB
@@ -30,6 +33,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
+
+//Session
+app.use(
+    session({
+        secret: 'TRONE',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    })
+);
 
 //Routes
 app.use('/', require('./routes/index'));

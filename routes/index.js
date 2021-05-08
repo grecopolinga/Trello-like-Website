@@ -7,6 +7,12 @@ const findUserBoard = require('../middlewares/findUserBoards');
 const ctrl = require('../controllers/controller');
 const validator = require('../helpers/validator');
 const userCtrl = require('../controllers/userCtrl');
+const logoutCtrl = require('../controllers/logoutCtrl');
+const {
+    isUserAuth,
+    isUserNotAuth,
+    isAuthorized,
+} = require('../middlewares/isAuth');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -22,43 +28,69 @@ const upload = multer({ storage: storage });
 
 // @desc  Landing page
 // @route GET /
-router.get('/', ctrl.getIndex);
+router.get('/', isUserAuth, ctrl.getIndex);
 
 // @desc  Login page
 // @route GET /login
-router.get('/login', ctrl.getLogin);
+router.get('/login', isUserAuth, ctrl.getLogin);
 
 // @desc  Login user
 // @route POST /login
-router.post('/login', signinCtrl.loginUser);
+router.post('/login', isUserAuth, signinCtrl.loginUser);
 
 // @desc  Register User
 // @route POST /register
-router.post('/register', validator.signupValidation(), signupCtrl.registerUser);
+router.post(
+    '/register',
+    isUserAuth,
+    validator.signupValidation(),
+    signupCtrl.registerUser
+);
+
+router.get('/logout', logoutCtrl.getLogout);
 
 // @desc  User Boards
 // @route GET /:username/favorites
-router.get('/:username/boards', findUserBoard, ctrl.userBoards);
+router.get('/:username/boards', isUserNotAuth, findUserBoard, ctrl.userBoards);
 
 // @desc  User Favorites
 // @route GET /:username/favorites
-router.get('/:username/favorites', findUserBoard, ctrl.userFavorites);
+router.get(
+    '/:username/favorites',
+    isUserNotAuth,
+    findUserBoard,
+    ctrl.userFavorites
+);
 
 // @desc  User Settings
 // @route GET /:username/settings
-router.get('/:username/settings', findUserBoard, ctrl.userSettings);
+router.get(
+    '/:username/settings',
+    isUserNotAuth,
+    findUserBoard,
+    ctrl.userSettings
+);
 
 // @desc  Update User Info
 // @route POST /:username/settings
-router.post('/:username/settings', upload.single('image'), userCtrl.updateUser);
+router.post(
+    '/:username/settings',
+    isUserNotAuth,
+    upload.single('image'),
+    userCtrl.updateUser
+);
 
 // @desc  Delete User
 // @route DELETE /:username/settings
-router.delete('/:username/settings', userCtrl.deleteUser);
+router.delete('/:username/settings', isUserNotAuth, userCtrl.deleteUser);
 
 // @desc  Confirm User Info Updates
 // @route GET /:username/settings/confirm
-router.get('/:username/settings/confirm', userCtrl.confirmPassword);
+router.get(
+    '/:username/settings/confirm',
+    isUserNotAuth,
+    userCtrl.confirmPassword
+);
 
 // @desc  Check username if it exists
 // @route GET /:username/settings/confirm
@@ -68,45 +100,73 @@ router.get('/getCheckUser', signupCtrl.getCheckUser);
 // @route POST /create
 // router.post('/createnewboard', boardCtrl.createBoard);
 
-router.get('/workspace/:id', ctrl.getWorkspace);
+router.get('/workspace/:id', isAuthorized, ctrl.getWorkspace);
 
 // @desc Update specific board
 // @route PATCH /updateboard
 // router.patch('/:boardName', boardCtrl.updateBoard);
-router.patch('/workspace/:id', boardCtrl.updateBoardDetails);
+router.patch('/workspace/:id', isAuthorized, boardCtrl.updateBoardDetails);
 
 // @desc Delete specific board
 // @route Delete /delete
 // router.delete('/:boardName', boardCtrl.deleteBoard);
-router.delete('/workspace/:id', boardCtrl.deleteBoard);
+router.delete('/workspace/:id', isAuthorized, boardCtrl.deleteBoard);
 
-router.post('/:username/createBoard', boardCtrl.createBoard);
+router.post('/:username/createBoard', isAuthorized, boardCtrl.createBoard);
 
-router.post('/workspace/:id/createList', boardCtrl.postCreateList);
+router.post(
+    '/workspace/:id/createList',
+    isAuthorized,
+    boardCtrl.postCreateList
+);
 
-router.delete('/workspace/:id/deleteList', boardCtrl.deleteList);
+router.delete('/workspace/:id/deleteList', isAuthorized, boardCtrl.deleteList);
 
-router.patch('/workspace/:id/updateList', boardCtrl.patchUpdateList);
+router.patch(
+    '/workspace/:id/updateList',
+    isAuthorized,
+    boardCtrl.patchUpdateList
+);
 
 // @desc Update clicked board
 // @route Patch /clicked
-router.patch('/:id/clicked', boardCtrl.confirmFavorite);
+router.patch('/:id/clicked', isAuthorized, boardCtrl.confirmFavorite);
 
 // @desc Get search board
 // @route GET /search
-router.get('/:username/search', ctrl.boardSearch);
+router.get('/:username/search', isUserNotAuth, ctrl.boardSearch);
 // @desc Create card
 // @route Create /Create;
-router.post('/workspace/:id/:listId/createCard', boardCtrl.postCreateCard);
+router.post(
+    '/workspace/:id/:listId/createCard',
+    isAuthorized,
+    boardCtrl.postCreateCard
+);
 
 // @desc Delete card
 // @route Delete /delete;
-router.delete('/workspace/:id/:listId/deleteCard', boardCtrl.deleteCard);
+router.delete(
+    '/workspace/:id/:listId/deleteCard',
+    isAuthorized,
+    boardCtrl.deleteCard
+);
 
-router.patch('/workspace/:id/:listId/updateCard', boardCtrl.patchUpdateCard);
+router.patch(
+    '/workspace/:id/:listId/updateCard',
+    isAuthorized,
+    boardCtrl.patchUpdateCard
+);
 
-router.delete('/workspace/:id/:listId/deleteComment', boardCtrl.deleteComment);
+router.delete(
+    '/workspace/:id/:listId/deleteComment',
+    isAuthorized,
+    boardCtrl.deleteComment
+);
 
-router.post('/workspace/:id/:listId/createComment', boardCtrl.createComment);
+router.post(
+    '/workspace/:id/:listId/createComment',
+    isAuthorized,
+    boardCtrl.createComment
+);
 
 module.exports = router;

@@ -29,6 +29,7 @@ const signupCtrl = {
                     img: 'default.png',
                 });
                 const newUser = await user.save();
+                req.session.userID = user.username;
                 res.redirect(`/${newUser.username}/boards`);
             }
         } catch (err) {

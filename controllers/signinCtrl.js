@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const signinCtrl = {
     loginUser: async (req, res) => {
         const user = await Users.findOne({ username: req.body.username });
-        console.log(user);
         if (user == null) {
             return res.render('login', {
                 layout: 'login',
@@ -14,6 +13,8 @@ const signinCtrl = {
         }
         try {
             if (await bcrypt.compare(req.body.password, user.password)) {
+                req.session.userID = user.username;
+                console.log(req.session);
                 res.redirect(`/${user.username}/boards`);
             } else {
                 res.render('login', {
