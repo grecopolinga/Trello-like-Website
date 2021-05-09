@@ -1,15 +1,16 @@
 function isFilled() {
-    var fName = validator.trim($('#fName').val());
-    var lName = validator.trim($('#lName').val());
-    var email = validator.trim($('#email').val());
-    // var pw = validator.trim($('#password').val());
+    // var fName = validator.trim($('#fName').val());
+    // var lName = validator.trim($('#lName').val());
+    // var email = validator.trim($('#email').val());
+    var pw = validator.trim($('#password').val());
 
-    var fNameEmpty = validator.isEmpty(fName);
-    var lNameEmpty = validator.isEmpty(lName);
-    var emailEmpty = validator.isEmpty(email);
-    // var pwEmpty = validator.isEmpty(pw);
+    // var fNameEmpty = validator.isEmpty(fName);
+    // var lNameEmpty = validator.isEmpty(lName);
+    // var emailEmpty = validator.isEmpty(email);
+    var pwEmpty = validator.isEmpty(pw);
 
-    return !fNameEmpty && !lNameEmpty && !emailEmpty;
+    // return !fNameEmpty && !lNameEmpty && !emailEmpty && !pwEmpty;
+    return !pwEmpty;
 }
 
 function isValidPassword(field) {
@@ -44,7 +45,8 @@ function validateFields(field, fieldname, err) {
 
     var filled = isFilled();
     var validPassword = isValidPassword(field);
-    if (filled && validPassword) $('#save-button').prop('disabled', false);
+
+    if (filled) $('#save-button').prop('disabled', false);
     else $('#save-button').prop('disabled', true);
 }
 

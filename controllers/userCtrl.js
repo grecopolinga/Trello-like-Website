@@ -5,10 +5,9 @@ const { validationResult } = require('express-validator');
 const userCtrl = {
     // update user info
     updateUser: async (req, res) => {
-        const user = await Users.findOne({ username: req.params.username });
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
         try {
             var errors = validationResult(req);
+            console.log(errors);
 
             if (!errors.isEmpty()) {
                 errors = errors.errors;
@@ -17,8 +16,13 @@ const userCtrl = {
                 for (let i = 0; i < errors.length; i++)
                     details[errors[i].param + 'Error'] = errors[i].msg;
 
-                res.render(`/${user.username}/settings`, details);
+                res.redirect(`/${req.session.userID}/settings`);
             } else {
+                const user = await Users.findOne({
+                    username: req.params.username,
+                });
+                const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
                 if (req.body.fName !== '') {
                     user.fName = req.body.fName;
                 }
@@ -34,10 +38,12 @@ const userCtrl = {
                 if (req.file != null) {
                     user.img = req.file.filename;
                 }
+                console.log(user);
                 await user.save();
                 res.redirect(`/${user.username}/settings`);
             }
         } catch (err) {
+            console.log(err);
             res.status(400).send();
         }
     },

@@ -1,4 +1,5 @@
 const { check } = require('express-validator');
+const { $where } = require('../models/Users');
 
 const validator = {
     signupValidation: () => {
@@ -30,20 +31,10 @@ const validator = {
 
     updateUserValidation: () => {
         var validation = [
-            // checks if `fName` is not empty
-            check('fName', 'First name should not be empty.').notEmpty(),
-
-            // checks if `lName` is not empty
-            check('lName', 'Last name should not be empty.').notEmpty(),
-
             // checks if `password` contains at least 8 characters
-            check(
-                'password',
-                'Passwords should contain at least 8 characters.'
-            ).isLength({ min: 8 }),
-
-            // checks if `email` is not empty
-            check('email', 'Email should not be empty.').notEmpty(),
+            check('password', 'Password should contain at least 8 characters.')
+                .optional()
+                .isLength({ min: 8 }),
         ];
         return validation;
     },
