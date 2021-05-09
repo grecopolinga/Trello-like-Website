@@ -1,5 +1,4 @@
 const { check } = require('express-validator');
-const { $where } = require('../models/Users');
 
 const validator = {
     signupValidation: () => {
@@ -24,7 +23,9 @@ const validator = {
             check(
                 'reg_password',
                 'Passwords should contain at least 8 characters.'
-            ).isLength({ min: 8 }),
+            )
+                .optional()
+                .isLength({ min: 8 }),
         ];
         return validation;
     },
@@ -33,7 +34,8 @@ const validator = {
         var validation = [
             // checks if `password` contains at least 8 characters
             check('password', 'Password should contain at least 8 characters.')
-                .optional()
+                .optional({ checkFalsy: true })
+                .bail()
                 .isLength({ min: 8 }),
         ];
         return validation;

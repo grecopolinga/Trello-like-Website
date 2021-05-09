@@ -1,67 +1,69 @@
-function isFilled() {
-    // var fName = validator.trim($('#fName').val());
-    // var lName = validator.trim($('#lName').val());
-    // var email = validator.trim($('#email').val());
-    var pw = validator.trim($('#password').val());
+$(document).ready(function () {
+    function isFilled() {
+        var fName = validator.trim($('#fName').val());
+        var lName = validator.trim($('#lName').val());
+        var email = validator.trim($('#email').val());
 
-    // var fNameEmpty = validator.isEmpty(fName);
-    // var lNameEmpty = validator.isEmpty(lName);
-    // var emailEmpty = validator.isEmpty(email);
-    var pwEmpty = validator.isEmpty(pw);
+        var fNameEmpty = validator.isEmpty(fName);
+        var lNameEmpty = validator.isEmpty(lName);
+        var emailEmpty = validator.isEmpty(email);
 
-    // return !fNameEmpty && !lNameEmpty && !emailEmpty && !pwEmpty;
-    return !pwEmpty;
-}
-
-function isValidPassword(field) {
-    var validPassword = false;
-
-    var password = validator.trim($('#password').val());
-    var isValidLength = validator.isLength(password, { min: 8 });
-
-    if (isValidLength || password.length == 0) {
-        if (field.is($('#password'))) $('#passwordError').text('');
-        validPassword = true;
-    } else {
-        if (field.is($('#password')))
-            $('#passwordError').text(
-                'Password should contain at least 8 characters.'
-            );
+        return !fNameEmpty && !lNameEmpty && !emailEmpty;
     }
 
-    return validPassword;
-}
+    function isValidPassword(field) {
+        var validPassword = false;
 
-function validateFields(field, fieldname, err) {
-    var value = validator.trim(field.val());
-    var empty = validator.isEmpty(value);
+        var password = validator.trim($('#password').val());
+        var isValidLength = validator.isLength(password, { min: 8 });
 
-    if (empty) {
-        field.prop('value', '');
-        err.text(fieldname + ' should not be empty.');
-    } else {
-        err.text('');
+        if (isValidLength || password.length === 0) {
+            if (field.is($('#password'))) $('#passwordError').text('');
+            validPassword = true;
+        } else {
+            if (field.is($('#password')))
+                $('#passwordError').text(
+                    'Passwords should contain at least 8 characters.'
+                );
+        }
+
+        return validPassword;
     }
 
-    var filled = isFilled();
-    var validPassword = isValidPassword(field);
+    function validateFields(field, fieldname, err) {
+        var value = validator.trim(field.val());
+        var empty = validator.isEmpty(value);
 
-    if (filled) $('#save-button').prop('disabled', false);
-    else $('#save-button').prop('disabled', true);
-}
+        if (empty && fieldname !== 'Password') {
+            field.prop('value', '');
+            err.text(fieldname + ' should not be empty.');
+        } else {
+            err.text('');
+        }
 
-$('#fName').keyup(() => {
-    validateFields($('#fName'), 'First Name', $('#fNameError'));
-});
+        var filled = isFilled();
+        var validPassword = isValidPassword(field);
 
-$('#lName').keyup(() => {
-    validateFields($('#lName'), 'Last Name', $('#lNameError'));
-});
+        if (filled && validPassword) {
+            $('#save-button').prop('disabled', false);
+        } else {
+            $('#save-button').prop('disabled', true);
+        }
+    }
 
-$('#password').keyup(() => {
-    validateFields($('#password'), 'Password', $('#passwordError'));
-});
+    $('#fName').keyup(function () {
+        validateFields($('#fName'), 'First name', $('#fNameError'));
+    });
 
-$('#email').keyup(() => {
-    validateFields($('#email'), 'Email', $('#emailError'));
+    $('#lName').keyup(function () {
+        validateFields($('#lName'), 'Last name', $('#lNameError'));
+    });
+
+    $('#email').keyup(function () {
+        validateFields($('#email'), 'Email', $('#emailError'));
+    });
+
+    $('#password').keyup(function () {
+        validateFields($('#password'), 'Password', $('#passwordError'));
+    });
 });
