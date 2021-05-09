@@ -12,6 +12,10 @@ $('#save-button').click(() => {
     $('#save-modal').removeClass('hidden');
 });
 
+$('#confirm-password').keyup(() => {
+    $('#confirm-err').addClass('hidden');
+});
+
 $('#save-confirm').click((e) => {
     let cPassword = $('#confirm-password').val();
     $.get(`${window.location.pathname}/confirm`, { cPassword }, (data) => {
