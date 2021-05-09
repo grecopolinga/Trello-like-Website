@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const Boards = require('../models/Boards');
 const Users = require('../models/Users');
 
-const URI =
-    'mongodb://dbadmin:dbpassword@cluster0-shard-00-00.2jx6x.mongodb.net:27017,cluster0-shard-00-01.2jx6x.mongodb.net:27017,cluster0-shard-00-02.2jx6x.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-e298gx-shard-0&authSource=admin&retryWrites=true&w=majority';
+const URI = 'mongodb://localhost:27017/TRONE';
 
 async function deleteData() {
     try {
