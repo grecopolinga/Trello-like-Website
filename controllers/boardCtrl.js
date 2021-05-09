@@ -116,7 +116,7 @@ const boardCtrl = {
     updateBoardDetails: async (req, res) => {
         try {
             var errors = validationResult(req);
-            console.log(errors);
+
             if (!errors.isEmpty()) {
                 errors = errors.errors;
 
