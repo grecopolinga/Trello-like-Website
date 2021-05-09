@@ -1,20 +1,17 @@
-const boardSettingsModal = document.getElementById('board-add-modal');
-const boardSettingsShow = document.getElementById('board-add-button');
-const boardSettingsConfirm = document.getElementById('board-add-confirm');
-
 const closeModal = document.querySelectorAll('.close-modal');
 
-boardSettingsShow.addEventListener('click', () => {
-    boardSettingsModal.classList.remove('hidden');
+$('#board-add-button').click(() => {
+    $('#board-add-modal').removeClass('hidden');
+    $('#board_name').val('');
+    $('#boardNameError').text('');
 });
 
-boardSettingsConfirm.addEventListener('click', () => {
-    boardSettingsModal.classList.add('hidden');
-    return window.location.replace('workspace.html');
+$('#board-add-confirm').click(() => {
+    $('#board-add-modal').addClass('hidden');
 });
 
 closeModal.forEach((close) => {
     close.addEventListener('click', () => {
-        boardSettingsModal.classList.add('hidden');
+        $('#board-add-modal').addClass('hidden');
     });
 });

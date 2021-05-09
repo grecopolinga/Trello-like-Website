@@ -106,14 +106,24 @@ router.get('/workspace/:id', isAuthorized, ctrl.getWorkspace);
 // @desc Update specific board
 // @route PATCH /updateboard
 // router.patch('/:boardName', boardCtrl.updateBoard);
-router.patch('/workspace/:id', isAuthorized, boardCtrl.updateBoardDetails);
+router.patch(
+    '/workspace/:id',
+    isAuthorized,
+    validator.boardNameValidation(),
+    boardCtrl.updateBoardDetails
+);
 
 // @desc Delete specific board
 // @route Delete /delete
 // router.delete('/:boardName', boardCtrl.deleteBoard);
 router.delete('/workspace/:id', isAuthorized, boardCtrl.deleteBoard);
 
-router.post('/:username/createBoard', isAuthorized, boardCtrl.createBoard);
+router.post(
+    '/:username/createBoard',
+    isAuthorized,
+    validator.boardNameValidation(),
+    boardCtrl.createBoard
+);
 
 router.post(
     '/workspace/:id/createList',

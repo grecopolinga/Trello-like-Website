@@ -1,5 +1,6 @@
 const Boards = require('../models/Boards');
 const Users = require('../models/Users');
+const { validationResult } = require('express-validator');
 
 const boardCtrl = {
     //retrieve one board
@@ -114,17 +115,29 @@ const boardCtrl = {
     // update board details
     updateBoardDetails: async (req, res) => {
         try {
-            const board = await Boards.findById(req.params.id);
-            if (req.body.board_name != null) {
-                board.boardName = req.body.board_name;
+            var errors = validationResult(req);
+            console.log(errors);
+            if (!errors.isEmpty()) {
+                errors = errors.errors;
+
+                var details = {};
+                for (let i = 0; i < errors.length; i++)
+                    details[errors[i].param + 'Error'] = errors[i].msg;
+
+                res.redirect(`/workspace/${req.params.id}`);
+            } else {
+                const board = await Boards.findById(req.params.id);
+                if (req.body.board_name != null) {
+                    board.boardName = req.body.board_name;
+                }
+                if (req.body.board_label != null) {
+                    board.boardLabel = req.body.board_label;
+                }
+                await board.save();
+                res.redirect(`/workspace/${req.params.id}`);
             }
-            if (req.body.board_label != null) {
-                board.boardLabel = req.body.board_label;
-            }
-            await board.save();
-            res.redirect(`/workspace/${req.params.id}`);
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             res.status(500).send();
         }
     },
@@ -148,15 +161,29 @@ const boardCtrl = {
     // create board
     createBoard: async (req, res) => {
         try {
-            const user = await Users.findOne({ username: req.params.username });
-            const board = new Boards({
-                boardName: req.body.board_name,
-                user: user._id,
-                boardLabel: req.body.board_label,
-                boardLists: [],
-            });
-            const newBoard = await board.save();
-            res.redirect(`/workspace/${newBoard._id}`);
+            var errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                errors = errors.errors;
+
+                var details = {};
+                for (let i = 0; i < errors.length; i++)
+                    details[errors[i].param + 'Error'] = errors[i].msg;
+
+                res.redirect(`/${req.session.userID}/boards`);
+            } else {
+                const user = await Users.findOne({
+                    username: req.params.username,
+                });
+                const board = new Boards({
+                    boardName: req.body.board_name,
+                    user: user._id,
+                    boardLabel: req.body.board_label,
+                    boardLists: [],
+                });
+                const newBoard = await board.save();
+                res.redirect(`/workspace/${newBoard._id}`);
+            }
         } catch (err) {
             // console.log(err);
             res.redirect('/boards');

@@ -47,6 +47,14 @@ const validator = {
         ];
         return validation;
     },
+
+    boardNameValidation: () => {
+        var validation = [
+            // checks if `board_name` is not empty
+            check('board_name', 'Board name should not be empty.').notEmpty(),
+        ];
+        return validation;
+    },
 };
 
 module.exports = validator;
