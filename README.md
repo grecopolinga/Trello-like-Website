@@ -22,6 +22,20 @@ The workspace in TRONE is a Kanban-style, list-making application that is simila
 -   [views](views) - This folder contains all the hbs files to be rendered to the server.
 -   [index.js](index.js) - Main entry point of the app
 
+# Dependencies Used:
+
+-   [bcrypt](https://www.npmjs.com/package/mongoose-bcrypt) - A library to help hash passwords.
+-   [connect-mongo](https://www.npmjs.com/package/connect-mongo) - A typescript-based MongoDB session store for Connect and Express.
+-   [dotenv](https://www.npmjs.com/package/dotenv) - A zero-dependency module that reads environment variables from a.env file and loads them into process.env.
+-   [express](https://expressjs.com/) - A lightweight and adaptable Node.js web application framework that offers a comprehensive set of features for developing web and mobile applications.
+-   [express-handlebars](https://www.npmjs.com/package/express-handlebars) - Ensures minimal templating and is a logicless engine that separates the view from the code. It can be used with express as the hbs module, which is available via npm.
+-   [express-session](https://www.npmjs.com/package/express-session) - HTTP is stateless, you need a way to store user data between HTTP requests in order to associate one request with another.
+-   [express-validator](https://www.npmjs.com/package/express-validator) - A set of express.js middlewares that wraps validator.js validator and sanitizer functions.
+-   [method-override](https://www.npmjs.com/package/method-override) - It allows you to use HTTP verbs like PUT and DELETE in places where the client does not support them.
+-   [mongoose](https://mongoosejs.com/) - A MongoDB and Node.js Object Data Modeling (ODM) library. It manages data relationships, performs schema validation, and is used to translate between objects in code and their representation in MongoDB.
+-   [morgan](https://www.npmjs.com/package/morgan) - A HTTP request logger middleware for node.js.
+-   [multer](https://www.npmjs.com/package/multer) - A node.js middleware that handles multipart/form-data and is primarily used for file uploading. For maximum efficiency, it is written on top of the busboy.
+
 # How to Run Program:
 
 Using a CLI:
@@ -61,7 +75,7 @@ http://localhost:3000/
 
 7. Enjoy Using the app!
 
-# User Data
+# User Data:
 
 The table below shows the details of the sample users.
 | Usename | Password |
