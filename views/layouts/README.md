@@ -1,4 +1,4 @@
-#2021T2-G05/views/layouts
+# 2021T2-G05/views/layouts
 This folder contains layouts hbs code used by other hbs files.
 <br>
 ### Contents:
