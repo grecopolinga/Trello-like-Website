@@ -2,4 +2,4 @@
 This folder contains the css file for tailwindcss.
 <br>
 ### Contents:
-- style.css - Stylesheet used for tailwind
+- [style.css](style.css) - Stylesheet used for tailwind
