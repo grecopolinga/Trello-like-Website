@@ -2,4 +2,4 @@
 This folder contains config files for the web app.
 
 ## Contents:
-config.env - contains the port and mong_uri
+- [config.env](config.env) - contains the port and mong_uri
