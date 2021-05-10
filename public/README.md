@@ -2,8 +2,8 @@
 This folder contains static assets such as css,fonts, img, js and svg files.
 <br>
 ### Contents:
-- css - this folder contains css files.
-- fonts - this folder contains font files.
-- img - this folder contains image files.
-- js - this folder contains JavaScript files.
-- svg - this folder contains svg files.
+- [css](css) - this folder contains css files.
+- [fonts](fonts) - this folder contains font files.
+- [img](img) - this folder contains image files.
+- [js](js) - this folder contains JavaScript files.
+- [svg](svg) - this folder contains svg files.
