@@ -2,4 +2,4 @@
 This folder contains files which contain helper functions.
 <br>
 ### Contents:
-- validator.js - defines an object containing functions which returns an array of validation middlewares
+- [validator.js](validator.js) - defines an object containing functions which returns an array of validation middlewares
